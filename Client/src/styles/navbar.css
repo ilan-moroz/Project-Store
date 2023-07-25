@@ -1,6 +1,6 @@
 .navbar {
   display: flex;
-  border-bottom: 2px solid rgb(103, 79, 167);
+  border-bottom: 2px solid rgb(103, 32, 180);
   justify-content: space-between;
 }
 
@@ -10,12 +10,12 @@
 }
 
 .navbar__contact {
-  color: rgb(103, 79, 167);
+  color: rgb(103, 32, 180);
   margin: 0.5rem 0.5rem 0.5rem 0;
   font-size: 1.2rem;
 }
 
 .user__info {
-  color: rgb(103, 79, 167);
+  color: rgb(103, 32, 180);
   font-size: 1.2rem;
 }
