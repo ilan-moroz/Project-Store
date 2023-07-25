@@ -68,7 +68,10 @@ export const Login = () => {
         <Typography variant="h3" gutterBottom className="purpleText">
           Login
         </Typography>
-        <Avatar sx={{ marginBottom: "3rem" }} className="purpleText">
+        <Avatar
+          sx={{ marginBottom: "3rem", bgcolor: "rgb(103, 32, 180)" }}
+          className="purpleText"
+        >
           <LoginIcon />
         </Avatar>
       </div>
