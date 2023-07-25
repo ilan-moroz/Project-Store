@@ -27,7 +27,7 @@ export const Register = () => {
         Register
       </Typography>
       <Stepper activeStep={activeStep}>
-        {steps.map((label, index) => {
+        {steps.map(label => {
           const stepProps: { completed?: boolean } = {};
 
           return (
