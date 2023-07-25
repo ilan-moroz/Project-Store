@@ -1,4 +1,5 @@
 import { About } from "../components/About";
+import { Info } from "../components/Info";
 import "../styles/main.css";
 
 export const Main = () => {
@@ -8,7 +9,9 @@ export const Main = () => {
       <section>
         <About />
       </section>
-      <aside>aside</aside>
+      <aside>
+        <Info />
+      </aside>
     </div>
   );
 };
