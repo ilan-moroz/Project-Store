@@ -2,6 +2,7 @@ import { Avatar, Button, TextField, Typography } from "@mui/material";
 import { Resolver, useForm, FieldError } from "react-hook-form";
 import LoginIcon from "@mui/icons-material/Login";
 import "../styles/login.css";
+import { Link } from "react-router-dom";
 
 // defining type for the form data.
 type FormValues = {
@@ -105,7 +106,7 @@ export const Login = () => {
           </div>
         </form>
         <div>
-          Don't have an account yet? <a href="/">register!</a>
+          Don't have an account yet? <Link to="/register">Register!</Link>
         </div>
       </div>
     </div>
