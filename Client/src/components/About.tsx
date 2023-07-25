@@ -1,9 +1,21 @@
+import { Typography } from "@mui/material";
 import storeImage from "../assets/images/store.png";
 import "../styles/about.css";
 
 export const About = () => {
   return (
     <div className="about center">
+      <Typography
+        variant="h3"
+        gutterBottom
+        sx={{
+          color: "rgb(103,32,180)",
+          whiteSpace: "nowrap",
+          marginTop: "1rem",
+        }}
+      >
+        Welcome to SuperStore!
+      </Typography>
       <img src={storeImage} alt="store" className="storeImage" />
       <p>
         In a marketplace crowded with options, our store stands apart as a

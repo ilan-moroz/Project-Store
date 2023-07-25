@@ -1,4 +1,4 @@
-import { Avatar, Button, TextField } from "@mui/material";
+import { Avatar, Button, TextField, Typography } from "@mui/material";
 import { Resolver, useForm, FieldError } from "react-hook-form";
 import LoginIcon from "@mui/icons-material/Login";
 import "../styles/login.css";
@@ -64,7 +64,9 @@ export const Login = () => {
   return (
     <div className="login">
       <div className="login__header center">
-        <h1>Login</h1>
+        <Typography variant="h3" gutterBottom sx={{ color: "rgb(103,32,180)" }}>
+          Login
+        </Typography>
         <Avatar sx={{ bgcolor: " rgb(103,32,180)", marginBottom: "3rem" }}>
           <LoginIcon />
         </Avatar>
