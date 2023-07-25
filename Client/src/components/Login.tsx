@@ -65,7 +65,7 @@ export const Login = () => {
     <div className="login">
       <div className="login__header center">
         <h1>Login</h1>
-        <Avatar sx={{ bgcolor: " rgb(103,32,180)", marginBottom: "4rem" }}>
+        <Avatar sx={{ bgcolor: " rgb(103,32,180)", marginBottom: "3rem" }}>
           <LoginIcon />
         </Avatar>
       </div>
@@ -80,6 +80,7 @@ export const Login = () => {
             fullWidth
             error={!!errors.username}
             helperText={errors.username?.message}
+            sx={{ marginBottom: "1.5rem" }}
           />
           <TextField
             {...register("password")}
@@ -90,6 +91,7 @@ export const Login = () => {
             fullWidth
             error={!!errors.password}
             helperText={errors.password?.message}
+            sx={{ marginBottom: "1.5rem" }}
           />
           <div className="login_form_buttons">
             <Button variant="contained" type="submit">

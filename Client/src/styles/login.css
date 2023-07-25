@@ -1,5 +1,15 @@
+.login {
+  margin: 0 auto;
+  margin-top: 10rem;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  width: 80%;
+  padding: 2rem;
+}
+
 .login__header h1 {
-  padding: 3rem;
+  padding: 1rem;
 }
 
 .login__form {
@@ -7,15 +17,8 @@
   margin: 0 auto;
 }
 
-.login__form {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  grid-gap: 1rem;
-}
-
 .login_form_buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1rem;
-  margin-top: 1rem;
 }
