@@ -4,12 +4,14 @@
   box-sizing: inherit;
 }
 
-html {
-  /* defines when 1rem is */
-  font-size: 62.5%;
-}
-
 body {
   box-sizing: border-box;
   height: 100vh;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

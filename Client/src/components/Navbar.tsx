@@ -18,9 +18,9 @@ export const Navbar = () => {
           variant="outlined"
           sx={{
             color: "rgb(103, 79, 167)",
-            width: "15rem",
-            fontSize: "1.8rem",
-            margin: "1rem 0 0 4rem",
+            width: "10rem",
+            fontSize: "1.1rem",
+            margin: "1rem 0 0 2rem",
           }}
         />
       </div>

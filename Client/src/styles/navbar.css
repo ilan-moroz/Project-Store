@@ -11,19 +11,18 @@
 }
 
 .navbar__logo img {
-  width: 12rem;
-  margin: 1rem 0 1rem 0;
+  width: 8rem;
+  margin: 0.8rem 0 0.8rem 0;
 }
 
 .navbar__contact {
   color: rgb(103, 79, 167);
-  margin: 2rem 1rem 0 0;
-  font-size: 2rem;
+  margin: 2rem 0.5rem 0 0;
+  font-size: 1.2rem;
 }
 
 .user__info {
   color: rgb(103, 79, 167);
-  width: 15rem;
-  font-size: 2rem;
+  font-size: 1.2rem;
   margin-top: 1rem;
 }

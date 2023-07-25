@@ -3,7 +3,7 @@ import "../styles/about.css";
 
 export const About = () => {
   return (
-    <div className="about">
+    <div className="about center">
       <img src={storeImage} alt="store" className="storeImage" />
       <p>
         In a marketplace crowded with options, our store stands apart as a
