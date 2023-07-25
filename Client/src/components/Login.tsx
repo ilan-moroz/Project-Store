@@ -14,14 +14,14 @@ export const Login = () => {
   };
 
   return (
-    <div className="login center">
+    <div className="login">
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextField
           margin="normal"
           fullWidth
           id="username"
           label="Username"
-          placeholder="Example: JoneDue23"
+          placeholder="Example: JohnDoe23"
           autoFocus
           {...register("username", {
             required: true,
