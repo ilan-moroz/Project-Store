@@ -1,0 +1,10 @@
+.Main {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.Main > main,
+.Main > aside,
+.Main > section {
+  grid-column: span 1;
+}
