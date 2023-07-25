@@ -2,18 +2,23 @@ import { Button, TextField } from "@mui/material";
 import { Resolver, useForm, FieldError } from "react-hook-form";
 import "../styles/login.css";
 
+// defining type for the form data.
 type FormValues = {
   username: string;
   password: string;
 };
 
+// defining type for potential errors in the form data.
 type FormErrors = {
   [K in keyof FormValues]?: FieldError;
 };
 
+//function that validates form data.
 const resolver: Resolver<FormValues> = async values => {
+  //empty object to hold any errors that are found in the form data.
   const errors: FormErrors = {};
 
+  // check if the username is empty or only whitespace
   if (!values.username || values.username.trim() === "") {
     errors.username = {
       type: "required",
@@ -21,6 +26,7 @@ const resolver: Resolver<FormValues> = async values => {
     };
   }
 
+  //check if the password is less than 6 characters.
   if (!values.password || values.password.length < 6) {
     errors.password = {
       type: "invalid",
@@ -28,6 +34,7 @@ const resolver: Resolver<FormValues> = async values => {
     };
   }
 
+  // check if the password is empty.
   if (!values.password || values.password.length === 0) {
     errors.password = {
       type: "required",
@@ -35,6 +42,8 @@ const resolver: Resolver<FormValues> = async values => {
     };
   }
 
+  //return an object with the valid form values and any errors.
+  // If there are any errors, the values are an empty object.
   return {
     values: Object.keys(errors).length > 0 ? {} : values,
     errors,
@@ -47,6 +56,8 @@ export const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>({ resolver });
+
+  // what happens when the form is submitted.
   const onSubmit = handleSubmit(data => console.log(data));
 
   return (

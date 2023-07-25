@@ -1,3 +1,12 @@
+.login {
+  text-align: center;
+}
+
 .login__form {
-  margin-top: 10rem;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.login__form TextField {
+  padding: 10rem;
 }
