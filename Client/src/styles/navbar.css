@@ -1,28 +1,21 @@
 .navbar {
   display: flex;
-  border-bottom: 1px solid #e6e6e6;
-  background: linear-gradient(
-    90deg,
-    rgba(5, 5, 11, 1) 0%,
-    rgb(144, 144, 175) 49%,
-    rgba(5, 5, 11, 1) 90%
-  );
+  border-bottom: 2px solid rgb(103, 79, 167);
   justify-content: space-between;
 }
 
 .navbar__logo img {
-  width: 8rem;
-  margin: 0.8rem 0 0.8rem 0;
+  width: 25rem;
+  margin: 1.5rem 0 0 1rem;
 }
 
 .navbar__contact {
   color: rgb(103, 79, 167);
-  margin: 2rem 0.5rem 0 0;
+  margin: 0.5rem 0.5rem 0.5rem 0;
   font-size: 1.2rem;
 }
 
 .user__info {
   color: rgb(103, 79, 167);
   font-size: 1.2rem;
-  margin-top: 1rem;
 }

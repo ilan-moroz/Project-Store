@@ -10,8 +10,8 @@ export const Navbar = () => {
         <img src={logo} alt="store logo" />
       </div>
       <div className="navbar__contact">
-        <p className="navbar_contact--phone">Phone: 08-6725423</p>
-        <p className="navbar_contact--email">Email: superstore@gmail.com</p>
+        <p>Phone: 08-6725423</p>
+        <p>Email: superstore@gmail.com</p>
         <Chip
           icon={<MoodIcon style={{ color: "rgb(103, 79, 167)" }} />}
           label="Hello Guest !"
