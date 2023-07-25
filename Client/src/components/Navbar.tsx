@@ -14,7 +14,7 @@ export const Navbar = () => {
         <p>Email: superstore@gmail.com</p>
         <Chip
           icon={<MoodIcon style={{ color: "rgb(103, 79, 167)" }} />}
-          label="Hello Guest !"
+          label="Hello Guest"
           variant="outlined"
           sx={{
             color: "rgb(103, 79, 167)",
