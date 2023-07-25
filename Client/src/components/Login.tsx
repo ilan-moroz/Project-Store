@@ -104,6 +104,9 @@ export const Login = () => {
             </Button>
           </div>
         </form>
+        <div>
+          Don't have an account yet? <a href="/">register!</a>
+        </div>
       </div>
     </div>
   );
