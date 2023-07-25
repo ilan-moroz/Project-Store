@@ -1,57 +1,87 @@
 import { Button, TextField } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { Resolver, useForm, FieldError } from "react-hook-form";
+import "../styles/login.css";
+
+type FormValues = {
+  username: string;
+  password: string;
+};
+
+type FormErrors = {
+  [K in keyof FormValues]?: FieldError;
+};
+
+const resolver: Resolver<FormValues> = async values => {
+  const errors: FormErrors = {};
+
+  if (!values.username || values.username.trim() === "") {
+    errors.username = {
+      type: "required",
+      message: "Username is required",
+    };
+  }
+
+  if (!values.password || values.password.length < 6) {
+    errors.password = {
+      type: "invalid",
+      message: "Password must be at least 6 characters",
+    };
+  }
+
+  if (!values.password || values.password.length === 0) {
+    errors.password = {
+      type: "required",
+      message: "Password is required",
+    };
+  }
+
+  return {
+    values: Object.keys(errors).length > 0 ? {} : values,
+    errors,
+  };
+};
 
 export const Login = () => {
-  // use form for form validation
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-
-  const onSubmit = (data: any) => {
-    console.log(data);
-  };
+  } = useForm<FormValues>({ resolver });
+  const onSubmit = handleSubmit(data => console.log(data));
 
   return (
     <div className="login">
-      <div className="login__form center">
-        <h1>Login</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <h1>Login</h1>
+      <div className="login__form">
+        <form onSubmit={onSubmit}>
           <TextField
-            margin="normal"
-            fullWidth
+            {...register("username")}
             id="username"
+            type="text"
             label="Username"
-            placeholder="Example: JohnDoe23"
-            autoFocus
-            {...register("username", {
-              required: true,
-            })}
-            error={Boolean(errors.username)}
-            helperText={errors.username && "Username is required"}
+            variant="outlined"
+            fullWidth
+            error={!!errors.username}
+            helperText={errors.username?.message}
           />
           <TextField
-            margin="normal"
-            fullWidth
+            {...register("password")}
             id="password"
+            type="password"
             label="Password"
-            placeholder="Example: 12345678"
-            autoFocus
-            {...register("password", {
-              required: true,
-            })}
-            error={Boolean(errors.password)}
-            helperText={errors.password && "Password is required"}
-          />
-          <Button
-            type="submit"
+            variant="outlined"
             fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Login
-          </Button>
+            error={!!errors.password}
+            helperText={errors.password?.message}
+          />
+          <div className="login_form_buttons">
+            <Button variant="contained" fullWidth type="submit">
+              Login
+            </Button>
+            <Button variant="contained" color="inherit" fullWidth type="reset">
+              Reset
+            </Button>
+          </div>
         </form>
       </div>
     </div>
