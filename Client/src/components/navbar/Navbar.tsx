@@ -1,11 +1,9 @@
-import { Chip, useMediaQuery } from "@mui/material";
+import { Chip } from "@mui/material";
 import logo from "../../assets/images/logo.png";
 import "../../styles/navbar.css";
 import MoodIcon from "@mui/icons-material/Mood";
 
 export const Navbar = () => {
-  const isMobile = useMediaQuery("(max-width: 768px)");
-
   return (
     <div className="navbar">
       <div className="navbar__logo">
