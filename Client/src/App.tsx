@@ -1,12 +1,18 @@
 import { BrowserRouter } from "react-router-dom";
 import { MainRoute } from "./routes/MainRoute";
+import { Navbar } from "./components/navbar/Navbar";
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <MainRoute />
-      </BrowserRouter>
+      <header>
+        <Navbar />
+      </header>
+      <main>
+        <BrowserRouter>
+          <MainRoute />
+        </BrowserRouter>
+      </main>
     </div>
   );
 }
