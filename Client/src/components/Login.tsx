@@ -64,10 +64,10 @@ export const Login = () => {
   return (
     <div className="login">
       <div className="login__header center">
-        <Typography variant="h3" gutterBottom sx={{ color: "rgb(103,32,180)" }}>
+        <Typography variant="h3" gutterBottom className="purpleText">
           Login
         </Typography>
-        <Avatar sx={{ bgcolor: " rgb(103,32,180)", marginBottom: "3rem" }}>
+        <Avatar sx={{ marginBottom: "3rem" }} className="purpleText">
           <LoginIcon />
         </Avatar>
       </div>

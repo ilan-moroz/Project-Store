@@ -8,8 +8,8 @@ export const About = () => {
       <Typography
         variant="h3"
         gutterBottom
+        className="purpleText"
         sx={{
-          color: "rgb(103,32,180)",
           whiteSpace: "nowrap",
           marginTop: "1rem",
         }}
