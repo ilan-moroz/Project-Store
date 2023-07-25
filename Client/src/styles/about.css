@@ -6,10 +6,3 @@
   font-size: 1.1rem;
   overflow: scroll;
 }
-
-.center {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}

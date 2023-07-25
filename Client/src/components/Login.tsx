@@ -1,5 +1,6 @@
-import { Button, TextField } from "@mui/material";
+import { Avatar, Button, TextField } from "@mui/material";
 import { Resolver, useForm, FieldError } from "react-hook-form";
+import LoginIcon from "@mui/icons-material/Login";
 import "../styles/login.css";
 
 // defining type for the form data.
@@ -62,7 +63,12 @@ export const Login = () => {
 
   return (
     <div className="login">
-      <h1>Login</h1>
+      <div className="login__header center">
+        <h1>Login</h1>
+        <Avatar sx={{ bgcolor: " rgb(103,32,180)", marginBottom: "4rem" }}>
+          <LoginIcon />
+        </Avatar>
+      </div>
       <div className="login__form">
         <form onSubmit={onSubmit}>
           <TextField
@@ -86,10 +92,10 @@ export const Login = () => {
             helperText={errors.password?.message}
           />
           <div className="login_form_buttons">
-            <Button variant="contained" fullWidth type="submit">
+            <Button variant="contained" type="submit">
               Login
             </Button>
-            <Button variant="contained" color="inherit" fullWidth type="reset">
+            <Button variant="contained" color="inherit" type="reset">
               Reset
             </Button>
           </div>

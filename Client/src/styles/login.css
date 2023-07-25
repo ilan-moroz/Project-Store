@@ -1,5 +1,5 @@
-.login {
-  text-align: center;
+.login__header h1 {
+  padding: 3rem;
 }
 
 .login__form {
@@ -7,6 +7,15 @@
   margin: 0 auto;
 }
 
-.login__form TextField {
-  padding: 10rem;
+.login__form {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 1rem;
+}
+
+.login_form_buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+  margin-top: 1rem;
 }
