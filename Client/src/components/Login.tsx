@@ -20,7 +20,11 @@ export const Login = () => {
   return (
     <div className="login">
       <div className="login__header center">
-        <Typography variant="h3" gutterBottom className="purpleText">
+        <Typography
+          variant="h3"
+          gutterBottom
+          className="purpleText login__header--text"
+        >
           Login
         </Typography>
         <Avatar
@@ -48,7 +52,7 @@ export const Login = () => {
             error={!!errors.password}
             helperText={errors.password?.message}
           />
-          <div className="login_form_buttons">
+          <div className="login__form--buttons">
             <Button variant="contained" type="submit">
               Login
             </Button>
@@ -57,7 +61,7 @@ export const Login = () => {
             </Button>
           </div>
         </form>
-        <div>
+        <div className="login__registerLink ">
           Don't have an account yet? <Link to="/register">Register!</Link>
         </div>
       </div>

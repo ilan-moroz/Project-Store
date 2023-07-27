@@ -1,6 +1,4 @@
 .login {
-  margin: 0 auto;
-  margin-top: 9.5rem;
   background-color: #f7f7f7;
   border-radius: 3px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -8,8 +6,8 @@
   padding: 2rem;
 }
 
-.login__header h1 {
-  padding: 1rem;
+.login__header--text {
+  padding-bottom: 1.5rem;
 }
 
 .login__form {
@@ -17,8 +15,13 @@
   margin: 0 auto;
 }
 
-.login_form_buttons {
+.login__form--buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1rem;
+}
+
+.login__registerLink {
+  margin: 2rem auto 0;
+  width: fit-content;
 }
