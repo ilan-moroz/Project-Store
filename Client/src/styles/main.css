@@ -8,3 +8,10 @@
 .Main > section {
   grid-column: span 1;
 }
+
+.Main > main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 65vh;
+}
