@@ -2,8 +2,13 @@ import { FieldError, Resolver } from "react-hook-form";
 
 // defining type for the form data.
 export type FormValues = {
-  username: string;
+  idNumber: number;
+  email: string;
   password: string;
+  city: string;
+  street: string;
+  firstName: string;
+  lastName: string;
 };
 
 // defining type for potential errors in the form data.
@@ -16,11 +21,19 @@ export const resolver: Resolver<FormValues> = async values => {
   //empty object to hold any errors that are found in the form data.
   const errors: FormErrors = {};
 
-  // check if the username is empty or only whitespace
-  if (!values.username || values.username.trim() === "") {
-    errors.username = {
-      type: "required",
-      message: "Username is required",
+  //   // check if the username is empty or only whitespace
+  //   if (!values.username || values.username.trim() === "") {
+  //     errors.username = {
+  //       type: "required",
+  //       message: "Username is required",
+  //     };
+  //   }
+
+  //check if the password is less than 6 characters.
+  if (!values.password || values.password.length < 6) {
+    errors.password = {
+      type: "invalid",
+      message: "Password must be at least 6 characters",
     };
   }
 
