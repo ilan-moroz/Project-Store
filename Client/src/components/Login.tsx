@@ -1,56 +1,9 @@
 import { Avatar, Button, TextField, Typography } from "@mui/material";
-import { Resolver, useForm, FieldError } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import LoginIcon from "@mui/icons-material/Login";
 import "../styles/login.css";
 import { Link } from "react-router-dom";
-
-// defining type for the form data.
-type FormValues = {
-  username: string;
-  password: string;
-};
-
-// defining type for potential errors in the form data.
-type FormErrors = {
-  [K in keyof FormValues]?: FieldError;
-};
-
-//function that validates form data.
-const resolver: Resolver<FormValues> = async values => {
-  //empty object to hold any errors that are found in the form data.
-  const errors: FormErrors = {};
-
-  // check if the username is empty or only whitespace
-  if (!values.username || values.username.trim() === "") {
-    errors.username = {
-      type: "required",
-      message: "Username is required",
-    };
-  }
-
-  //check if the password is less than 6 characters.
-  if (!values.password || values.password.length < 6) {
-    errors.password = {
-      type: "invalid",
-      message: "Password must be at least 6 characters",
-    };
-  }
-
-  // check if the password is empty.
-  if (!values.password || values.password.length === 0) {
-    errors.password = {
-      type: "required",
-      message: "Password is required",
-    };
-  }
-
-  //return an object with the valid form values and any errors.
-  // If there are any errors, the values are an empty object.
-  return {
-    values: Object.keys(errors).length > 0 ? {} : values,
-    errors,
-  };
-};
+import { FormValues, resolver } from "../validators/loginValidator";
 
 export const Login = () => {
   const {
