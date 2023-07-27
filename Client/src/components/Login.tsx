@@ -1,9 +1,12 @@
-import { Avatar, Button, TextField, Typography } from "@mui/material";
+import { Avatar, Button, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import LoginIcon from "@mui/icons-material/Login";
 import "../styles/login.css";
 import { Link } from "react-router-dom";
-import { FormValues, resolver } from "../validators/loginValidator";
+import { resolver } from "../validators/loginValidator";
+import { FormValues } from "../types/loginFormValues";
+import TextInput from "./inputs/TextInput";
+import PasswordInput from "./inputs/PasswordInput";
 
 export const Login = () => {
   const {
@@ -30,27 +33,19 @@ export const Login = () => {
       </div>
       <div className="login__form">
         <form onSubmit={onSubmit}>
-          <TextField
-            {...register("username")}
-            id="username"
-            type="text"
+          <TextInput
+            register={register("username")}
+            name="username"
             label="Username"
-            variant="outlined"
-            fullWidth
             error={!!errors.username}
             helperText={errors.username?.message}
-            sx={{ marginBottom: "1.5rem" }}
           />
-          <TextField
-            {...register("password")}
-            id="password"
-            type="password"
+          <PasswordInput
+            register={register("password")}
+            name="password"
             label="Password"
-            variant="outlined"
-            fullWidth
             error={!!errors.password}
             helperText={errors.password?.message}
-            sx={{ marginBottom: "1.5rem" }}
           />
           <div className="login_form_buttons">
             <Button variant="contained" type="submit">
