@@ -5,8 +5,7 @@ import "../styles/login.css";
 import { Link } from "react-router-dom";
 import { resolver } from "../validators/loginValidator";
 import { FormValues } from "../types/loginFormValues";
-import TextInput from "./inputs/TextInput";
-import PasswordInput from "./inputs/PasswordInput";
+import FormInput from "./FormInput";
 
 export const Login = () => {
   const {
@@ -33,17 +32,19 @@ export const Login = () => {
       </div>
       <div className="login__form">
         <form onSubmit={onSubmit}>
-          <TextInput
+          <FormInput
             register={register("username")}
             name="username"
             label="Username"
+            type="text"
             error={!!errors.username}
             helperText={errors.username?.message}
           />
-          <PasswordInput
+          <FormInput
             register={register("password")}
             name="password"
             label="Password"
+            type="password"
             error={!!errors.password}
             helperText={errors.password?.message}
           />
