@@ -1,4 +1,3 @@
-import { BrowserRouter } from "react-router-dom";
 import { MainRoute } from "./routes/MainRoute";
 import { Navbar } from "./components/Navbar";
 
@@ -9,9 +8,7 @@ function App() {
         <Navbar />
       </header>
       <main>
-        <BrowserRouter>
-          <MainRoute />
-        </BrowserRouter>
+        <MainRoute />
       </main>
     </div>
   );
