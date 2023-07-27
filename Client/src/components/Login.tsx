@@ -1,4 +1,4 @@
-import { Avatar, Button, Typography } from "@mui/material";
+import { Avatar, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import LoginIcon from "@mui/icons-material/Login";
 import "../styles/login.css";
@@ -53,12 +53,12 @@ export const Login = () => {
             helperText={errors.password?.message}
           />
           <div className="login__form--buttons">
-            <Button variant="contained" type="submit">
-              Login
-            </Button>
-            <Button variant="contained" color="inherit" type="reset">
-              Reset
-            </Button>
+            <button className="login_submit-button" type="submit">
+              login
+            </button>
+            <button className="login_reset-button" type="reset">
+              reset
+            </button>
           </div>
         </form>
         <div className="login__registerLink ">

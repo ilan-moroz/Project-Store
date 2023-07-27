@@ -25,3 +25,41 @@
   margin: 2rem auto 0;
   width: fit-content;
 }
+
+/* button design */
+.login_submit-button:link,
+.login_submit-button:visited,
+.login_submit-button,
+.login_reset-button:link,
+.login_reset-button:visited,
+.login_reset-button {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.9rem;
+  border-radius: 10rem;
+  transition: all 0.2s;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+.login_submit-button {
+  background-color: rgb(103, 32, 180);
+}
+
+.login_reset-button {
+  background-color: rgb(109, 112, 104);
+}
+
+.login_submit-button:hover,
+.login_reset-button:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: 0px 0.7rem 1.5rem rgba(0, 0, 0, 0.5);
+}
+
+.login_submit-button:active,
+.login_reset-button:active {
+  transform: translateY(-0.1rem);
+  box-shadow: 0px 0.35rem 0.75rem rgba(0, 0, 0, 0.5);
+}
