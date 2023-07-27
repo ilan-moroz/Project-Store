@@ -5,6 +5,10 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import FormInput from "../components/FormInput";
+import { useForm } from "react-hook-form";
+import { FormValues } from "../types/registerFormValues";
+import { resolver } from "../validators/registerValidator";
 
 export const Register = () => {
   const steps = ["User settings", "User information"];
@@ -21,6 +25,12 @@ export const Register = () => {
 
   const onSubmit = () => {};
 
+  const {
+    register,
+    // handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>({ resolver });
+
   return (
     <Box sx={{ width: "70%", margin: "2rem auto" }}>
       <Typography variant="h3" gutterBottom className="purpleText">
@@ -29,7 +39,6 @@ export const Register = () => {
       <Stepper activeStep={activeStep}>
         {steps.map(label => {
           const stepProps: { completed?: boolean } = {};
-
           return (
             <Step key={label} {...stepProps}>
               <StepLabel>{label}</StepLabel>
@@ -50,6 +59,77 @@ export const Register = () => {
       ) : (
         <React.Fragment>
           <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
+          {activeStep === 0 && (
+            <div className="firstStepInputs">
+              <FormInput
+                register={register("idNumber")}
+                name="idNumber"
+                label="Id Number"
+                type="number"
+                error={!!errors.idNumber}
+                helperText={errors.idNumber?.message}
+              />
+              <FormInput
+                register={register("email")}
+                name="email"
+                label="Email"
+                type="text"
+                error={!!errors.email}
+                helperText={errors.email?.message}
+              />
+              <FormInput
+                register={register("password")}
+                name="password"
+                label="Password"
+                type="password"
+                error={!!errors.password}
+                helperText={errors.password?.message}
+              />
+              <FormInput
+                name="confirmPassword"
+                label="Confirm Password"
+                type="password"
+                error={!!errors.confirmPassword}
+                helperText={errors.password?.message}
+              />
+            </div>
+          )}
+          {activeStep === 1 && (
+            <div className="secondStepInputs">
+              <FormInput
+                register={register("city")}
+                name="city"
+                label="City"
+                type="string"
+                error={!!errors.city}
+                helperText={errors.city?.message}
+              />
+              <FormInput
+                register={register("street")}
+                name="street"
+                label="Street"
+                type="text"
+                error={!!errors.street}
+                helperText={errors.street?.message}
+              />
+              <FormInput
+                register={register("firstName")}
+                name="firstName"
+                label="First Name"
+                type="string"
+                error={!!errors.firstName}
+                helperText={errors.firstName?.message}
+              />
+              <FormInput
+                register={register("lastName")}
+                name="lastName"
+                label="Last Name"
+                type="string"
+                error={!!errors.lastName}
+                helperText={errors.lastName?.message}
+              />
+            </div>
+          )}
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Button
               color="inherit"

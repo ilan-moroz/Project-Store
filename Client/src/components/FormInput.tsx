@@ -2,7 +2,7 @@ import { TextField } from "@mui/material";
 import { UseFormRegisterReturn } from "react-hook-form";
 
 interface FormInputProps {
-  register: UseFormRegisterReturn;
+  register?: UseFormRegisterReturn;
   name: string;
   label: string;
   error: boolean;

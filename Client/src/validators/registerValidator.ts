@@ -1,15 +1,5 @@
 import { FieldError, Resolver } from "react-hook-form";
-
-// defining type for the form data.
-export type FormValues = {
-  idNumber: number;
-  email: string;
-  password: string;
-  city: string;
-  street: string;
-  firstName: string;
-  lastName: string;
-};
+import { FormValues } from "../types/registerFormValues";
 
 // defining type for potential errors in the form data.
 type FormErrors = {
