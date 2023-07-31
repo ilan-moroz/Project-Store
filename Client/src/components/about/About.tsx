@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import storeImage from "../assets/images/store.png";
+import storeImage from "../../assets/images/store.png";
 import "./about.css";
 
 export const About = () => {
