@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { Main } from "../pages/Main";
+import { Main } from "../pages/main/Main";
 import { Register } from "../pages/Register";
 
 export const MainRoute = () => {

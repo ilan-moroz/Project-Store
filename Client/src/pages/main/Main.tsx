@@ -1,7 +1,7 @@
-import { About } from "../components/About";
-import { Info } from "../components/Info";
-import { Login } from "../components/Login";
-import "../styles/main.css";
+import { About } from "../../components/about/About";
+import { Info } from "../../components/Info";
+import { Login } from "../../components/login/Login";
+import "./main.css";
 
 export const Main = () => {
   return (

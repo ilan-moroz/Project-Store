@@ -1,11 +1,11 @@
 import { Avatar, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import LoginIcon from "@mui/icons-material/Login";
-import "../styles/login.css";
+import "./login.css";
 import { Link } from "react-router-dom";
-import { resolver } from "../validators/loginValidator";
-import { FormValues } from "../types/loginFormValues";
-import FormInput from "./FormInput";
+import { resolver } from "../../validators/loginValidator";
+import { FormValues } from "../../types/loginFormValues";
+import FormInput from "../FormInput";
 
 export const Login = () => {
   const {

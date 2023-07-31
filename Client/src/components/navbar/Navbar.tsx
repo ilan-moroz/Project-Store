@@ -1,6 +1,6 @@
 import { Chip } from "@mui/material";
 import logo from "../assets/images/logo.png";
-import "../styles/navbar.css";
+import "./navbar.css";
 import MoodIcon from "@mui/icons-material/Mood";
 import { Link } from "react-router-dom";
 

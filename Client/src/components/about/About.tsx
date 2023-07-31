@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import storeImage from "../assets/images/store.png";
-import "../styles/about.css";
+import "./about.css";
 
 export const About = () => {
   return (
