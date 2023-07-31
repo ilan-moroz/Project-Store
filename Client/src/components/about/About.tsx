@@ -8,10 +8,13 @@ export const About = () => {
       <Typography
         variant="h3"
         gutterBottom
-        className="purpleText"
+        className="purpleText header"
         sx={{
           whiteSpace: "nowrap",
           marginTop: "1rem",
+          fontFamily: "Josefin Sans",
+          fontWeight: 500,
+          fontSize: "3.5rem",
         }}
       >
         Welcome to SuperStore!

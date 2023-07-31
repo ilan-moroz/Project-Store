@@ -14,6 +14,7 @@ import { RootState } from "../../redux/Store";
 import { StartShopping } from "../StartShopping";
 
 export const Login = () => {
+  // Accessing the user object from the Redux store
   const user = useSelector((state: RootState) => state.user.user);
 
   const {
@@ -29,9 +30,11 @@ export const Login = () => {
   const onSubmit = handleSubmit(async data => {
     try {
       const response = await login(data);
+      // If login is successful, update the Redux store with the user and token
       if (response) dispatch(setLoginAction(response.user, response.token));
       reset();
     } catch (err: any) {
+      // If there's an error,show a toast notification with the error message
       toast.error(err.response.data.message);
       console.error(err);
     }
@@ -48,6 +51,10 @@ export const Login = () => {
               variant="h3"
               gutterBottom
               className="purpleText login__header--text"
+              sx={{
+                fontFamily: "Josefin Sans",
+                fontWeight: 400,
+              }}
             >
               Login
             </Typography>
