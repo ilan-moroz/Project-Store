@@ -8,6 +8,8 @@ import { FormValues } from "../../types/loginFormValues";
 import FormInput from "../FormInput";
 import { login } from "../../api/userApi";
 import { toast } from "react-toastify";
+import { setLoginAction } from "../../redux/userReducer";
+import { useDispatch } from "react-redux";
 
 export const Login = () => {
   const {
@@ -16,10 +18,13 @@ export const Login = () => {
     formState: { errors },
   } = useForm<FormValues>({ resolver });
 
+  const dispatch = useDispatch();
+
   // what happens when the form is submitted.
   const onSubmit = handleSubmit(async data => {
     try {
-      await login(data);
+      const response = await login(data);
+      if (response) dispatch(setLoginAction(response.user, response.token));
     } catch (err: any) {
       toast.error(err.response.data.message);
       console.error(err);
