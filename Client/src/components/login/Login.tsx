@@ -7,6 +7,7 @@ import { resolver } from "../../validators/loginValidator";
 import { FormValues } from "../../types/loginFormValues";
 import FormInput from "../FormInput";
 import { login } from "../../api/userApi";
+import { toast } from "react-toastify";
 
 export const Login = () => {
   const {
@@ -16,7 +17,14 @@ export const Login = () => {
   } = useForm<FormValues>({ resolver });
 
   // what happens when the form is submitted.
-  const onSubmit = handleSubmit(data => login(data));
+  const onSubmit = handleSubmit(async data => {
+    try {
+      await login(data);
+    } catch (err: any) {
+      toast.error(err.response.data.message);
+      console.error(err);
+    }
+  });
 
   return (
     <div className="login">
