@@ -9,12 +9,17 @@ import FormInput from "../FormInput";
 import { login } from "../../api/userApi";
 import { toast } from "react-toastify";
 import { setLoginAction } from "../../redux/userReducer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/Store";
+import { StartShopping } from "../StartShopping";
 
 export const Login = () => {
+  const user = useSelector((state: RootState) => state.user.user);
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormValues>({ resolver });
 
@@ -25,6 +30,7 @@ export const Login = () => {
     try {
       const response = await login(data);
       if (response) dispatch(setLoginAction(response.user, response.token));
+      reset();
     } catch (err: any) {
       toast.error(err.response.data.message);
       console.error(err);
@@ -33,52 +39,58 @@ export const Login = () => {
 
   return (
     <div className="login">
-      <div className="login__header center">
-        <Typography
-          variant="h3"
-          gutterBottom
-          className="purpleText login__header--text"
-        >
-          Login
-        </Typography>
-        <Avatar
-          sx={{ marginBottom: "3rem", bgcolor: "rgb(103, 32, 180)" }}
-          className="purpleText"
-        >
-          <LoginIcon />
-        </Avatar>
-      </div>
-      <div className="login__form">
-        <form onSubmit={onSubmit}>
-          <FormInput
-            register={register("email")}
-            name="email"
-            label="Email"
-            type="text"
-            error={!!errors.email}
-            helperText={errors.email?.message}
-          />
-          <FormInput
-            register={register("password")}
-            name="password"
-            label="Password"
-            type="password"
-            error={!!errors.password}
-            helperText={errors.password?.message}
-          />
-          <div className="login__form--buttons">
-            <button className="login_submit-button" type="submit">
-              login
-            </button>
-            <button className="login_reset-button" type="reset">
-              reset
-            </button>
+      {user ? (
+        <StartShopping />
+      ) : (
+        <>
+          <div className="login__header center">
+            <Typography
+              variant="h3"
+              gutterBottom
+              className="purpleText login__header--text"
+            >
+              Login
+            </Typography>
+            <Avatar
+              sx={{ marginBottom: "3rem", bgcolor: "rgb(103, 32, 180)" }}
+              className="purpleText"
+            >
+              <LoginIcon />
+            </Avatar>
           </div>
-        </form>
-        <div className="login__registerLink ">
-          Don't have an account yet? <Link to="/register">Register!</Link>
-        </div>
-      </div>
+          <div className="login__form">
+            <form onSubmit={onSubmit}>
+              <FormInput
+                register={register("email")}
+                name="email"
+                label="Email"
+                type="text"
+                error={!!errors.email}
+                helperText={errors.email?.message}
+              />
+              <FormInput
+                register={register("password")}
+                name="password"
+                label="Password"
+                type="password"
+                error={!!errors.password}
+                helperText={errors.password?.message}
+              />
+              <div className="login__form--buttons">
+                <button className="login_submit-button" type="submit">
+                  login
+                </button>
+                <button className="login_reset-button" type="reset">
+                  reset
+                </button>
+              </div>
+            </form>
+            <div className="login__registerLink ">
+              Don't have an account yet? <Link to="/register">Register!</Link>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
