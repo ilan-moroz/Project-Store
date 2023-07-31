@@ -9,12 +9,13 @@ import { setLogoutAction } from "../../redux/userReducer";
 import React from "react";
 
 export const Navbar = () => {
+  // Accessing the user object from the Redux store
   const user = useSelector((state: RootState) => state.user.user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // for the menu
+  // for the popup menu
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {

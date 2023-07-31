@@ -1,6 +1,7 @@
 import { TextField } from "@mui/material";
 import { UseFormRegisterReturn } from "react-hook-form";
 
+// Define the type for the props the component will receive
 interface FormInputProps {
   register?: UseFormRegisterReturn;
   name: string;
@@ -10,6 +11,7 @@ interface FormInputProps {
   helperText: string | undefined;
 }
 
+//reusable form input component
 const FormInput: React.FC<FormInputProps> = ({
   register,
   name,
