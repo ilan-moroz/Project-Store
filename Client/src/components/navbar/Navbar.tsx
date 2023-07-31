@@ -3,8 +3,12 @@ import logo from "../../assets/images/logo.png";
 import "./navbar.css";
 import MoodIcon from "@mui/icons-material/Mood";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/Store";
 
 export const Navbar = () => {
+  const user = useSelector((state: RootState) => state.user.user);
+
   return (
     <div className="navbar">
       <div className="navbar__logo">
