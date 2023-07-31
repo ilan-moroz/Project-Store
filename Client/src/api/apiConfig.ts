@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:4000";
+const baseUrl = "http://localhost:4000/mongoStore";
 
 // Create an instance of axios with the base URL
 const api = axios.create({

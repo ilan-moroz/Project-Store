@@ -13,7 +13,7 @@ export const register = async (req: Request, res: Response) => {
   const newCustomer = new UserModel(newUser);
   newCustomer
     .save()
-    .then((customer) => {
+    .then(customer => {
       const token = jwt.sign(
         { id: customer._id, email: customer.email },
         process.env.SECRET_KEY!,
@@ -28,7 +28,7 @@ export const register = async (req: Request, res: Response) => {
         },
       });
     })
-    .catch((error) => {
+    .catch(error => {
       res.status(500).json({ error: error.message });
     });
 };
@@ -57,6 +57,7 @@ export const login = async (req: Request, res: Response) => {
       user: {
         firstName: user.firstName,
         lastName: user.lastName,
+        role: user.role,
       },
     });
   } catch (error: any) {

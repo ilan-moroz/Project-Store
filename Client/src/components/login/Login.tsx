@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { resolver } from "../../validators/loginValidator";
 import { FormValues } from "../../types/loginFormValues";
 import FormInput from "../FormInput";
+import { login } from "../../api/userApi";
 
 export const Login = () => {
   const {
@@ -15,7 +16,7 @@ export const Login = () => {
   } = useForm<FormValues>({ resolver });
 
   // what happens when the form is submitted.
-  const onSubmit = handleSubmit(data => console.log(data));
+  const onSubmit = handleSubmit(data => login(data));
 
   return (
     <div className="login">
@@ -37,12 +38,12 @@ export const Login = () => {
       <div className="login__form">
         <form onSubmit={onSubmit}>
           <FormInput
-            register={register("username")}
-            name="username"
-            label="Username"
+            register={register("email")}
+            name="email"
+            label="Email"
             type="text"
-            error={!!errors.username}
-            helperText={errors.username?.message}
+            error={!!errors.email}
+            helperText={errors.email?.message}
           />
           <FormInput
             register={register("password")}

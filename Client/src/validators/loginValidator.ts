@@ -11,11 +11,17 @@ export const resolver: Resolver<FormValues> = async values => {
   //empty object to hold any errors that are found in the form data.
   const errors: FormErrors = {};
 
-  // check if the username is empty or only whitespace
-  if (!values.username || values.username.trim() === "") {
-    errors.username = {
+  // check if the email is empty or only whitespace
+  if (!values.email || values.email.trim() === "") {
+    errors.email = {
       type: "required",
-      message: "Username is required",
+      message: "Email is required",
+    };
+  } // verify that the email has the correct format
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
+    errors.email = {
+      type: "pattern",
+      message: "Invalid email format",
     };
   }
 
