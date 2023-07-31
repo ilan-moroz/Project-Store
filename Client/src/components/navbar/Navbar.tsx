@@ -21,7 +21,7 @@ export const Navbar = () => {
         <p>Email: superstore@gmail.com</p>
         <Chip
           icon={<MoodIcon style={{ color: "rgb(103,32,180)" }} />}
-          label="Hello Guest"
+          label={user ? `${user.firstName} ${user.lastName}` : "Hello Guest"}
           variant="outlined"
           sx={{
             color: "rgb(103,32,180)",
