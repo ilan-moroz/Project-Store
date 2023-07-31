@@ -1,13 +1,36 @@
-import { Chip } from "@mui/material";
+import { Chip, Menu, MenuItem } from "@mui/material";
 import logo from "../../assets/images/logo.png";
 import "./navbar.css";
 import MoodIcon from "@mui/icons-material/Mood";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
+import { setLogoutAction } from "../../redux/userReducer";
+import React from "react";
 
 export const Navbar = () => {
   const user = useSelector((state: RootState) => state.user.user);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // for the menu
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  // logout user
+  const handleLogout = () => {
+    dispatch(setLogoutAction());
+    handleClose();
+    navigate("/");
+  };
 
   return (
     <div className="navbar">
@@ -29,7 +52,22 @@ export const Navbar = () => {
             fontSize: "1.1rem",
             margin: "1rem 0 0 2rem",
           }}
+          aria-controls={open ? "basic-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleClick}
         />
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            "aria-labelledby": "basic-button",
+          }}
+        >
+          <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        </Menu>
       </div>
     </div>
   );
