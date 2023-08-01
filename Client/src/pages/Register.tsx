@@ -18,6 +18,7 @@ import { useDispatch } from "react-redux";
 import { setLoginAction } from "../redux/userReducer";
 import { useNavigate } from "react-router-dom";
 import { User } from "../models/User";
+import { getCitiesData } from "../api/citiesApi";
 
 export const Register = () => {
   const steps = ["User settings", "User information"];
@@ -31,6 +32,18 @@ export const Register = () => {
     city: "",
     street: "",
   });
+
+  const [cities, setCities] = React.useState([]);
+
+  React.useEffect(() => {
+    const fetchCitiesData = async () => {
+      const data = await getCitiesData();
+      setCities(data);
+    };
+    fetchCitiesData();
+  }, []);
+
+  console.log(cities);
 
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -156,7 +169,7 @@ export const Register = () => {
                   register={register("city")}
                   id="city"
                   label="City"
-                  type="string"
+                  type="select"
                   error={!!errors.city}
                   helperText={errors.city?.message}
                 />
