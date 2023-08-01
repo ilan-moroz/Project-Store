@@ -35,6 +35,7 @@ export const Register = () => {
 
   const [cities, setCities] = React.useState([]);
 
+  // get all cities names from gov api
   React.useEffect(() => {
     const fetchCitiesData = async () => {
       const data = await getCitiesData();
@@ -42,8 +43,6 @@ export const Register = () => {
     };
     fetchCitiesData();
   }, []);
-
-  console.log(cities);
 
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -126,7 +125,7 @@ export const Register = () => {
               <form onSubmit={firstStepSubmit}>
                 <FormInput
                   register={register("idNumber")}
-                  id="idNumber"
+                  name="idNumber"
                   label="Id Number"
                   type="number"
                   error={!!errors.idNumber}
@@ -134,7 +133,7 @@ export const Register = () => {
                 />
                 <FormInput
                   register={register("email")}
-                  id="email"
+                  name="email"
                   label="Email"
                   type="text"
                   error={!!errors.email}
@@ -142,7 +141,7 @@ export const Register = () => {
                 />
                 <FormInput
                   register={register("password")}
-                  id="password"
+                  name="password"
                   label="Password"
                   type="password"
                   error={!!errors.password}
@@ -150,7 +149,7 @@ export const Register = () => {
                 />
                 <FormInput
                   register={register("confirmPassword")}
-                  id="confirmPassword"
+                  name="confirmPassword"
                   label="Confirm Password"
                   type="password"
                   error={!!errors.confirmPassword}
@@ -167,15 +166,16 @@ export const Register = () => {
               <form onSubmit={secondStepSubmit}>
                 <FormInput
                   register={register("city")}
-                  id="city"
+                  name="city"
                   label="City"
                   type="select"
+                  selectOptions={cities}
                   error={!!errors.city}
                   helperText={errors.city?.message}
                 />
                 <FormInput
                   register={register("street")}
-                  id="street"
+                  name="street"
                   label="Street"
                   type="text"
                   error={!!errors.street}
@@ -183,7 +183,7 @@ export const Register = () => {
                 />
                 <FormInput
                   register={register("firstName")}
-                  id="firstName"
+                  name="firstName"
                   label="First Name"
                   type="string"
                   error={!!errors.firstName}
@@ -191,7 +191,7 @@ export const Register = () => {
                 />
                 <FormInput
                   register={register("lastName")}
-                  id="lastName"
+                  name="lastName"
                   label="Last Name"
                   type="string"
                   error={!!errors.lastName}

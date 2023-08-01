@@ -69,7 +69,7 @@ export const Login = () => {
             <form onSubmit={onSubmit}>
               <FormInput
                 register={register("email")}
-                id="email"
+                name="email"
                 label="Email"
                 type="text"
                 error={!!errors.email}
@@ -77,7 +77,7 @@ export const Login = () => {
               />
               <FormInput
                 register={register("password")}
-                id="password"
+                name="password"
                 label="Password"
                 type="password"
                 error={!!errors.password}
