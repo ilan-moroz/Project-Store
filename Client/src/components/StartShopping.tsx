@@ -10,7 +10,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 export const StartShopping = () => {
   return (
     <div className="startShopping">
-      <Card sx={{ minWidth: 275 }} className="center">
+      <Card className="center">
         <CardContent>
           <Typography variant="h5" component="div">
             Start Shopping / Continue Shopping
