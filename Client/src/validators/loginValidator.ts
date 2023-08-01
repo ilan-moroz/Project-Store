@@ -1,13 +1,13 @@
 import { FieldError, Resolver } from "react-hook-form";
-import { FormValues } from "../types/loginFormValues";
+import { loginFormValues } from "../types/loginFormValues";
 
 // defining type for potential errors in the form data.
 type FormErrors = {
-  [K in keyof FormValues]?: FieldError;
+  [K in keyof loginFormValues]?: FieldError;
 };
 
 //function that validates form data.
-export const resolver: Resolver<FormValues> = async values => {
+export const resolver: Resolver<loginFormValues> = async values => {
   //empty object to hold any errors that are found in the form data.
   const errors: FormErrors = {};
 
