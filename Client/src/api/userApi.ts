@@ -1,3 +1,4 @@
+import { User } from "../models/User";
 import api from "./apiConfig";
 
 // function to login the user
@@ -14,6 +15,15 @@ export const checkEmailId = async (email: string, idNumber: number) => {
   try {
     const response = await api.get(`/user/checkEmailId/${email}/${idNumber}`);
     if (response.status === 200) return response.data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const registerUser = async (newUser: User) => {
+  try {
+    const response = await api.post(`/user/register`, newUser);
+    if (response.status === 201) return response.data;
   } catch (err) {
     throw err;
   }

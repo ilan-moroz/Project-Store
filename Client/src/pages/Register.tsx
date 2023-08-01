@@ -12,13 +12,26 @@ import {
   stepOneResolver,
   stepTwoResolver,
 } from "../validators/registerValidator";
-import { checkEmailId } from "../api/userApi";
+import { checkEmailId, registerUser } from "../api/userApi";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setLoginAction } from "../redux/userReducer";
+import { useNavigate } from "react-router-dom";
+import { User } from "../models/User";
 
 export const Register = () => {
   const steps = ["User settings", "User information"];
 
-  const [formData, setFormData] = React.useState({});
+  const [formData, setFormData] = React.useState<User>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    idNumber: 0,
+    password: "",
+    city: "",
+    street: "",
+    role: "user",
+  });
 
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -29,6 +42,9 @@ export const Register = () => {
   const handleBack = () => {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
   };
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -49,12 +65,20 @@ export const Register = () => {
   });
 
   const secondStepSubmit = handleSubmit(data => {
-    setFormData(data);
+    setFormData(prevState => ({ ...prevState, ...data }));
     handleNext();
   });
 
-  const onSubmit = () => {
-    console.log(formData);
+  const onSubmit = async () => {
+    try {
+      const response = await registerUser(formData);
+      if (response) {
+        dispatch(setLoginAction(response.user, response.token));
+        navigate("/");
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

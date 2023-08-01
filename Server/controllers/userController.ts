@@ -24,6 +24,7 @@ export const register = async (req: Request, res: Response) => {
         user: {
           firstName: customer.firstName,
           lastName: customer.lastName,
+          role: customer.role,
         },
       });
     })
