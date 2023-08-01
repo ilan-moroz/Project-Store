@@ -39,20 +39,16 @@ export const login = async (req: Request, res: Response) => {
     // Retrieve user from the database
     const user = await UserModel.findOne({ email });
     if (!user) {
-      return res
-        .status(400)
-        .json({
-          message: "Invalid credentials. Please check your email and password.",
-        });
+      return res.status(400).json({
+        message: "Invalid credentials. Please check your email and password.",
+      });
     }
     // Check if the provided password is correct
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res
-        .status(400)
-        .json({
-          message: "Invalid credentials. Please check your email and password.",
-        });
+      return res.status(400).json({
+        message: "Invalid credentials. Please check your email and password.",
+      });
     }
     // Generate a new JWT token
     const token = jwt.sign(
@@ -79,9 +75,14 @@ export const checkEmailId = async (req: Request, res: Response) => {
   const idNumber = +req.params.idNumber;
   try {
     const existingUser = await checkExistingUser(email, idNumber);
-    if (existingUser) {
-      return res.status(200).json({
-        exists: true,
+    if (existingUser.emailExists) {
+      return res.status(400).json({
+        message: "Email already exists, please change email and try again",
+      });
+    } else if (existingUser.idExists) {
+      return res.status(400).json({
+        message:
+          "Id number already exists, please change id number and try again",
       });
     } else {
       return res.status(200).json({
