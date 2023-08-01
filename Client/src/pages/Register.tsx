@@ -79,7 +79,7 @@ export const Register = () => {
               <form onSubmit={firstStepSubmit}>
                 <FormInput
                   register={register("idNumber")}
-                  name="idNumber"
+                  id="idNumber"
                   label="Id Number"
                   type="number"
                   error={!!errors.idNumber}
@@ -87,7 +87,7 @@ export const Register = () => {
                 />
                 <FormInput
                   register={register("email")}
-                  name="email"
+                  id="email"
                   label="Email"
                   type="text"
                   error={!!errors.email}
@@ -95,7 +95,7 @@ export const Register = () => {
                 />
                 <FormInput
                   register={register("password")}
-                  name="password"
+                  id="password"
                   label="Password"
                   type="password"
                   error={!!errors.password}
@@ -103,7 +103,7 @@ export const Register = () => {
                 />
                 <FormInput
                   register={register("confirmPassword")}
-                  name="confirmPassword"
+                  id="confirmPassword"
                   label="Confirm Password"
                   type="password"
                   error={!!errors.confirmPassword}
@@ -118,7 +118,7 @@ export const Register = () => {
               <form onSubmit={secondStepSubmit}>
                 <FormInput
                   register={register("city")}
-                  name="city"
+                  id="city"
                   label="City"
                   type="string"
                   error={!!errors.city}
@@ -126,7 +126,7 @@ export const Register = () => {
                 />
                 <FormInput
                   register={register("street")}
-                  name="street"
+                  id="street"
                   label="Street"
                   type="text"
                   error={!!errors.street}
@@ -134,7 +134,7 @@ export const Register = () => {
                 />
                 <FormInput
                   register={register("firstName")}
-                  name="firstName"
+                  id="firstName"
                   label="First Name"
                   type="string"
                   error={!!errors.firstName}
@@ -142,7 +142,7 @@ export const Register = () => {
                 />
                 <FormInput
                   register={register("lastName")}
-                  name="lastName"
+                  id="lastName"
                   label="Last Name"
                   type="string"
                   error={!!errors.lastName}

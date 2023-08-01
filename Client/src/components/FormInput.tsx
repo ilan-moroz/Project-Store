@@ -4,7 +4,7 @@ import { UseFormRegisterReturn } from "react-hook-form";
 // Define the type for the props the component will receive
 interface FormInputProps {
   register?: UseFormRegisterReturn;
-  name: string;
+  id: string;
   label: string;
   error: boolean;
   type: string;
@@ -14,7 +14,7 @@ interface FormInputProps {
 //reusable form input component
 const FormInput: React.FC<FormInputProps> = ({
   register,
-  name,
+  id,
   label,
   error,
   type,
@@ -23,7 +23,7 @@ const FormInput: React.FC<FormInputProps> = ({
   return (
     <TextField
       {...register}
-      id={name}
+      id={id}
       type={type}
       label={label}
       variant="outlined"
