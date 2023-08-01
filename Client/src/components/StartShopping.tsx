@@ -19,7 +19,7 @@ export const StartShopping = () => {
         <CardActions>
           <IconButton color="secondary" aria-label="add an alarm">
             <ShoppingCartIcon />
-          </IconButton>{" "}
+          </IconButton>
         </CardActions>
       </Card>
     </div>
