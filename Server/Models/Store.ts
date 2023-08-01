@@ -53,7 +53,7 @@ const UserSchema = new Schema<User>({
   password: { type: String, required: true },
   city: { type: String, required: false },
   street: { type: String, required: false },
-  role: { type: String, required: true },
+  role: { type: String, required: true, default: "user" },
 });
 
 const CategorySchema = new Schema<Category>({

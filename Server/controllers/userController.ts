@@ -19,7 +19,6 @@ export const register = async (req: Request, res: Response) => {
         { expiresIn: "2h" }
       );
       res.status(201).json({
-        customer,
         token,
         user: {
           firstName: customer.firstName,
@@ -37,14 +36,14 @@ export const login = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
     // Retrieve user from the database
-    const user = await UserModel.findOne({ email });
-    if (!user) {
+    const customer = await UserModel.findOne({ email });
+    if (!customer) {
       return res.status(400).json({
         message: "Invalid credentials. Please check your email and password.",
       });
     }
     // Check if the provided password is correct
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(password, customer.password);
     if (!isPasswordValid) {
       return res.status(400).json({
         message: "Invalid credentials. Please check your email and password.",
@@ -52,16 +51,16 @@ export const login = async (req: Request, res: Response) => {
     }
     // Generate a new JWT token
     const token = jwt.sign(
-      { id: user._id, email: user.email },
+      { id: customer._id, email: customer.email },
       process.env.SECRET_KEY!,
       { expiresIn: "2h" }
     );
     res.status(200).json({
       token,
       user: {
-        firstName: user.firstName,
-        lastName: user.lastName,
-        role: user.role,
+        firstName: customer.firstName,
+        lastName: customer.lastName,
+        role: customer.role,
       },
     });
   } catch (error: any) {

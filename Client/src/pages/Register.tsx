@@ -30,7 +30,6 @@ export const Register = () => {
     password: "",
     city: "",
     street: "",
-    role: "user",
   });
 
   const [activeStep, setActiveStep] = React.useState(0);
@@ -65,7 +64,7 @@ export const Register = () => {
   });
 
   const secondStepSubmit = handleSubmit(data => {
-    setFormData(prevState => ({ ...prevState, ...data }));
+    setFormData(data);
     handleNext();
   });
 
