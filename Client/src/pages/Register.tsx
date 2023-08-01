@@ -197,19 +197,15 @@ export const Register = () => {
                   error={!!errors.lastName}
                   helperText={errors.lastName?.message}
                 />
-                <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                  <Button color="inherit" onClick={handleBack}>
+                    Back
+                  </Button>
                   <Button type="submit">Finish</Button>
                 </Box>
               </form>
             </div>
           )}
-          <Box sx={{ display: "inline-block" }}>
-            {activeStep === 1 && (
-              <Button color="inherit" onClick={handleBack}>
-                Back
-              </Button>
-            )}
-          </Box>
         </React.Fragment>
       )}
     </Box>

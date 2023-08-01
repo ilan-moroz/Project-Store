@@ -1,5 +1,6 @@
 import { TextField, MenuItem } from "@mui/material";
 import { UseFormRegisterReturn } from "react-hook-form";
+import { capitalizeWords } from "../utils/capitalizeWords";
 
 interface FormInputProps {
   register?: UseFormRegisterReturn;
@@ -30,13 +31,14 @@ const FormInput: React.FC<FormInputProps> = ({
         label={label}
         variant="outlined"
         fullWidth
+        defaultValue=""
         error={error}
         helperText={helperText}
         sx={{ marginBottom: "1.5rem" }}
       >
         {selectOptions.map((option, index) => (
           <MenuItem key={index} value={option}>
-            {option}
+            {capitalizeWords(option)}
           </MenuItem>
         ))}
       </TextField>
