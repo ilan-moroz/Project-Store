@@ -12,6 +12,8 @@ import {
   stepOneResolver,
   stepTwoResolver,
 } from "../validators/registerValidator";
+import { checkEmailId } from "../api/userApi";
+import { toast } from "react-toastify";
 
 export const Register = () => {
   const steps = ["User settings", "User information"];
@@ -36,8 +38,14 @@ export const Register = () => {
     resolver: activeStep === 0 ? stepOneResolver : stepTwoResolver,
   });
 
-  const firstStepSubmit = handleSubmit(() => {
-    handleNext();
+  const firstStepSubmit = handleSubmit(async data => {
+    try {
+      const response = await checkEmailId(data.email, data.idNumber);
+      if (response) handleNext();
+    } catch (err: any) {
+      toast.error(err.response.data.message);
+      console.error(err);
+    }
   });
 
   const secondStepSubmit = handleSubmit(data => {
