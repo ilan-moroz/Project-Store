@@ -1,5 +1,5 @@
 // defining type for the form data.
-export type FormValues = {
+export type loginFormValues = {
   email: string;
   password: string;
 };

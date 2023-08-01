@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import FormInput from "../components/FormInput";
 import { useForm } from "react-hook-form";
-import { FormValues } from "../types/registerFormValues";
+import { registerFormValues } from "../types/registerFormValues";
 import { resolver } from "../validators/registerValidator";
 
 export const Register = () => {
@@ -27,9 +27,16 @@ export const Register = () => {
 
   const {
     register,
-    // handleSubmit,
+    handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({ resolver });
+  } = useForm<registerFormValues>({ resolver });
+
+  const firstStepSubmit = handleSubmit(data => {
+    console.log(data);
+  });
+  const secondStepSubmit = handleSubmit(data => {
+    console.log(data);
+  });
 
   return (
     <Box sx={{ width: "30%", margin: "2rem auto" }}>
@@ -61,73 +68,77 @@ export const Register = () => {
           <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
           {activeStep === 0 && (
             <div className="firstStepInputs">
-              <FormInput
-                register={register("idNumber")}
-                name="idNumber"
-                label="Id Number"
-                type="number"
-                error={!!errors.idNumber}
-                helperText={errors.idNumber?.message}
-              />
-              <FormInput
-                register={register("email")}
-                name="email"
-                label="Email"
-                type="text"
-                error={!!errors.email}
-                helperText={errors.email?.message}
-              />
-              <FormInput
-                register={register("password")}
-                name="password"
-                label="Password"
-                type="password"
-                error={!!errors.password}
-                helperText={errors.password?.message}
-              />
-              <FormInput
-                name="confirmPassword"
-                label="Confirm Password"
-                type="password"
-                error={!!errors.confirmPassword}
-                helperText={errors.password?.message}
-              />
+              <form onSubmit={firstStepSubmit}>
+                <FormInput
+                  register={register("idNumber")}
+                  name="idNumber"
+                  label="Id Number"
+                  type="number"
+                  error={!!errors.idNumber}
+                  helperText={errors.idNumber?.message}
+                />
+                <FormInput
+                  register={register("email")}
+                  name="email"
+                  label="Email"
+                  type="text"
+                  error={!!errors.email}
+                  helperText={errors.email?.message}
+                />
+                <FormInput
+                  register={register("password")}
+                  name="password"
+                  label="Password"
+                  type="password"
+                  error={!!errors.password}
+                  helperText={errors.password?.message}
+                />
+                <FormInput
+                  name="confirmPassword"
+                  label="Confirm Password"
+                  type="password"
+                  error={!!errors.confirmPassword}
+                  helperText={errors.password?.message}
+                />
+              </form>
             </div>
           )}
           {activeStep === 1 && (
             <div className="secondStepInputs">
-              <FormInput
-                register={register("city")}
-                name="city"
-                label="City"
-                type="string"
-                error={!!errors.city}
-                helperText={errors.city?.message}
-              />
-              <FormInput
-                register={register("street")}
-                name="street"
-                label="Street"
-                type="text"
-                error={!!errors.street}
-                helperText={errors.street?.message}
-              />
-              <FormInput
-                register={register("firstName")}
-                name="firstName"
-                label="First Name"
-                type="string"
-                error={!!errors.firstName}
-                helperText={errors.firstName?.message}
-              />
-              <FormInput
-                register={register("lastName")}
-                name="lastName"
-                label="Last Name"
-                type="string"
-                error={!!errors.lastName}
-                helperText={errors.lastName?.message}
-              />
+              <form onSubmit={secondStepSubmit}>
+                <FormInput
+                  register={register("city")}
+                  name="city"
+                  label="City"
+                  type="string"
+                  error={!!errors.city}
+                  helperText={errors.city?.message}
+                />
+                <FormInput
+                  register={register("street")}
+                  name="street"
+                  label="Street"
+                  type="text"
+                  error={!!errors.street}
+                  helperText={errors.street?.message}
+                />
+                <FormInput
+                  register={register("firstName")}
+                  name="firstName"
+                  label="First Name"
+                  type="string"
+                  error={!!errors.firstName}
+                  helperText={errors.firstName?.message}
+                />
+                <FormInput
+                  register={register("lastName")}
+                  name="lastName"
+                  label="Last Name"
+                  type="string"
+                  error={!!errors.lastName}
+                  helperText={errors.lastName?.message}
+                />
+              </form>
             </div>
           )}
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
