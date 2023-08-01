@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import FormInput from "../components/FormInput";
 import { useForm } from "react-hook-form";
-import { registerFormValues } from "../types/registerFormValues";
+import { RegisterFormValues } from "../types/RegisterFormValues";
 import {
   stepOneResolver,
   stepTwoResolver,
@@ -32,7 +32,7 @@ export const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<registerFormValues>({
+  } = useForm<RegisterFormValues>({
     resolver: activeStep === 0 ? stepOneResolver : stepTwoResolver,
   });
 

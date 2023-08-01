@@ -4,7 +4,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import "./login.css";
 import { Link } from "react-router-dom";
 import { resolver } from "../../validators/loginValidator";
-import { loginFormValues } from "../../types/loginFormValues";
+import { LoginFormValues } from "../../types/LoginFormValues";
 import FormInput from "../FormInput";
 import { login } from "../../api/userApi";
 import { toast } from "react-toastify";
@@ -22,7 +22,7 @@ export const Login = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<loginFormValues>({ resolver });
+  } = useForm<LoginFormValues>({ resolver });
 
   const dispatch = useDispatch();
 

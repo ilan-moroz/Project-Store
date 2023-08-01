@@ -1,14 +1,14 @@
 import { FieldError, Resolver } from "react-hook-form";
-import { registerFormValues } from "../types/registerFormValues";
+import { RegisterFormValues } from "../types/RegisterFormValues";
 import { emailValidator, passwordValidator } from "./commonValidators";
 
 // defining type for potential errors in the form data.
 type FormErrors = {
-  [K in keyof registerFormValues]?: FieldError;
+  [K in keyof RegisterFormValues]?: FieldError;
 };
 
 // validation for step 1
-export const stepOneResolver: Resolver<registerFormValues> = async values => {
+export const stepOneResolver: Resolver<RegisterFormValues> = async values => {
   const errors: FormErrors = {};
 
   // check if the idNumber is empty
@@ -52,7 +52,7 @@ export const stepOneResolver: Resolver<registerFormValues> = async values => {
 };
 
 // validation for step 2
-export const stepTwoResolver: Resolver<registerFormValues> = async values => {
+export const stepTwoResolver: Resolver<RegisterFormValues> = async values => {
   const errors: FormErrors = {};
 
   // Check if the city is empty.
