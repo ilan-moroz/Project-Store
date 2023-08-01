@@ -16,6 +16,8 @@ import {
 export const Register = () => {
   const steps = ["User settings", "User information"];
 
+  const [formData, setFormData] = React.useState({});
+
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
@@ -26,8 +28,6 @@ export const Register = () => {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
   };
 
-  const onSubmit = () => {};
-
   const {
     register,
     handleSubmit,
@@ -36,15 +36,18 @@ export const Register = () => {
     resolver: activeStep === 0 ? stepOneResolver : stepTwoResolver,
   });
 
-  const firstStepSubmit = handleSubmit(data => {
-    console.log(data);
+  const firstStepSubmit = handleSubmit(() => {
     handleNext();
   });
 
   const secondStepSubmit = handleSubmit(data => {
-    console.log(data);
+    setFormData(data);
     handleNext();
   });
+
+  const onSubmit = () => {
+    console.log(formData);
+  };
 
   return (
     <Box sx={{ width: "30%", margin: "2rem auto" }}>
@@ -109,7 +112,9 @@ export const Register = () => {
                   error={!!errors.confirmPassword}
                   helperText={errors.confirmPassword?.message}
                 />
-                <Button type="submit">Next</Button>
+                <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                  <Button type="submit">Next</Button>
+                </Box>
               </form>
             </div>
           )}
@@ -148,23 +153,18 @@ export const Register = () => {
                   error={!!errors.lastName}
                   helperText={errors.lastName?.message}
                 />
-                <Button type="submit">Finish</Button>
+                <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                  <Button type="submit">Finish</Button>
+                </Box>
               </form>
             </div>
           )}
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Button
-              color="inherit"
-              disabled={activeStep === 0}
-              onClick={handleBack}
-              sx={{ mr: 1 }}
-            >
-              Back
-            </Button>
-            <Box sx={{ flex: "1 1 auto" }} />
-            {/* <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? "Finish" : "Next"}
-            </Button> */}
+          <Box sx={{ display: "inline-block" }}>
+            {activeStep === 1 && (
+              <Button color="inherit" onClick={handleBack}>
+                Back
+              </Button>
+            )}
           </Box>
         </React.Fragment>
       )}
