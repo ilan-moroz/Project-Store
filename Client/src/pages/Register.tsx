@@ -33,9 +33,12 @@ export const Register = () => {
 
   const firstStepSubmit = handleSubmit(data => {
     console.log(data);
+    handleNext();
   });
+
   const secondStepSubmit = handleSubmit(data => {
     console.log(data);
+    handleNext();
   });
 
   return (
@@ -99,8 +102,9 @@ export const Register = () => {
                   label="Confirm Password"
                   type="password"
                   error={!!errors.confirmPassword}
-                  helperText={errors.password?.message}
+                  helperText={errors.confirmPassword?.message}
                 />
+                <Button type="submit">Next</Button>
               </form>
             </div>
           )}
@@ -139,6 +143,7 @@ export const Register = () => {
                   error={!!errors.lastName}
                   helperText={errors.lastName?.message}
                 />
+                <Button type="submit">Finish</Button>
               </form>
             </div>
           )}
@@ -152,9 +157,9 @@ export const Register = () => {
               Back
             </Button>
             <Box sx={{ flex: "1 1 auto" }} />
-            <Button onClick={handleNext}>
+            {/* <Button onClick={handleNext}>
               {activeStep === steps.length - 1 ? "Finish" : "Next"}
-            </Button>
+            </Button> */}
           </Box>
         </React.Fragment>
       )}

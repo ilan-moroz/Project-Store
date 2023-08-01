@@ -47,6 +47,38 @@ export const resolver: Resolver<registerFormValues> = async values => {
     };
   }
 
+  // Check if the city is empty.
+  if (!values.city || values.city.length === 0) {
+    errors.city = {
+      type: "required",
+      message: "City is required",
+    };
+  }
+
+  // Check if the city is empty.
+  if (!values.street || values.street.length === 0) {
+    errors.street = {
+      type: "required",
+      message: "Street is required",
+    };
+  }
+
+  // Check if the city is empty.
+  if (!values.firstName || values.firstName.length === 0) {
+    errors.firstName = {
+      type: "required",
+      message: "First name is required",
+    };
+  }
+
+  // Check if the city is empty.
+  if (!values.lastName || values.lastName.length === 0) {
+    errors.lastName = {
+      type: "required",
+      message: "Last name is required",
+    };
+  }
+
   //return an object with the valid form values and any errors.
   // If there are any errors, the values are an empty object.
   return {
