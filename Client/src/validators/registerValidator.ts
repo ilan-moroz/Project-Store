@@ -39,6 +39,14 @@ export const resolver: Resolver<registerFormValues> = async values => {
     };
   }
 
+  // check if the password and confirmPassword are the same
+  if (values.password !== values.confirmPassword) {
+    errors.confirmPassword = {
+      type: "mismatch",
+      message: "Passwords must match",
+    };
+  }
+
   //return an object with the valid form values and any errors.
   // If there are any errors, the values are an empty object.
   return {

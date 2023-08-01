@@ -94,6 +94,7 @@ export const Register = () => {
                   helperText={errors.password?.message}
                 />
                 <FormInput
+                  register={register("confirmPassword")}
                   name="confirmPassword"
                   label="Confirm Password"
                   type="password"
