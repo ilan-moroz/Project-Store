@@ -8,7 +8,10 @@ import Typography from "@mui/material/Typography";
 import FormInput from "../components/FormInput";
 import { useForm } from "react-hook-form";
 import { registerFormValues } from "../types/registerFormValues";
-import { resolver } from "../validators/registerValidator";
+import {
+  stepOneResolver,
+  stepTwoResolver,
+} from "../validators/registerValidator";
 
 export const Register = () => {
   const steps = ["User settings", "User information"];
@@ -29,7 +32,9 @@ export const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<registerFormValues>({ resolver });
+  } = useForm<registerFormValues>({
+    resolver: activeStep === 0 ? stepOneResolver : stepTwoResolver,
+  });
 
   const firstStepSubmit = handleSubmit(data => {
     console.log(data);

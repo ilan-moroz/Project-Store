@@ -7,9 +7,8 @@ type FormErrors = {
   [K in keyof registerFormValues]?: FieldError;
 };
 
-//function that validates form data.
-export const resolver: Resolver<registerFormValues> = async values => {
-  //empty object to hold any errors that are found in the form data.
+// validation for step 1
+export const stepOneResolver: Resolver<registerFormValues> = async values => {
   const errors: FormErrors = {};
 
   // check if the idNumber is empty
@@ -46,6 +45,15 @@ export const resolver: Resolver<registerFormValues> = async values => {
       message: "Passwords must match",
     };
   }
+  return {
+    values: Object.keys(errors).length > 0 ? {} : values,
+    errors,
+  };
+};
+
+// validation for step 2
+export const stepTwoResolver: Resolver<registerFormValues> = async values => {
+  const errors: FormErrors = {};
 
   // Check if the city is empty.
   if (!values.city || values.city.length === 0) {
@@ -78,9 +86,6 @@ export const resolver: Resolver<registerFormValues> = async values => {
       message: "Last name is required",
     };
   }
-
-  //return an object with the valid form values and any errors.
-  // If there are any errors, the values are an empty object.
   return {
     values: Object.keys(errors).length > 0 ? {} : values,
     errors,
