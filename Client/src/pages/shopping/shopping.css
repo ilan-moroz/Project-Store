@@ -1,6 +1,14 @@
 .shopping {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  height: 87vh;
+  overflow: hidden;
+}
+
+@media (min-width: 1800px) {
+  .shopping {
+    height: 91.8vh;
+  }
 }
 
 .shopping > .shopping__cart {
@@ -9,4 +17,17 @@
 
 .shopping > .shopping__main {
   grid-column: span 2;
+}
+
+.shopping__cart {
+  background-color: #f0f0f0;
+  overflow: auto;
+  height: 100%;
+  border-right: 1px solid black;
+}
+
+.shopping__main {
+  width: 100vw;
+  height: 100%;
+  overflow: auto;
 }
