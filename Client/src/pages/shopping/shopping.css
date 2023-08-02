@@ -1,0 +1,12 @@
+.shopping {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.shopping > .shopping__cart {
+  grid-column: span 1;
+}
+
+.shopping > .shopping__main {
+  grid-column: span 2;
+}
