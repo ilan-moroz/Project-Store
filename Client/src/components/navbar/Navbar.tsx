@@ -1,12 +1,13 @@
-import { Chip, Menu, MenuItem } from "@mui/material";
+import { Box, Chip, Menu, MenuItem } from "@mui/material";
 import logo from "../../assets/images/logo.png";
 import "./navbar.css";
 import MoodIcon from "@mui/icons-material/Mood";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
 import { setLogoutAction } from "../../redux/userReducer";
 import React from "react";
+import SearchInput from "../SearchInput";
 
 const Navbar = () => {
   // Accessing the user object from the Redux store
@@ -33,6 +34,8 @@ const Navbar = () => {
     navigate("/");
   };
 
+  const location = useLocation();
+
   return (
     <div className="navbar">
       <div className="navbar__logo">
@@ -40,6 +43,18 @@ const Navbar = () => {
           <img src={logo} alt="store logo" />
         </Link>
       </div>
+      {/* show the search only in shopping page */}
+      {location.pathname === "/shopping" && (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <SearchInput />
+        </Box>
+      )}
       <div className="navbar__contact">
         <p>Phone: 08-6725423</p>
         <p>Email: superstore@gmail.com</p>
