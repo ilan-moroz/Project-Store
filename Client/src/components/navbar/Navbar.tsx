@@ -58,17 +58,19 @@ export const Navbar = () => {
           aria-expanded={open ? "true" : undefined}
           onClick={handleClick}
         />
-        <Menu
-          id="basic-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          MenuListProps={{
-            "aria-labelledby": "basic-button",
-          }}
-        >
-          <MenuItem onClick={handleLogout}>Logout</MenuItem>
-        </Menu>
+        {user && (
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+          </Menu>
+        )}
       </div>
     </div>
   );
