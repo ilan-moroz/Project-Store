@@ -1,3 +1,5 @@
+import Cart from "../../components/Cart";
+import Products from "../../components/Products";
 import "./shopping.css";
 import { Resizable } from "re-resizable";
 
@@ -10,9 +12,9 @@ const Shopping = () => {
           height: "100%",
         }}
       >
-        <div className="shopping__cart">cart</div>
+        <Cart />
       </Resizable>
-      <div className="shopping__main">shopping</div>
+      <Products />
     </div>
   );
 };
