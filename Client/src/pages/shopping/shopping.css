@@ -23,7 +23,7 @@
   background-color: #f0f0f0;
   overflow: auto;
   height: 100%;
-  border-right: 1px solid black;
+  border-right: 1px solid darkgray;
 }
 
 .shopping__main {
