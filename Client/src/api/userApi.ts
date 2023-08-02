@@ -11,6 +11,7 @@ export const login = async (data: { email: string; password: string }) => {
   }
 };
 
+// function checks if a given email or id already exists in the database
 export const checkEmailId = async (email: string, idNumber: number) => {
   try {
     const response = await api.get(`/user/checkEmailId/${email}/${idNumber}`);
@@ -20,6 +21,7 @@ export const checkEmailId = async (email: string, idNumber: number) => {
   }
 };
 
+// function to register new user
 export const registerUser = async (newUser: User) => {
   try {
     const response = await api.post(`/user/register`, newUser);
