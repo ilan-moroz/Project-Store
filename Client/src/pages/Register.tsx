@@ -17,8 +17,10 @@ import { useRegister } from "../hooks/useRegister";
 import { useCities } from "../hooks/useCities";
 
 const Register = () => {
+  // Define the steps for registration
   const steps = ["User settings", "User information"];
 
+  // Current active step in the registration process
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
@@ -29,6 +31,7 @@ const Register = () => {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
   };
 
+  // Set up form handling using react-hook-form
   const {
     register,
     handleSubmit,
@@ -37,9 +40,12 @@ const Register = () => {
     resolver: activeStep === 0 ? stepOneResolver : stepTwoResolver,
   });
 
+  // Hook to handle registration steps
   const { firstStepSubmit, secondStepSubmit, finalSubmit } = useRegister();
+  // Hook to handle registration steps
   const cities = useCities();
 
+  // Handler for the first step form submission
   const firstStepHandle = handleSubmit(async data => {
     try {
       if (await firstStepSubmit(data)) handleNext();
@@ -49,10 +55,12 @@ const Register = () => {
     }
   });
 
+  // Handler for the second step form submission
   const secondStepHandle = handleSubmit(data => {
     if (secondStepSubmit(data)) handleNext();
   });
 
+  // Handler for the final form submission
   const finalSubmitHandle = async () => {
     try {
       await finalSubmit();
@@ -97,6 +105,7 @@ const Register = () => {
       ) : (
         <React.Fragment>
           <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
+          {/* step 1 inputs */}
           {activeStep === 0 && (
             <div className="firstStepInputs">
               <form onSubmit={firstStepHandle}>
@@ -138,6 +147,7 @@ const Register = () => {
               </form>
             </div>
           )}
+          {/* step 2 inputs */}
           {activeStep === 1 && (
             <div className="secondStepInputs">
               <form onSubmit={secondStepHandle}>

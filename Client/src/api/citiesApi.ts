@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// api request to get all israel cities
 const getCitiesData = async () => {
   try {
     const response = await axios.get(
