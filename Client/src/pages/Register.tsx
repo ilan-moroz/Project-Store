@@ -12,37 +12,12 @@ import {
   stepOneResolver,
   stepTwoResolver,
 } from "../validators/registerValidator";
-import { checkEmailId, registerUser } from "../api/userApi";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { setLoginAction } from "../redux/userReducer";
-import { useNavigate } from "react-router-dom";
-import { User } from "../models/User";
-import getCitiesData from "../api/citiesApi";
+import { useRegister } from "../hooks/useRegister";
+import { useCities } from "../hooks/useCities";
 
 const Register = () => {
   const steps = ["User settings", "User information"];
-
-  const [formData, setFormData] = React.useState<User>({
-    firstName: "",
-    lastName: "",
-    email: "",
-    idNumber: 0,
-    password: "",
-    city: "",
-    street: "",
-  });
-
-  const [cities, setCities] = React.useState([]);
-
-  // get all cities names from gov api
-  React.useEffect(() => {
-    const fetchCitiesData = async () => {
-      const data = await getCitiesData();
-      setCities(data);
-    };
-    fetchCitiesData();
-  }, []);
 
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -54,9 +29,6 @@ const Register = () => {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
   };
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const {
     register,
     handleSubmit,
@@ -65,29 +37,26 @@ const Register = () => {
     resolver: activeStep === 0 ? stepOneResolver : stepTwoResolver,
   });
 
-  const firstStepSubmit = handleSubmit(async data => {
+  const { firstStepSubmit, secondStepSubmit, finalSubmit } = useRegister();
+  const cities = useCities();
+
+  const firstStepHandle = handleSubmit(async data => {
     try {
-      const response = await checkEmailId(data.email, data.idNumber);
-      if (response) handleNext();
+      if (await firstStepSubmit(data)) handleNext();
     } catch (err: any) {
       toast.error(err.response.data.message);
       console.error(err);
     }
   });
 
-  const secondStepSubmit = handleSubmit(data => {
-    setFormData(data);
-    handleNext();
+  const secondStepHandle = handleSubmit(data => {
+    if (secondStepSubmit(data)) handleNext();
   });
 
-  const onSubmit = async () => {
+  const finalSubmitHandle = async () => {
     try {
-      const response = await registerUser(formData);
-      if (response) {
-        dispatch(setLoginAction(response.user, response.token));
-        navigate("/");
-      }
-    } catch (err) {
+      await finalSubmit();
+    } catch (err: any) {
       console.error(err);
     }
   };
@@ -122,7 +91,7 @@ const Register = () => {
           </Typography>
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Box sx={{ flex: "1 1 auto" }} />
-            <Button onClick={onSubmit}>Create Account</Button>
+            <Button onClick={finalSubmitHandle}>Create Account</Button>
           </Box>
         </React.Fragment>
       ) : (
@@ -130,7 +99,7 @@ const Register = () => {
           <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
           {activeStep === 0 && (
             <div className="firstStepInputs">
-              <form onSubmit={firstStepSubmit}>
+              <form onSubmit={firstStepHandle}>
                 <FormInput
                   register={register("idNumber")}
                   name="idNumber"
@@ -171,7 +140,7 @@ const Register = () => {
           )}
           {activeStep === 1 && (
             <div className="secondStepInputs">
-              <form onSubmit={secondStepSubmit}>
+              <form onSubmit={secondStepHandle}>
                 <FormInput
                   register={register("city")}
                   name="city"
