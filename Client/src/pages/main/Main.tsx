@@ -1,9 +1,9 @@
-import { About } from "../../components/about/About";
-import { Info } from "../../components/Info";
+import Info from "../../components/Info";
+import About from "../../components/about/About";
 import { Login } from "../../components/login/Login";
 import "./main.css";
 
-export const Main = () => {
+const Main = () => {
   return (
     <div className="Main">
       <main>
@@ -18,3 +18,5 @@ export const Main = () => {
     </div>
   );
 };
+
+export default Main;

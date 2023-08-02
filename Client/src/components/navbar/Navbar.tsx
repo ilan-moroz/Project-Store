@@ -8,7 +8,7 @@ import { RootState } from "../../redux/Store";
 import { setLogoutAction } from "../../redux/userReducer";
 import React from "react";
 
-export const Navbar = () => {
+const Navbar = () => {
   // Accessing the user object from the Redux store
   const user = useSelector((state: RootState) => state.user.user);
 
@@ -75,3 +75,5 @@ export const Navbar = () => {
     </div>
   );
 };
+
+export default Navbar;

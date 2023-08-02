@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-export const StartShopping = () => {
+const StartShopping = () => {
   return (
     <div className="startShopping">
       <Card className="center">
@@ -25,3 +25,5 @@ export const StartShopping = () => {
     </div>
   );
 };
+
+export default StartShopping;

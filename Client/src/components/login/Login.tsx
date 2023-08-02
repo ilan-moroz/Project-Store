@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import { setLoginAction } from "../../redux/userReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
-import { StartShopping } from "../StartShopping";
+import StartShopping from "../StartShopping";
 
 export const Login = () => {
   // Accessing the user object from the Redux store

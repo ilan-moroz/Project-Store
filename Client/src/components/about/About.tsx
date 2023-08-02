@@ -2,7 +2,7 @@ import { Typography } from "@mui/material";
 import storeImage from "../../assets/images/store.png";
 import "./about.css";
 
-export const About = () => {
+const About = () => {
   return (
     <div className="about center">
       <Typography
@@ -39,3 +39,5 @@ export const About = () => {
     </div>
   );
 };
+
+export default About;

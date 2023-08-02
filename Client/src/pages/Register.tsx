@@ -18,9 +18,9 @@ import { useDispatch } from "react-redux";
 import { setLoginAction } from "../redux/userReducer";
 import { useNavigate } from "react-router-dom";
 import { User } from "../models/User";
-import { getCitiesData } from "../api/citiesApi";
+import getCitiesData from "../api/citiesApi";
 
-export const Register = () => {
+const Register = () => {
   const steps = ["User settings", "User information"];
 
   const [formData, setFormData] = React.useState<User>({
@@ -219,3 +219,5 @@ export const Register = () => {
     </Box>
   );
 };
+
+export default Register;
