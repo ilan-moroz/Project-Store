@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Register from "../pages/Register";
 import Main from "../pages/main/Main";
-import Shopping from "../pages/Shopping";
+import Shopping from "../pages/shopping/Shopping";
 
 export const MainRoute = () => {
   return (
