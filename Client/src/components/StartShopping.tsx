@@ -6,6 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Link } from "react-router-dom";
 
 const StartShopping = () => {
   return (
@@ -17,8 +18,10 @@ const StartShopping = () => {
           </Typography>
         </CardContent>
         <CardActions>
-          <IconButton color="secondary" aria-label="add an alarm">
-            <ShoppingCartIcon />
+          <IconButton color="secondary">
+            <Link to="/shopping">
+              <ShoppingCartIcon />
+            </Link>
           </IconButton>
         </CardActions>
       </Card>
