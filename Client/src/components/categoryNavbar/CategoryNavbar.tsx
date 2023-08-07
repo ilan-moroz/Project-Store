@@ -9,8 +9,8 @@ const CategoryNavbar = () => {
   return (
     <div className="categoryNavbar">
       {catagories.map((category: Category) => (
-        <div className="category">
-          <NavLink to="#" className="category__link" key={category._id}>
+        <div className="category" key={category._id}>
+          <NavLink to="#" className="category__link">
             {category.categoryName}
           </NavLink>
         </div>
