@@ -5,14 +5,18 @@ import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 dotenv.config();
 
+// Function to add a new user to the database
 export const register = async (req: Request, res: Response) => {
   const newUser: User = req.body;
+
+  // Generate a new salt and hash the user's password with it
   const salt = await bcrypt.genSalt(10);
   newUser.password = await bcrypt.hash(newUser.password, salt);
   const newCustomer = new UserModel(newUser);
   newCustomer
     .save()
     .then(customer => {
+      // Generate a new JWT token for the user
       const token = jwt.sign(
         { id: customer._id, email: customer.email },
         process.env.SECRET_KEY!,
@@ -73,7 +77,9 @@ export const checkEmailId = async (req: Request, res: Response) => {
   const email = req.params.email;
   const idNumber = +req.params.idNumber;
   try {
+    // Check if the ID number already exists in the database
     const existingIdNumber = await UserModel.findOne({ idNumber: idNumber });
+    // Check if the email already exists in the database
     const existingEmail = await UserModel.findOne({ email: email });
     if (existingIdNumber) {
       return res.status(400).json({
