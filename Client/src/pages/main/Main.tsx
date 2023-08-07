@@ -1,6 +1,6 @@
 import Info from "../../components/Info";
-import About from "../../components/about/About";
-import { Login } from "../../components/login/Login";
+import About from "../../components/About/About";
+import { Login } from "../../components/Login/Login";
 import "./main.css";
 
 const Main = () => {

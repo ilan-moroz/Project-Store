@@ -1,4 +1,4 @@
-import CategoryNavbar from "./categoryNavbar/CategoryNavbar";
+import CategoryNavbar from "./CategoryNavbar/CategoryNavbar";
 
 const Products = () => {
   return (
