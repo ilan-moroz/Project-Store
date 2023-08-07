@@ -9,7 +9,6 @@ export const useCategory = () => {
       try {
         const response = await getAllCategories();
         setCategories(response);
-        console.log(response);
       } catch (err: any) {
         console.error(err);
       }
