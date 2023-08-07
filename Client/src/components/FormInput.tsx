@@ -37,9 +37,15 @@ const FormInput: React.FC<FormInputProps> = ({
         helperText={helperText}
         sx={{ marginBottom: "1.5rem" }}
       >
-        {selectOptions.map((option, index) => (
-          <MenuItem key={index} value={option}>
-            {capitalizeWords(option)}
+        {selectOptions.map((option: any, index: number) => (
+          <MenuItem
+            // check if an array or object is provided
+            key={typeof option === "object" ? option._id : index}
+            value={typeof option === "object" ? option._id : option}
+          >
+            {typeof option === "object"
+              ? option.categoryName
+              : capitalizeWords(option)}
           </MenuItem>
         ))}
       </TextField>

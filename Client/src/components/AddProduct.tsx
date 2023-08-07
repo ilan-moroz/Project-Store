@@ -3,8 +3,6 @@ import { resolver } from "../validators/addProductValidators";
 import { AddProductFormValues } from "../types/AddProductFormValues";
 import FormInput from "./FormInput";
 import { useCategory } from "../hooks/useCategory";
-import { MenuItem, TextField } from "@mui/material";
-import { Category } from "../models/Category";
 import { addProduct } from "../api/productApi";
 import { prepareFormData } from "../utils/prepareFormData";
 
@@ -39,22 +37,15 @@ const AddProduct = () => {
           error={!!errors.productName}
           helperText={errors.productName?.message}
         />
-        <TextField
-          {...register("categoryId")}
+        <FormInput
+          register={register("categoryId")}
           name="categoryId"
-          select
           label="Category Name"
-          variant="outlined"
-          fullWidth
-          defaultValue=""
-          sx={{ marginBottom: "1.5rem" }}
-        >
-          {catagories.map((category: Category) => (
-            <MenuItem key={category._id} value={category._id}>
-              {category.categoryName}
-            </MenuItem>
-          ))}
-        </TextField>
+          type="select"
+          selectOptions={catagories}
+          error={!!errors.categoryId}
+          helperText={errors.categoryId?.message}
+        />
         <FormInput
           register={register("price")}
           name="price"
