@@ -4,7 +4,7 @@ import { Request, Response } from "express";
 export const addProduct = async (req: Request, res: Response) => {
   try {
     const product = req.body;
-    const { productName, categoryId } = product;
+    const { productName } = product;
     const imagePath = req.file!.path;
 
     const existingProduct = await ProductModel.findOne({ productName });
