@@ -1,28 +1,22 @@
-import { Product, ProductModel } from "../Models/Store";
+import { ProductModel } from "../Models/Store";
 import { Request, Response } from "express";
 
 export const addProduct = async (req: Request, res: Response) => {
   try {
+    const product = req.body;
+    const { productName, categoryId } = product;
     const imagePath = req.file!.path;
-    // check if product already exists
-    const { productName, categoryId, price } = req.body;
-    const existProductName = await ProductModel.findOne({ productName });
-    if (existProductName) {
-      return res.status(400).json({
-        message: "Product with this name already exists",
-      });
+
+    const existingProduct = await ProductModel.findOne({ productName });
+    if (existingProduct) {
+      return res.status(400).json({ message: "Product already exists" });
     }
-    // save the new product
-    const newProduct: Product = new ProductModel({
-      productName,
-      categoryId,
-      price,
-      imagePath,
-    });
+
+    const newProduct = new ProductModel({ ...product, imagePath });
     await newProduct.save();
-    res.status(201).json({ newProduct });
+    res.status(201).json(newProduct);
   } catch (error: any) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
