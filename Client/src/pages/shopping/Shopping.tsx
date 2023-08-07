@@ -6,6 +6,7 @@ import { Resizable } from "re-resizable";
 const Shopping = () => {
   return (
     <div className="shopping">
+      {/* resizable comp */}
       <Resizable
         defaultSize={{
           width: 450,
