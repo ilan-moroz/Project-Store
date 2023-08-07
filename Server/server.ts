@@ -6,6 +6,7 @@ import categoryRouter from "./Routes/categoryRoutes";
 import helmet from "helmet";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import productRouter from "./Routes/productRoutes";
 dotenv.config();
 
 // Create Server
@@ -23,6 +24,7 @@ server.use(bodyParser.json());
 // How to use routes
 server.use("/mongoStore/user", userRouter);
 server.use("/mongoStore/category", categoryRouter);
+server.use("/mongoStore/product", productRouter);
 
 // for security
 server.use(helmet());
