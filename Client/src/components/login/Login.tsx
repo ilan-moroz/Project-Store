@@ -12,6 +12,7 @@ import { setLoginAction } from "../../redux/userReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
 import StartShopping from "../StartShopping";
+import Button from "../Button/Button";
 
 export const Login = () => {
   // Accessing the user object from the Redux store
@@ -84,12 +85,8 @@ export const Login = () => {
                 helperText={errors.password?.message}
               />
               <div className="login__form--buttons">
-                <button className="login_submit-button" type="submit">
-                  login
-                </button>
-                <button className="login_reset-button" type="reset">
-                  reset
-                </button>
+                <Button type="submit" text="Login" color=" rgb(103, 32, 180)" />
+                <Button type="reset" text="reset" color=" rgb(109, 112, 104)" />
               </div>
             </form>
             <div className="login__registerLink ">

@@ -1,10 +1,12 @@
 import { useForm } from "react-hook-form";
-import { resolver } from "../validators/addProductValidators";
-import { AddProductFormValues } from "../types/AddProductFormValues";
-import FormInput from "./FormInput";
-import { useCategory } from "../hooks/useCategory";
-import { addProduct } from "../api/productApi";
-import { prepareFormData } from "../utils/prepareFormData";
+import { resolver } from "../../validators/addProductValidators";
+import { AddProductFormValues } from "../../types/AddProductFormValues";
+import FormInput from "../FormInput";
+import { useCategory } from "../../hooks/useCategory";
+import { addProduct } from "../../api/productApi";
+import { prepareFormData } from "../../utils/prepareFormData";
+import "./addProduct.css";
+import Button from "../Button/Button";
 
 const AddProduct = () => {
   const {
@@ -62,7 +64,7 @@ const AddProduct = () => {
           error={!!errors.imagePath}
           helperText={errors.imagePath?.message}
         />
-        <button type="submit">add</button>
+        <Button type="submit" text="add product" color=" rgb(103, 32, 180)" />
       </form>
     </div>
   );
