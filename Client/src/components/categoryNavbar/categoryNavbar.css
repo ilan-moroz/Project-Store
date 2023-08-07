@@ -1,0 +1,19 @@
+.categoryNavbar {
+  display: flex;
+  background-color: #ccc;
+  border-bottom: 1px solid black;
+  padding: 1rem;
+  justify-content: center;
+}
+
+.category {
+  padding: 0 1rem;
+}
+
+.category:not(:last-child) {
+  border-right: 1px solid white;
+}
+
+.category__link {
+  text-decoration: none;
+}
