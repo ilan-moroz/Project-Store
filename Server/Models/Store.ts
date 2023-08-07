@@ -86,7 +86,7 @@ const OrderSchema = new Schema<Order>({
   deliveryCity: { type: String, required: true },
   deliveryStreet: { type: String, required: true },
   deliveryDate: { type: Date, required: true },
-  orderExecutionDate: { type: Date, required: true },
+  orderExecutionDate: { type: Date, required: true, default: Date.now },
   paymentMethodLast4Digits: { type: String, required: true },
 });
 
