@@ -8,7 +8,7 @@ const Shopping = () => {
     <div className="shopping">
       <Resizable
         defaultSize={{
-          width: 600,
+          width: 450,
           height: "100%",
         }}
       >
