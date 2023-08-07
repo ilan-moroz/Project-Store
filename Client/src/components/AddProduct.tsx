@@ -6,6 +6,7 @@ import { useCategory } from "../hooks/useCategory";
 import { MenuItem, TextField } from "@mui/material";
 import { Category } from "../models/Category";
 import { addProduct } from "../api/productApi";
+import { prepareFormData } from "../utils/prepareFormData";
 
 const AddProduct = () => {
   const {
@@ -14,29 +15,17 @@ const AddProduct = () => {
     formState: { errors },
   } = useForm<AddProductFormValues>({ resolver });
 
-  const prepareFormData = (data: any) => {
-    const formData = new FormData();
-    formData.append("categoryId", data.categoryId);
-    formData.append("productName", data.productName);
-    formData.append("price", data.price);
-    formData.append(
-      "imagePath",
-      typeof data.imagePath === "string" ? data.imagePath : data.imagePath[0]
-    );
-    return formData;
-  };
-
   // what happens when the form is submitted.
   const onSubmit = handleSubmit(async data => {
     try {
       const formData = prepareFormData(data);
       await addProduct(formData);
-      console.log(data);
     } catch (err) {
       console.error(err);
     }
   });
 
+  // Get the categories using a custom hook
   const catagories = useCategory();
 
   return (
