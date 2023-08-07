@@ -1,10 +1,5 @@
-import express, { Request, Response, NextFunction } from "express";
-import { User, UserModel } from "../Models/Store";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
-import dotenv from "dotenv";
+import express from "express";
 import { checkEmailId, login, register } from "../controllers/userController";
-dotenv.config();
 
 const userRouter = express.Router();
 
