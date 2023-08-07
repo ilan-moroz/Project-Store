@@ -1,6 +1,7 @@
 import React from "react";
 import { getAllCategories } from "../api/categoryApi";
 
+// hook to get all categories from database
 export const useCategory = () => {
   const [catagories, setCategories] = React.useState([]);
 

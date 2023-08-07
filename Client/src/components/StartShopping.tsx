@@ -8,6 +8,7 @@ import {
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
 
+// start shopping comp for display after user login
 const StartShopping = () => {
   return (
     <div className="startShopping">

@@ -4,6 +4,7 @@ import { Category } from "../../models/Category";
 import "./categoryNavbar.css";
 
 const CategoryNavbar = () => {
+  // get all categories from a custom hook
   const catagories = useCategory();
 
   return (

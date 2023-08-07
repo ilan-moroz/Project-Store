@@ -12,6 +12,7 @@ interface FormInputProps {
   selectOptions?: string[]; // array of select options
 }
 
+// reusable form input component
 const FormInput: React.FC<FormInputProps> = ({
   register,
   name,

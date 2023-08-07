@@ -1,5 +1,6 @@
 import api from "./apiConfig";
 
+// make api get request to get all categories
 export const getAllCategories = async () => {
   try {
     const response = await api.get(`category/getAllCategories`);
