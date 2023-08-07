@@ -1,4 +1,4 @@
-import AddProduct from "./AddProduct/AddProduct";
+import AddProduct from "./AddProduct";
 
 const Cart = () => {
   return (

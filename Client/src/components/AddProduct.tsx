@@ -1,12 +1,11 @@
 import { useForm } from "react-hook-form";
-import { resolver } from "../../validators/addProductValidators";
-import { AddProductFormValues } from "../../types/AddProductFormValues";
-import FormInput from "../FormInput";
-import { useCategory } from "../../hooks/useCategory";
-import { addProduct } from "../../api/productApi";
-import { prepareFormData } from "../../utils/prepareFormData";
-import "./addProduct.css";
-import Button from "../Button/Button";
+import { resolver } from "../validators/addProductValidators";
+import { AddProductFormValues } from "../types/AddProductFormValues";
+import FormInput from "./FormInput";
+import { useCategory } from "../hooks/useCategory";
+import { addProduct } from "../api/productApi";
+import { prepareFormData } from "../utils/prepareFormData";
+import Button from "./Button/Button";
 
 const AddProduct = () => {
   const {
@@ -29,7 +28,15 @@ const AddProduct = () => {
   const catagories = useCategory();
 
   return (
-    <div className="addProduct">
+    <div
+      className="addProduct"
+      style={{
+        textAlign: "center",
+        width: "80%",
+        margin: "0 auto",
+        marginTop: "3rem",
+      }}
+    >
       <form onSubmit={onSubmit}>
         <FormInput
           register={register("productName")}
