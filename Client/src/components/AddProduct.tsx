@@ -13,6 +13,7 @@ const AddProduct = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<AddProductFormValues>({ resolver });
 
@@ -24,6 +25,7 @@ const AddProduct = () => {
       const formData = prepareFormData(data);
       const response = await addProduct(formData);
       if (response) dispatch(addProductAction(response));
+      reset();
     } catch (err) {
       console.error(err);
     }
