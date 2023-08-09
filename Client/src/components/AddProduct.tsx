@@ -6,6 +6,8 @@ import { useCategory } from "../hooks/useCategory";
 import { addProduct } from "../api/productApi";
 import { prepareFormData } from "../utils/prepareFormData";
 import Button from "./Button/Button";
+import { useDispatch } from "react-redux";
+import { addProductAction } from "../redux/productReducer";
 
 const AddProduct = () => {
   const {
@@ -14,11 +16,14 @@ const AddProduct = () => {
     formState: { errors },
   } = useForm<AddProductFormValues>({ resolver });
 
+  const dispatch = useDispatch();
+
   // what happens when the form is submitted.
   const onSubmit = handleSubmit(async data => {
     try {
       const formData = prepareFormData(data);
-      await addProduct(formData);
+      const response = await addProduct(formData);
+      if (response) dispatch(addProductAction(response));
     } catch (err) {
       console.error(err);
     }

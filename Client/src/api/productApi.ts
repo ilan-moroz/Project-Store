@@ -9,3 +9,13 @@ export const addProduct = async (product: any) => {
     throw err;
   }
 };
+
+// api request to get all products from database
+export const getProducts = async () => {
+  try {
+    const response = await api.get("product/getAllProducts");
+    if (response.status === 200) return response.data;
+  } catch (err) {
+    throw err;
+  }
+};
