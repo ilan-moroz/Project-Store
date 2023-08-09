@@ -2,6 +2,7 @@ import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { userReducer } from "./userReducer";
+import { productReducer } from "./productReducer";
 
 // This configuration allows the userReducer to be persisted in local storage
 const userPersistConfig = {
@@ -15,6 +16,7 @@ const persistedUserReducer = persistReducer(userPersistConfig, userReducer);
 // Combining all the reducers in the application
 const reducers = {
   user: persistedUserReducer,
+  products: productReducer,
 };
 
 // Configuring the Redux store
