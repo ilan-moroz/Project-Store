@@ -63,6 +63,7 @@ const FormInput: React.FC<FormInputProps> = ({
       fullWidth
       error={error}
       helperText={helperText}
+      inputProps={{ step: "0.01" }}
       sx={{ marginBottom: "1.5rem" }}
     />
   );
