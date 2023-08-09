@@ -14,25 +14,30 @@ type cardProps = {
 };
 
 const CardComp: React.FC<cardProps> = ({ name, price, imagePath, id }) => {
-  console.log(`http://localhost:4000/${imagePath}`);
-
   return (
-    <Card sx={{ maxWidth: 345 }} key={id}>
+    <Card sx={{ width: "12rem", textAlign: "center" }} key={id}>
       <CardMedia
-        sx={{ height: 140 }}
+        sx={{ height: 100, backgroundSize: "contain" }}
         image={`http://localhost:4000/${imagePath}`}
         title={name}
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="div"
+          sx={{ fontSize: "1rem" }}
+        >
           {name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           &#8362; {price.toFixed(2)}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Add to cart</Button>
+      <CardActions sx={{ justifyContent: "center" }}>
+        <Button size="small" sx={{ color: "rgb(70,23,155)" }}>
+          Add to cart
+        </Button>
       </CardActions>
     </Card>
   );
