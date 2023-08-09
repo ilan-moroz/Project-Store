@@ -21,6 +21,9 @@ server.use(express.json());
 //Parse the body as JSON
 server.use(bodyParser.json());
 
+// Serve images as static resources
+server.use("/images", express.static("images"));
+
 // How to use routes
 server.use("/mongoStore/user", userRouter);
 server.use("/mongoStore/category", categoryRouter);
