@@ -13,7 +13,7 @@ const Products = () => {
   const products = useSelector((state: RootState) => state.products.products);
 
   return (
-    <div className="shopping__main">
+    <div>
       <CategoryNavbar />
       <div className="productCards">
         {/* map all the products and display in card */}

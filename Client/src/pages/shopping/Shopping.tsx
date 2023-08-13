@@ -23,7 +23,9 @@ const Shopping = () => {
           {user?.role === "admin" ? <AddProduct /> : <Cart />}
         </div>
       </Resizable>
-      <Products />
+      <div className="shopping__main">
+        <Products />
+      </div>
     </div>
   );
 };
