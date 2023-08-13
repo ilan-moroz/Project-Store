@@ -7,7 +7,9 @@ import "./products.css";
 import { RootState } from "../../redux/Store";
 
 const Products = () => {
+  // get all products from backend using custom hook
   useProduct();
+  // display all products from the state
   const products = useSelector((state: RootState) => state.products.products);
 
   return (
