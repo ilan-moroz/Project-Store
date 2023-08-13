@@ -7,6 +7,7 @@ import helmet from "helmet";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import productRouter from "./Routes/productRoutes";
+import cartRouter from "./Routes/cartRoutes";
 dotenv.config();
 
 // Create Server
@@ -28,6 +29,7 @@ server.use("/images", express.static("images"));
 server.use("/mongoStore/user", userRouter);
 server.use("/mongoStore/category", categoryRouter);
 server.use("/mongoStore/product", productRouter);
+server.use("/mongoStore/cart", cartRouter);
 
 // for security
 server.use(helmet());

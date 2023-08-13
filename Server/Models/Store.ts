@@ -23,7 +23,7 @@ export interface Product extends Document {
 }
 
 export interface ShoppingCart extends Document {
-  customerId: Schema.Types.ObjectId; // Foreign key referencing Customer
+  customerId: Schema.Types.ObjectId; // Foreign key referencing User
   createdAt: Date;
 }
 
