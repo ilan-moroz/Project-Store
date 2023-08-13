@@ -12,6 +12,7 @@ const Shopping = () => {
           width: 450,
           height: "100%",
         }}
+        minWidth={125}
       >
         <Cart />
       </Resizable>
