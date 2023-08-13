@@ -41,10 +41,10 @@ const NumberInput = () => {
           },
           "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
             {
-              "-webkit-appearance": "none",
+              WebkitAppearance: "none",
             },
           "& input[type=number]": {
-            "-moz-appearance": "textfield",
+            MozAppearance: "textfield",
             textAlign: "center",
           },
         }}
