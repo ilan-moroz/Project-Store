@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
 import StartShopping from "../StartShopping";
 import Button from "../Button/Button";
+import { checkShoppingCart } from "../../api/cartApi";
 
 export const Login = () => {
   // Accessing the user object from the Redux store
@@ -33,10 +34,14 @@ export const Login = () => {
     try {
       const response = await login(data);
       // If login is successful, update the Redux store with the user and token
-      if (response) dispatch(setLoginAction(response.user, response.token));
-      // if admin logged in navigate to shopping page
-      if (response.user.role === "admin") navigate("/shopping");
-      reset();
+      if (response) {
+        dispatch(setLoginAction(response.user, response.token));
+        // check for cart
+        await checkShoppingCart(response.user._id);
+        // if admin logged in navigate to shopping page
+        if (response.user.role === "admin") navigate("/shopping");
+        reset();
+      }
     } catch (err: any) {
       // If there's an error,show a toast notification with the error message
       toast.error(err.response.data.message);

@@ -5,7 +5,9 @@ import { Request, Response } from "express";
 export const checkShoppingCart = async (req: Request, res: Response) => {
   const { userId } = req.params;
   try {
-    const shoppingCart = await ShoppingCartModel.findOne({ userId });
+    const shoppingCart = await ShoppingCartModel.findOne({
+      customerId: userId,
+    });
     if (shoppingCart) {
       res.status(200).json(shoppingCart);
     } else {

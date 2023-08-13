@@ -40,14 +40,14 @@ export const login = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
     // Retrieve user from the database
-    const customer = await UserModel.findOne({ email });
-    if (!customer) {
+    const user = await UserModel.findOne({ email });
+    if (!user) {
       return res.status(400).json({
         message: "Invalid credentials. Please check your email and password.",
       });
     }
     // Check if the provided password is correct
-    const isPasswordValid = await bcrypt.compare(password, customer.password);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(400).json({
         message: "Invalid credentials. Please check your email and password.",
@@ -55,17 +55,13 @@ export const login = async (req: Request, res: Response) => {
     }
     // Generate a new JWT token
     const token = jwt.sign(
-      { id: customer._id, email: customer.email },
+      { id: user._id, email: user.email },
       process.env.SECRET_KEY!,
       { expiresIn: "2h" }
     );
     res.status(200).json({
       token,
-      user: {
-        firstName: customer.firstName,
-        lastName: customer.lastName,
-        role: customer.role,
-      },
+      user,
     });
   } catch (error: any) {
     res.status(500).json({ error: error.message });
