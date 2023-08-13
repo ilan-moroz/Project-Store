@@ -34,6 +34,7 @@ export const Login = () => {
       const response = await login(data);
       // If login is successful, update the Redux store with the user and token
       if (response) dispatch(setLoginAction(response.user, response.token));
+      // if admin logged in navigate to shopping page
       if (response.user.role === "admin") navigate("/shopping");
       reset();
     } catch (err: any) {

@@ -20,6 +20,7 @@ const Shopping = () => {
         minWidth={125}
       >
         <div className="cartOrAddProduct">
+          {/* if admin show add product comp if user show cart comp */}
           {user?.role === "admin" ? <AddProduct /> : <Cart />}
         </div>
       </Resizable>
