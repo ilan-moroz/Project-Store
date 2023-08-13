@@ -14,6 +14,7 @@ import { RootState } from "../../redux/Store";
 import StartShopping from "../StartShopping";
 import Button from "../Button/Button";
 import { checkShoppingCart } from "../../api/cartApi";
+import { setCartAction } from "../../redux/cartReducer";
 
 export const Login = () => {
   // Accessing the user object from the Redux store
@@ -37,7 +38,8 @@ export const Login = () => {
       if (response) {
         dispatch(setLoginAction(response.user, response.token));
         // check for cart
-        await checkShoppingCart(response.user._id);
+        const res = await checkShoppingCart(response.user._id);
+        if (res) dispatch(setCartAction(res));
         // if admin logged in navigate to shopping page
         if (response.user.role === "admin") navigate("/shopping");
         reset();

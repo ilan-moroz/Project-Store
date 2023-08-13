@@ -3,20 +3,28 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { userReducer } from "./userReducer";
 import { productReducer } from "./productReducer";
+import { cartReducer } from "./cartReducer";
 
-// This configuration allows the userReducer to be persisted in local storage
+// This configuration allows the userReducer,cartReducer to be persisted in local storage
 const userPersistConfig = {
   key: "user",
   storage,
 };
 
-// This configuration allows the userReducer to be persisted in local storage
+const cartPersistConfig = {
+  key: "shoppingCart",
+  storage,
+};
+
+// This configuration allows the userReducer,cartReducer to be persisted in local storage
 const persistedUserReducer = persistReducer(userPersistConfig, userReducer);
+const persistedCartReducer = persistReducer(cartPersistConfig, cartReducer);
 
 // Combining all the reducers in the application
 const reducers = {
   user: persistedUserReducer,
   products: productReducer,
+  shoppingCart: persistedCartReducer,
 };
 
 // Configuring the Redux store
