@@ -2,7 +2,7 @@ import { Avatar, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import LoginIcon from "@mui/icons-material/Login";
 import "./login.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { resolver } from "../../validators/loginValidator";
 import { LoginFormValues } from "../../types/LoginFormValues";
 import FormInput from "../FormInput";
@@ -26,6 +26,7 @@ export const Login = () => {
   } = useForm<LoginFormValues>({ resolver });
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // what happens when the form is submitted.
   const onSubmit = handleSubmit(async data => {
@@ -33,6 +34,7 @@ export const Login = () => {
       const response = await login(data);
       // If login is successful, update the Redux store with the user and token
       if (response) dispatch(setLoginAction(response.user, response.token));
+      if (response.user.role === "admin") navigate("/shopping");
       reset();
     } catch (err: any) {
       // If there's an error,show a toast notification with the error message
