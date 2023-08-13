@@ -13,7 +13,8 @@ type cardProps = {
   id: string;
 };
 
-const CardComp: React.FC<cardProps> = ({ name, price, imagePath, id }) => {
+// card template for displaying products
+const ProductCard: React.FC<cardProps> = ({ name, price, imagePath, id }) => {
   return (
     <Card sx={{ width: "12rem", textAlign: "center" }} key={id}>
       <CardMedia
@@ -43,4 +44,4 @@ const CardComp: React.FC<cardProps> = ({ name, price, imagePath, id }) => {
   );
 };
 
-export default CardComp;
+export default ProductCard;

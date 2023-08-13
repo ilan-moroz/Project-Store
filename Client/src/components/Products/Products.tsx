@@ -16,6 +16,7 @@ const Products = () => {
     <div className="shopping__main">
       <CategoryNavbar />
       <div className="productCards">
+        {/* map all the products and display in card */}
         {products.map((product: Product) => (
           <CardComp
             name={product.productName}
