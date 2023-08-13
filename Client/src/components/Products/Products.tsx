@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { useProduct } from "../../hooks/useProducts";
 import { Product } from "../../models/Product";
-import CardComp from "../Card";
+import CardComp from "../ProductCard";
 import CategoryNavbar from "../CategoryNavbar/CategoryNavbar";
 import "./products.css";
 import { RootState } from "../../redux/Store";
