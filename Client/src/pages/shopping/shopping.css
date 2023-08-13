@@ -5,10 +5,11 @@
   overflow: hidden;
 }
 
-.shopping__cart {
+.cartOrAddProduct {
   background-color: #f0f0f0;
   height: 100%;
   border-right: 1px solid darkgray;
+  padding-top: 3rem;
 }
 
 .shopping__main {

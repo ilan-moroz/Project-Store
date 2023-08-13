@@ -41,7 +41,6 @@ const AddProduct = () => {
         textAlign: "center",
         width: "80%",
         margin: "0 auto",
-        marginTop: "3rem",
       }}
     >
       <form onSubmit={onSubmit}>

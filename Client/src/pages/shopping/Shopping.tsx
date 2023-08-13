@@ -1,9 +1,14 @@
+import { useSelector } from "react-redux";
 import Cart from "../../components/Cart";
 import Products from "../../components/Products/Products";
 import "./shopping.css";
 import { Resizable } from "re-resizable";
+import { RootState } from "../../redux/Store";
+import AddProduct from "../../components/AddProduct";
 
 const Shopping = () => {
+  const user = useSelector((state: RootState) => state.user.user);
+
   return (
     <div className="shopping">
       {/* resizable comp */}
@@ -14,7 +19,9 @@ const Shopping = () => {
         }}
         minWidth={125}
       >
-        <Cart />
+        <div className="cartOrAddProduct">
+          {user?.role === "admin" ? <AddProduct /> : <Cart />}
+        </div>
       </Resizable>
       <Products />
     </div>
