@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import NumberInput from "./NumberInput";
 
 type cardProps = {
   imagePath: string;
@@ -34,6 +35,7 @@ const ProductCard: React.FC<cardProps> = ({ name, price, imagePath, id }) => {
         <Typography variant="body2" color="text.secondary">
           &#8362; {price.toFixed(2)}
         </Typography>
+        <NumberInput />
       </CardContent>
       <CardActions sx={{ justifyContent: "center" }}>
         <Button size="small" sx={{ color: "rgb(70,23,155)" }}>
