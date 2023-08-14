@@ -42,15 +42,15 @@ const Cart = () => {
   return (
     <div className="cartItems">
       <div>
-        <h2>Your Cart</h2>
+        <h2 className="marginLeft">Your Cart</h2>
         {cartItems.length === 0 && (
-          <div className="cartItems__empty">Your cart is empty</div>
+          <div className="cartItems__empty marginLeft">Your cart is empty</div>
         )}
         {cartItems.map((item: CartItem) => (
           <ItemCart item={item} key={item._id} />
         ))}
       </div>
-      <div className="cartItems__total">
+      <div className="cartItems__total marginLeft">
         <h3>Total: &#8362; {total.toFixed(2)}</h3>
       </div>
     </div>
