@@ -20,6 +20,8 @@ type cardProps = {
 
 // card template for displaying products
 const ProductCard: React.FC<cardProps> = ({ name, price, imagePath, id }) => {
+  const [quantity, setQuantity] = React.useState(1);
+
   const cart = useSelector((state: RootState) => state.shoppingCart.cart);
   const cartId = cart?._id || "";
 
@@ -27,7 +29,7 @@ const ProductCard: React.FC<cardProps> = ({ name, price, imagePath, id }) => {
   const addToCart = async (cartItem: CartItem) => {
     try {
       const response = await addItemToCart(cartItem.cartId, cartItem);
-      console.log(response);
+      setQuantity(1);
     } catch (err) {
       console.error(err);
     }
@@ -52,7 +54,7 @@ const ProductCard: React.FC<cardProps> = ({ name, price, imagePath, id }) => {
         <Typography variant="body2" color="text.secondary">
           &#8362; {price.toFixed(2)}
         </Typography>
-        <NumberInput />
+        <NumberInput onValueChange={setQuantity} quantity={quantity} />
       </CardContent>
       <CardActions sx={{ justifyContent: "center" }}>
         <Button
@@ -61,8 +63,8 @@ const ProductCard: React.FC<cardProps> = ({ name, price, imagePath, id }) => {
           onClick={() => {
             addToCart({
               productId: id,
-              generalPrice: price,
-              quantity: 1,
+              generalPrice: price * quantity,
+              quantity: quantity,
               cartId: cartId,
             });
           }}

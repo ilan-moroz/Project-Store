@@ -3,15 +3,25 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import React from "react";
 
-const NumberInput = () => {
-  const [value, setValue] = React.useState(1);
+type NumberInputProps = {
+  quantity: number;
+  onValueChange: (value: number) => void;
+};
 
+const NumberInput: React.FC<NumberInputProps> = ({
+  onValueChange,
+  quantity,
+}) => {
   const handleIncrease = () => {
-    if (value < 99) setValue(value + 1);
+    if (quantity < 99) {
+      onValueChange(quantity + 1);
+    }
   };
 
   const handleDecrease = () => {
-    if (value > 1) setValue(value - 1);
+    if (quantity > 1) {
+      onValueChange(quantity - 1);
+    }
   };
 
   return (
@@ -32,7 +42,7 @@ const NumberInput = () => {
       <TextField
         id="productQuantity"
         type="number"
-        value={value}
+        value={quantity}
         inputProps={{ min: 1, max: 99 }}
         sx={{
           "& input": {
