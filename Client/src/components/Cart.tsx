@@ -8,9 +8,7 @@ import { CartItem } from "../models/CartItem";
 
 const Cart = () => {
   const [total, setTotal] = React.useState(0);
-
   const dispatch = useDispatch();
-
   const cartId =
     useSelector((state: RootState) => state.shoppingCart.cart?._id) ?? "";
 
@@ -25,12 +23,20 @@ const Cart = () => {
 
   React.useEffect(() => {
     getAllCartItems(cartId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [cartId]);
 
   const cartItems = useSelector(
     (state: RootState) => state.shoppingCart.cartItems
   );
+
+  // Calculate total using reduce
+  React.useEffect(() => {
+    const computedTotal = cartItems.reduce(
+      (acc, item) => acc + item.generalPrice,
+      0
+    );
+    setTotal(computedTotal);
+  }, [cartItems]);
 
   return (
     <div style={{ marginTop: "-2rem" }}>
@@ -42,4 +48,5 @@ const Cart = () => {
     </div>
   );
 };
+
 export default Cart;
