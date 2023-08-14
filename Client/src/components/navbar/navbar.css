@@ -2,20 +2,27 @@
   display: flex;
   border-bottom: 2px solid rgb(103, 32, 180);
   justify-content: space-between;
+  height: 11.5vh;
+  align-items: center;
+}
+
+@media only screen and (min-width: 112.5em) {
+  .navbar {
+    height: 8vh;
+  }
 }
 
 .navbar__logo img {
   width: 25rem;
-  margin: 1.5rem 0 0 1rem;
+  margin-left: 0.5rem;
 }
 
 .navbar__contact {
   color: rgb(103, 32, 180);
-  margin: 0.5rem 0.5rem 0.5rem 0;
   font-size: 1.2rem;
+  margin-right: 0.5rem;
 }
 
-.user__info {
-  color: rgb(103, 32, 180);
-  font-size: 1.2rem;
+.navbar__username {
+  margin-top: -0.7rem;
 }

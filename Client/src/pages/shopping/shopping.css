@@ -1,8 +1,14 @@
 .shopping {
   display: flex;
   flex-direction: row;
-  height: 87.7vh;
+  height: 88.5vh;
   overflow: hidden;
+}
+
+@media only screen and (min-width: 112.5em) {
+  .shopping {
+    height: 92vh;
+  }
 }
 
 .cartOrAddProduct {

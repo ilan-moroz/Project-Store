@@ -58,34 +58,36 @@ const Navbar = () => {
       <div className="navbar__contact">
         <p>Phone: 08-6725423</p>
         <p>Email: superstore@gmail.com</p>
-        <Chip
-          icon={<MoodIcon style={{ color: "rgb(103,32,180)" }} />}
-          label={user ? `${user.firstName} ${user.lastName}` : "Hello Guest"}
-          variant="outlined"
-          sx={{
-            color: "rgb(103,32,180)",
-            width: "10rem",
-            fontSize: "1.1rem",
-            margin: "1rem 0 0 2rem",
-          }}
-          aria-controls={open ? "basic-menu" : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
-          onClick={handleClick}
-        />
-        {user && (
-          <Menu
-            id="basic-menu"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            MenuListProps={{
-              "aria-labelledby": "basic-button",
+        <div className="navbar__username">
+          <Chip
+            icon={<MoodIcon style={{ color: "rgb(103,32,180)" }} />}
+            label={user ? `${user.firstName} ${user.lastName}` : "Hello Guest"}
+            variant="outlined"
+            sx={{
+              color: "rgb(103,32,180)",
+              width: "10rem",
+              fontSize: "1.1rem",
+              margin: "1rem 0 0 2rem",
             }}
-          >
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
-          </Menu>
-        )}
+            aria-controls={open ? "basic-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleClick}
+          />
+          {user && (
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                "aria-labelledby": "basic-button",
+              }}
+            >
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            </Menu>
+          )}
+        </div>
       </div>
     </div>
   );

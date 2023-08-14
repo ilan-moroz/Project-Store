@@ -21,3 +21,21 @@ body {
 .purpleText {
   color: rgb(103, 32, 180);
 }
+
+header {
+  height: 11.5vh;
+}
+
+main {
+  height: 88.5vh;
+}
+
+@media only screen and (min-width: 112.5em) {
+  header {
+    height: 8vh;
+  }
+
+  main {
+    height: 92vh;
+  }
+}
