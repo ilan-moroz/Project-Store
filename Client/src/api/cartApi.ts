@@ -9,3 +9,13 @@ export const checkShoppingCart = async (userId: string) => {
     throw err;
   }
 };
+
+// function to add item to a cart
+export const addItemToCart = async (cartId: string, cartItem: {}) => {
+  try {
+    const response = await api.post(`cart/addItemToCart/${cartId}`, cartItem);
+    if (response.status === 201) return response.data;
+  } catch (err) {
+    throw err;
+  }
+};
