@@ -8,6 +8,7 @@ import { RootState } from "../../redux/Store";
 import { setLogoutAction } from "../../redux/userReducer";
 import React from "react";
 import SearchInput from "../SearchInput";
+import { removeCartAction } from "../../redux/cartReducer";
 
 const Navbar = () => {
   // Accessing the user object from the Redux store
@@ -30,6 +31,7 @@ const Navbar = () => {
   // logout user
   const handleLogout = () => {
     dispatch(setLogoutAction());
+    dispatch(removeCartAction());
     handleClose();
     navigate("/");
   };

@@ -37,11 +37,12 @@ export const Login = () => {
       // If login is successful, update the Redux store with the user and token
       if (response) {
         dispatch(setLoginAction(response.user, response.token));
-        // check for cart
-        const res = await checkShoppingCart(response.user._id);
-        if (res) dispatch(setCartAction(res));
-        // if admin logged in navigate to shopping page
-        if (response.user.role === "admin") navigate("/shopping");
+        // check for cart only for user
+        if (response.user.role === "user") {
+          const res = await checkShoppingCart(response.user._id);
+          if (res) dispatch(setCartAction(res));
+          // if admin logged in navigate to shopping page
+        } else navigate("/shopping");
         reset();
       }
     } catch (err: any) {
