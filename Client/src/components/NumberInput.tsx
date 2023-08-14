@@ -15,13 +15,15 @@ const NumberInput: React.FC<NumberInputProps> = ({
   onQuantityChange,
 }) => {
   const handleIncrease = () => {
-    if (quantity < 99) onValueChange(quantity + 1);
-    if (onQuantityChange) onQuantityChange(quantity + 1);
+    const newValue = quantity < 99 ? quantity + 1 : quantity;
+    onValueChange(newValue);
+    if (onQuantityChange) onQuantityChange(newValue);
   };
 
   const handleDecrease = () => {
-    if (quantity > 1) onValueChange(quantity - 1);
-    if (onQuantityChange) onQuantityChange(quantity - 1);
+    const newValue = quantity > 1 ? quantity - 1 : quantity;
+    onValueChange(newValue);
+    if (onQuantityChange) onQuantityChange(newValue);
   };
 
   return (
