@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CartItem } from "../../models/CartItem";
 import { RootState } from "../../redux/Store";
 import "./itemCart.css";
@@ -7,6 +7,7 @@ import React from "react";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { deleteCartItem } from "../../api/cartApi";
+import { deleteItemFromCartAction } from "../../redux/cartReducer";
 
 type cardProps = {
   item: CartItem;
@@ -18,13 +19,17 @@ const ItemCart: React.FC<cardProps> = ({ item }) => {
 
   const [quantity, setQuantity] = React.useState(item.quantity);
 
+  const dispatch = useDispatch();
+
   React.useEffect(() => {
     setQuantity(item.quantity);
   }, [item.quantity]);
 
   const handleDelete = async () => {
     try {
-      await deleteCartItem(item.cartId, item.productId);
+      const response = await deleteCartItem(item.cartId, item.productId);
+      if (response)
+        dispatch(deleteItemFromCartAction(response.cartId, response.productId));
     } catch (err) {
       console.error(err);
     }

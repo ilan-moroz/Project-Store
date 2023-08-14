@@ -85,8 +85,8 @@ export const cartReducer = (
     case CartActionType.deleteItemFromCart:
       newState.cartItems = newState.cartItems.filter(
         (cartItem: CartItem) =>
-          cartItem.cartId === action.payload.cartId &&
-          cartItem.productId === action.payload.productId
+          cartItem.cartId !== action.payload.cartId ||
+          cartItem.productId !== action.payload.productId
       );
       break;
 
