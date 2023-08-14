@@ -1,10 +1,11 @@
 import React from "react";
-import { getCartItems } from "../api/cartApi";
+import { getCartItems } from "../../api/cartApi";
 import { useDispatch, useSelector } from "react-redux";
-import { setCartItemsAction } from "../redux/cartReducer";
-import { RootState } from "../redux/Store";
-import ItemCart from "./ItemCart/ItemCart";
-import { CartItem } from "../models/CartItem";
+import { setCartItemsAction } from "../../redux/cartReducer";
+import { RootState } from "../../redux/Store";
+import ItemCart from "../ItemCart/ItemCart";
+import { CartItem } from "../../models/CartItem";
+import "./cart.css";
 
 const Cart = () => {
   const [total, setTotal] = React.useState(0);
@@ -39,12 +40,19 @@ const Cart = () => {
   }, [cartItems]);
 
   return (
-    <div style={{ marginTop: "-2rem" }}>
-      <h2>Your Cart</h2>
-      {cartItems.map((item: CartItem) => (
-        <ItemCart item={item} key={item._id} />
-      ))}
-      <h3>Total: &#8362; {total.toFixed(2)}</h3>
+    <div className="cartItems">
+      <div className="cartItems__headingItems">
+        <h2>Your Cart</h2>
+        {cartItems.length === 0 && (
+          <div className="cartItems__empty">Your cart is empty</div>
+        )}
+        {cartItems.map((item: CartItem) => (
+          <ItemCart item={item} key={item._id} />
+        ))}
+      </div>
+      <div className="cartItems__total">
+        <h3>Total: &#8362; {total.toFixed(2)}</h3>
+      </div>
     </div>
   );
 };
