@@ -19,6 +19,16 @@ const ItemCart: React.FC<cardProps> = ({ item }) => {
   const product = products.find(product => product._id === item.productId);
 
   const [quantity, setQuantity] = React.useState(item.quantity);
+  const [showButton, setShowButton] = React.useState(false);
+
+  const handleQuantityChange = (newValue: number) => {
+    if (newValue !== quantity) {
+      setShowButton(true);
+    }
+    if (newValue === quantity) {
+      setShowButton(false);
+    }
+  };
 
   const dispatch = useDispatch();
 
@@ -51,18 +61,26 @@ const ItemCart: React.FC<cardProps> = ({ item }) => {
           className="cartItem__image"
         />
       </div>
-      {/* <Button
-        variant="outlined"
-        startIcon={<EditIcon />}
-        size="small"
-        color="success"
-      >
-        Update
-      </Button> */}
+      {showButton && (
+        <div className="updateButton">
+          <Button
+            variant="outlined"
+            startIcon={<EditIcon />}
+            size="small"
+            color="success"
+          >
+            Update
+          </Button>
+        </div>
+      )}
       <div className="cartItem__price">
         <p> Price: &#8362; {product?.price} </p>
         <div className="numberInputWrapper">
-          <NumberInput onValueChange={setQuantity} quantity={quantity} />
+          <NumberInput
+            onValueChange={setQuantity}
+            quantity={quantity}
+            onQuantityChange={handleQuantityChange}
+          />
         </div>
         <p> Total Price: &#8362; {item.generalPrice.toFixed(2)}</p>
       </div>

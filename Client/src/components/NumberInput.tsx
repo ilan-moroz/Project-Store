@@ -6,22 +6,22 @@ import React from "react";
 type NumberInputProps = {
   quantity: number;
   onValueChange: (value: number) => void;
+  onQuantityChange?: (value: number) => void;
 };
 
 const NumberInput: React.FC<NumberInputProps> = ({
   onValueChange,
   quantity,
+  onQuantityChange,
 }) => {
   const handleIncrease = () => {
-    if (quantity < 99) {
-      onValueChange(quantity + 1);
-    }
+    if (quantity < 99) onValueChange(quantity + 1);
+    if (onQuantityChange) onQuantityChange(quantity + 1);
   };
 
   const handleDecrease = () => {
-    if (quantity > 1) {
-      onValueChange(quantity - 1);
-    }
+    if (quantity > 1) onValueChange(quantity - 1);
+    if (onQuantityChange) onQuantityChange(quantity - 1);
   };
 
   return (
