@@ -18,13 +18,7 @@ const Products = () => {
       <div className="productCards">
         {/* map all the products and display in card */}
         {products.map((product: Product) => (
-          <CardComp
-            name={product.productName}
-            price={product.price}
-            imagePath={product.imagePath}
-            id={product._id!}
-            key={product._id}
-          />
+          <CardComp product={product} />
         ))}
       </div>
     </div>

@@ -10,16 +10,14 @@ import { addItemToCart } from "../api/cartApi";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/Store";
 import { CartItem } from "../models/CartItem";
+import { Product } from "../models/Product";
 
 type cardProps = {
-  imagePath: string;
-  name: string;
-  price: number;
-  id: string;
+  product: Product;
 };
 
 // card template for displaying products
-const ProductCard: React.FC<cardProps> = ({ name, price, imagePath, id }) => {
+const ProductCard: React.FC<cardProps> = ({ product }) => {
   const [quantity, setQuantity] = React.useState(1);
 
   const cart = useSelector((state: RootState) => state.shoppingCart.cart);
@@ -36,11 +34,11 @@ const ProductCard: React.FC<cardProps> = ({ name, price, imagePath, id }) => {
   };
 
   return (
-    <Card sx={{ width: "12rem", textAlign: "center" }} key={id}>
+    <Card sx={{ width: "12rem", textAlign: "center" }} key={product._id}>
       <CardMedia
         sx={{ height: 100, backgroundSize: "contain" }}
-        image={`http://localhost:4000/${imagePath}`}
-        title={name}
+        image={`http://localhost:4000/${product.imagePath}`}
+        title={product.productName}
       />
       <CardContent>
         <Typography
@@ -49,10 +47,10 @@ const ProductCard: React.FC<cardProps> = ({ name, price, imagePath, id }) => {
           component="div"
           sx={{ fontSize: "1rem" }}
         >
-          {name}
+          {product.productName}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          &#8362; {price.toFixed(2)}
+          &#8362; {product.price.toFixed(2)}
         </Typography>
         <NumberInput onValueChange={setQuantity} quantity={quantity} />
       </CardContent>
@@ -62,8 +60,8 @@ const ProductCard: React.FC<cardProps> = ({ name, price, imagePath, id }) => {
           sx={{ color: "rgb(70,23,155)" }}
           onClick={() => {
             addToCart({
-              productId: id,
-              generalPrice: price * quantity,
+              productId: product._id!,
+              generalPrice: product.price * quantity,
               quantity: quantity,
               cartId: cartId,
             });
