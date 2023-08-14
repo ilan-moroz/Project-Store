@@ -14,7 +14,7 @@ export const checkShoppingCart = async (userId: string) => {
 export const addItemToCart = async (cartId: string, cartItem: {}) => {
   try {
     const response = await api.post(`cart/addItemToCart/${cartId}`, cartItem);
-    if (response.status === 201) return response.data;
+    if (response.status === 201 || 200) return response.data;
   } catch (err) {
     throw err;
   }

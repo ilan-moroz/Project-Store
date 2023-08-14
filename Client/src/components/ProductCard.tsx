@@ -12,7 +12,10 @@ import { RootState } from "../redux/Store";
 import { CartItem } from "../models/CartItem";
 import { Product } from "../models/Product";
 import { Box } from "@mui/material";
-import { addItemToCartAction } from "../redux/cartReducer";
+import {
+  addItemToCartAction,
+  updateCartItemAction,
+} from "../redux/cartReducer";
 
 type cardProps = {
   product: Product;
@@ -27,11 +30,23 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
 
   const dispatch = useDispatch();
 
+  const cartItems = useSelector(
+    (state: RootState) => state.shoppingCart.cartItems
+  );
+
   // handle add item to cart
   const addToCart = async (cartItem: CartItem) => {
     try {
+      const existingItem = cartItems.find(
+        item => item.productId === cartItem.productId
+      );
       const response = await addItemToCart(cartItem.cartId, cartItem);
-      dispatch(addItemToCartAction(response));
+
+      if (existingItem) {
+        dispatch(updateCartItemAction(response));
+      } else {
+        dispatch(addItemToCartAction(response));
+      }
       setQuantity(1);
     } catch (err) {
       console.error(err);

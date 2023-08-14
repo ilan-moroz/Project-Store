@@ -11,6 +11,7 @@ export enum CartActionType {
   removeCart = "removeCart",
   setCartItems = "setCartItems",
   addItemToCart = "addItemToCart",
+  updateCartItem = "updateCartItem",
 }
 
 export interface CartAction {
@@ -32,6 +33,10 @@ export const setCartItemsAction = (cartItems: CartItem[]): CartAction => {
 
 export const addItemToCartAction = (cartItem: CartItem): CartAction => {
   return { type: CartActionType.addItemToCart, payload: cartItem };
+};
+
+export const updateCartItemAction = (cartItem: CartItem): CartAction => {
+  return { type: CartActionType.updateCartItem, payload: cartItem };
 };
 
 export const cartReducer = (
@@ -58,6 +63,12 @@ export const cartReducer = (
 
     case CartActionType.addItemToCart:
       newState.cartItems = [...newState.cartItems, action.payload];
+      break;
+
+    case CartActionType.updateCartItem:
+      newState.cartItems = newState.cartItems.map(cartItem =>
+        cartItem._id === action.payload._id ? action.payload : cartItem
+      );
       break;
 
     default:

@@ -15,6 +15,10 @@ const ItemCart: React.FC<cardProps> = ({ item }) => {
 
   const [quantity, setQuantity] = React.useState(item.quantity);
 
+  React.useEffect(() => {
+    setQuantity(item.quantity);
+  }, [item.quantity]);
+
   return (
     <div className="cartItem">
       <div className="cartItem__imageName">
