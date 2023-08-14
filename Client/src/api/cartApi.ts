@@ -19,3 +19,13 @@ export const addItemToCart = async (cartId: string, cartItem: {}) => {
     throw err;
   }
 };
+
+// function to get all cart items
+export const getCartItems = async (cartId: string) => {
+  try {
+    const response = await api.get(`cart/getCartItems/${cartId}`);
+    if (response.status === 200) return response.data;
+  } catch (err) {
+    throw err;
+  }
+};
