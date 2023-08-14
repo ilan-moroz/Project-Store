@@ -1,3 +1,4 @@
+import { Product } from "./../../Client/src/models/Product";
 import { CartItemModel, ShoppingCartModel } from "../Models/Store";
 import { Request, Response } from "express";
 
@@ -30,9 +31,22 @@ export const addItemToCart = async (req: Request, res: Response) => {
     if (!shoppingCart) {
       return res.status(400).json({ message: "Shopping cart not found" });
     }
-    const newCartItem = new CartItemModel({ ...item, cartId: cartId });
-    await newCartItem.save();
-    res.status(201).json(newCartItem);
+
+    const existingCartItem = await CartItemModel.findOne({
+      cartId: cartId,
+      productId: item.productId,
+    });
+
+    if (existingCartItem) {
+      existingCartItem.quantity += item.quantity;
+      existingCartItem.generalPrice += item.generalPrice;
+      await existingCartItem.save();
+      res.status(200).json(existingCartItem);
+    } else {
+      const newCartItem = new CartItemModel({ ...item, cartId: cartId });
+      await newCartItem.save();
+      res.status(201).json(newCartItem);
+    }
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
@@ -47,6 +61,30 @@ export const getCartItems = async (req: Request, res: Response) => {
       return res.status(404).json({ message: "No items in this cart" });
     }
     res.status(200).json(cartItems);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// update cart item
+export const updateCartItem = async (req: Request, res: Response) => {
+  const item = req.body;
+
+  try {
+    const cartItem = await CartItemModel.findOne({
+      cartId: item.cartId,
+      productId: item.productId,
+    });
+    if (!cartItem) {
+      return res.status(404).json({ message: "Cart item not found" });
+    }
+
+    cartItem.quantity = item.quantity;
+    cartItem.generalPrice = item.generalPrice;
+
+    await cartItem.save();
+
+    res.status(200).json(cartItem);
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
