@@ -4,10 +4,11 @@ import { RootState } from "../../redux/Store";
 import "./itemCart.css";
 import NumberInput from "../NumberInput";
 import React from "react";
-import { IconButton } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { deleteCartItem } from "../../api/cartApi";
 import { deleteItemFromCartAction } from "../../redux/cartReducer";
+import EditIcon from "@mui/icons-material/Edit";
 
 type cardProps = {
   item: CartItem;
@@ -50,9 +51,19 @@ const ItemCart: React.FC<cardProps> = ({ item }) => {
           className="cartItem__image"
         />
       </div>
-      <div className="cartITem__price">
+      {/* <Button
+        variant="outlined"
+        startIcon={<EditIcon />}
+        size="small"
+        color="success"
+      >
+        Update
+      </Button> */}
+      <div className="cartItem__price">
         <p> Price: &#8362; {product?.price} </p>
-        <NumberInput onValueChange={setQuantity} quantity={quantity} />
+        <div className="numberInputWrapper">
+          <NumberInput onValueChange={setQuantity} quantity={quantity} />
+        </div>
         <p> Total Price: &#8362; {item.generalPrice.toFixed(2)}</p>
       </div>
     </div>

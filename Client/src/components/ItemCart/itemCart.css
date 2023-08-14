@@ -1,19 +1,30 @@
 .cartItem {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   margin-top: -1rem;
   border-bottom: 2px solid white;
   padding: 1rem;
   position: relative;
+  text-align: center;
 }
 
 .cartItem__image {
   width: 20%;
 }
 
-.cartITem__price {
+.cartItem__price {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  margin-top: 1rem;
+}
+
+.numberInputWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
 .cartItem__imageName {
