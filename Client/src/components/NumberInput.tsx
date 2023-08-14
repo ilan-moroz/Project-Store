@@ -41,7 +41,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
         sx={{
           "& input": {
             height: "0.2rem",
-            width: "1rem",
+            width: "1.1rem",
           },
           "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
             {

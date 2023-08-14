@@ -13,7 +13,7 @@ const ItemCart: React.FC<cardProps> = ({ item }) => {
   const products = useSelector((state: RootState) => state.products.products);
   const product = products.find(product => product._id === item.productId);
 
-  const [quantity, setQuantity] = React.useState(1);
+  const [quantity, setQuantity] = React.useState(item.quantity);
 
   return (
     <div className="cartItem">
