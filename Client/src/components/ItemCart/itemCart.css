@@ -1,0 +1,22 @@
+.cartItem {
+  margin-bottom: 1rem;
+  margin-top: -1rem;
+  border-bottom: 2px solid white;
+  padding: 1rem;
+}
+
+.cartItem__image {
+  width: 20%;
+}
+
+.cartITem__price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cartItem__imageName {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

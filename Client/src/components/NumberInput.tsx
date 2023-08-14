@@ -25,13 +25,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
   };
 
   return (
-    <div
-      className="numberInput"
-      style={{
-        marginTop: "1rem",
-        marginBottom: "-1.5rem",
-      }}
-    >
+    <div className="numberInput">
       <IconButton
         sx={{ color: "rgb(70,23,155)" }}
         aria-label="decrease product"

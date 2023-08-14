@@ -18,7 +18,7 @@ const Products = () => {
       <div className="productCards">
         {/* map all the products and display in card */}
         {products.map((product: Product) => (
-          <CardComp product={product} />
+          <CardComp product={product} key={product._id} />
         ))}
       </div>
     </div>

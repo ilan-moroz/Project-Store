@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/Store";
 import { CartItem } from "../models/CartItem";
 import { Product } from "../models/Product";
+import { Box } from "@mui/material";
 
 type cardProps = {
   product: Product;
@@ -52,7 +53,9 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
         <Typography variant="body2" color="text.secondary">
           &#8362; {product.price.toFixed(2)}
         </Typography>
-        <NumberInput onValueChange={setQuantity} quantity={quantity} />
+        <Box sx={{ marginTop: "0.7rem", marginBottom: "-1.5rem" }}>
+          <NumberInput onValueChange={setQuantity} quantity={quantity} />
+        </Box>
       </CardContent>
       <CardActions sx={{ justifyContent: "center" }}>
         <Button
