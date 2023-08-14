@@ -23,6 +23,7 @@ const Cart = () => {
 
   React.useEffect(() => {
     getAllCartItems(cartId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
