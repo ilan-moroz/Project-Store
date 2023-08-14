@@ -3,6 +3,7 @@
   margin-top: -1rem;
   border-bottom: 2px solid white;
   padding: 1rem;
+  position: relative;
 }
 
 .cartItem__image {
@@ -19,4 +20,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-right: 2rem;
+}
+
+.cartItem__delete {
+  opacity: 0;
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.cartItem:hover .cartItem__delete {
+  opacity: 1;
+  display: block;
 }
