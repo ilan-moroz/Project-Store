@@ -37,3 +37,17 @@ export const addItemToCart = async (req: Request, res: Response) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// get all cart items with cartId
+export const getCartItems = async (req: Request, res: Response) => {
+  const { cartId } = req.params;
+  try {
+    const cartItems = await CartItemModel.find({ cartId: cartId });
+    if (!cartItems) {
+      return res.status(404).json({ message: "No items in this cart" });
+    }
+    res.status(200).json(cartItems);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+};

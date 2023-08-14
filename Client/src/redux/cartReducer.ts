@@ -1,7 +1,9 @@
+import { CartItem } from "../models/CartItem";
 import { ShoppingCart } from "../models/ShoppingCart";
 
 export interface CartState {
   cart: ShoppingCart | null;
+  cartItems: CartItem | null;
 }
 
 export enum CartActionType {
@@ -25,6 +27,7 @@ export const removeCartAction = (): CartAction => {
 export const cartReducer = (
   currentState: CartState = {
     cart: null,
+    cartItems: null,
   },
   action: CartAction
 ): CartState => {
