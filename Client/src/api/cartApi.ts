@@ -29,3 +29,14 @@ export const getCartItems = async (cartId: string) => {
     throw err;
   }
 };
+
+export const deleteCartItem = async (cartId: string, productId: String) => {
+  try {
+    const response = await api.delete(
+      `cart/deleteCartItem/${cartId}/${productId}`
+    );
+    if (response.status === 200) return response.data;
+  } catch (err) {
+    throw err;
+  }
+};

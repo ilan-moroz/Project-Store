@@ -6,6 +6,7 @@ import NumberInput from "../NumberInput";
 import React from "react";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { deleteCartItem } from "../../api/cartApi";
 
 type cardProps = {
   item: CartItem;
@@ -21,12 +22,20 @@ const ItemCart: React.FC<cardProps> = ({ item }) => {
     setQuantity(item.quantity);
   }, [item.quantity]);
 
+  const handleDelete = async () => {
+    try {
+      await deleteCartItem(item.cartId, item.productId);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div className="cartItem">
       <div className="cartItem__imageName">
         <h3>{product?.productName}</h3>
         <div className="cartItem__delete">
-          <IconButton aria-label="delete" color="error">
+          <IconButton aria-label="delete" color="error" onClick={handleDelete}>
             <DeleteIcon />
           </IconButton>
         </div>
