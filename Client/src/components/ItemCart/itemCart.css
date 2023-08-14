@@ -24,14 +24,13 @@
 }
 
 .cartItem__delete {
-  opacity: 0;
-  display: none;
+  transform: scale(0);
   position: absolute;
   top: 0;
   right: 0;
+  transition: all 0.5s;
 }
 
 .cartItem:hover .cartItem__delete {
-  opacity: 1;
-  display: block;
+  transform: scale(1);
 }
