@@ -89,3 +89,21 @@ export const updateCartItem = async (req: Request, res: Response) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// delete item from cart
+export const deleteCartItem = async (req: Request, res: Response) => {
+  const { cartId, productId } = req.params;
+  try {
+    const cartItem = await CartItemModel.findOne({
+      cartId: cartId,
+      productId: productId,
+    });
+    if (!cartItem) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+    await CartItemModel.deleteOne({ _id: cartItem._id });
+    res.status(200).json(cartItem);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+};
