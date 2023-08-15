@@ -1,11 +1,16 @@
 import React from "react";
-import { getCartItems } from "../../api/cartApi";
+import { deleteAllCartItems, getCartItems } from "../../api/cartApi";
 import { useDispatch, useSelector } from "react-redux";
-import { setCartItemsAction } from "../../redux/cartReducer";
+import {
+  deleteAllCartItemsAction,
+  setCartItemsAction,
+} from "../../redux/cartReducer";
 import { RootState } from "../../redux/Store";
 import ItemCart from "../ItemCart/ItemCart";
 import { CartItem } from "../../models/CartItem";
 import "./cart.css";
+import { Button } from "@mui/material";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 const Cart = () => {
   const [total, setTotal] = React.useState(0);
@@ -39,6 +44,16 @@ const Cart = () => {
     setTotal(computedTotal);
   }, [cartItems]);
 
+  const handleDeleteCart = async () => {
+    try {
+      const response = await deleteAllCartItems(cartId);
+      dispatch(deleteAllCartItemsAction());
+      console.log(response);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div className="cartItems">
       <div>
@@ -52,6 +67,14 @@ const Cart = () => {
       </div>
       <div className="cartItems__total marginLeft">
         <h3>Total: &#8362; {total.toFixed(2)}</h3>
+        <Button
+          endIcon={<DeleteForeverIcon />}
+          size="small"
+          color="error"
+          onClick={handleDeleteCart}
+        >
+          Clear Cart
+        </Button>
       </div>
     </div>
   );

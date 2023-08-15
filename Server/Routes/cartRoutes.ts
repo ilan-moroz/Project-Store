@@ -2,6 +2,7 @@ import express from "express";
 import {
   addItemToCart,
   checkShoppingCart,
+  deleteAllCartItems,
   deleteCartItem,
   getCartItems,
   updateCartItem,
@@ -15,5 +16,6 @@ cartRouter.post("/addItemToCart/:cartId", addItemToCart);
 cartRouter.get("/getCartItems/:cartId", getCartItems);
 cartRouter.put("/updateCartItem", updateCartItem);
 cartRouter.delete("/deleteCartItem/:cartId/:productId", deleteCartItem);
+cartRouter.delete("/deleteAllCartItems/:cartId", deleteAllCartItems);
 
 export default cartRouter;

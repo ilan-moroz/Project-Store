@@ -13,6 +13,7 @@ export enum CartActionType {
   addItemToCart = "addItemToCart",
   updateCartItem = "updateCartItem",
   deleteItemFromCart = "deleteItemFromCart",
+  deleteAllCartItems = "deleteAllCartItems",
 }
 
 export interface CartAction {
@@ -38,6 +39,10 @@ export const addItemToCartAction = (cartItem: CartItem): CartAction => {
 
 export const updateCartItemAction = (cartItem: CartItem): CartAction => {
   return { type: CartActionType.updateCartItem, payload: cartItem };
+};
+
+export const deleteAllCartItemsAction = (): CartAction => {
+  return { type: CartActionType.deleteAllCartItems };
 };
 
 export const deleteItemFromCartAction = (
@@ -88,6 +93,10 @@ export const cartReducer = (
           cartItem.cartId !== action.payload.cartId ||
           cartItem.productId !== action.payload.productId
       );
+      break;
+
+    case CartActionType.deleteAllCartItems:
+      newState.cartItems = [];
       break;
 
     default:

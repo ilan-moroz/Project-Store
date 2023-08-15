@@ -52,3 +52,13 @@ export const updateCartItem = async (item: CartItem) => {
     throw err;
   }
 };
+
+// delete all items from cart
+export const deleteAllCartItems = async (cartId: string) => {
+  try {
+    const response = await api.delete(`cart/deleteAllCartItems/${cartId}`);
+    if (response.status === 200) return response.data;
+  } catch (err) {
+    throw err;
+  }
+};

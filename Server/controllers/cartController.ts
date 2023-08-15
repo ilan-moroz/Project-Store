@@ -107,3 +107,18 @@ export const deleteCartItem = async (req: Request, res: Response) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// delete all cart items
+export const deleteAllCartItems = async (req: Request, res: Response) => {
+  const { cartId } = req.params;
+
+  try {
+    const cartItems = await CartItemModel.find({ cartId: cartId });
+    if (cartItems.length === 0)
+      return res.status(404).json({ message: "No items in this cart" });
+    await CartItemModel.deleteMany({ cartId: cartId });
+    res.status(200).json({ message: "All cart items are deleted" });
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+};
