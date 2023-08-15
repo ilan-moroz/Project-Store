@@ -24,8 +24,13 @@ const CategoryNavbar: React.FC<CategoryProps> = ({ onSelectCategory }) => {
           }`}
           key={category._id}
           onClick={() => {
-            onSelectCategory(category._id);
-            setActiveCategory(category._id);
+            if (activeCategory === category._id) {
+              setActiveCategory(null);
+              onSelectCategory(""); // Or use null, but ensure `handleCategorySelect` in Products component can handle it
+            } else {
+              setActiveCategory(category._id);
+              onSelectCategory(category._id);
+            }
           }}
         >
           <li className="category__link purpleText">{category.categoryName}</li>

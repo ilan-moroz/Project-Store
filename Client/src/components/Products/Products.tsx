@@ -18,7 +18,11 @@ const Products = () => {
   );
 
   const handleCategorySelect = (categoryId: string) => {
-    setSelectedCategory(categoryId);
+    if (selectedCategory === categoryId) {
+      setSelectedCategory(null);
+    } else {
+      setSelectedCategory(categoryId);
+    }
   };
 
   const filteredProducts = selectedCategory
