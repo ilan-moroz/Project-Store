@@ -13,11 +13,16 @@ import { Button } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 const Cart = () => {
+  // Local state for cart total
   const [total, setTotal] = React.useState(0);
+  // Get Redux dispatch function
   const dispatch = useDispatch();
+
+  // Get cartId from the Redux store
   const cartId =
     useSelector((state: RootState) => state.shoppingCart.cart?._id) ?? "";
 
+  // Function to fetch all items in the cart from the API
   const getAllCartItems = async (cartId: string) => {
     try {
       const response = await getCartItems(cartId);
@@ -27,15 +32,17 @@ const Cart = () => {
     }
   };
 
+  // Fetch cart items when the cartId changes
   React.useEffect(() => {
     getAllCartItems(cartId);
   }, [cartId]);
 
+  // Get cartItems from the Redux store
   const cartItems = useSelector(
     (state: RootState) => state.shoppingCart.cartItems
   );
 
-  // Calculate total using reduce
+  // Recalculate total whenever cart items change
   React.useEffect(() => {
     const computedTotal = cartItems.reduce(
       (acc, item) => acc + item.generalPrice,
@@ -44,6 +51,7 @@ const Cart = () => {
     setTotal(computedTotal);
   }, [cartItems]);
 
+  // Function to handle deleting all items from the cart
   const handleDeleteCart = async () => {
     try {
       const response = await deleteAllCartItems(cartId);
