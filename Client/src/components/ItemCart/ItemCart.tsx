@@ -22,7 +22,7 @@ const ItemCart: React.FC<cardProps> = ({ item }) => {
   const [showButton, setShowButton] = React.useState(false);
 
   const handleQuantityChange = (newValue: number) => {
-    if (newValue !== quantity) {
+    if (newValue !== item.quantity) {
       setShowButton(true);
     } else {
       setShowButton(false);
