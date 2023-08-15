@@ -26,10 +26,10 @@ server.use(bodyParser.json());
 server.use("/images", express.static("images"));
 
 // How to use routes
-server.use("/mongoStore/user", userRouter);
-server.use("/mongoStore/category", categoryRouter);
-server.use("/mongoStore/product", productRouter);
-server.use("/mongoStore/cart", cartRouter);
+server.use("/user", userRouter);
+server.use("/category", categoryRouter);
+server.use("/product", productRouter);
+server.use("/cart", cartRouter);
 
 // for security
 server.use(helmet());
