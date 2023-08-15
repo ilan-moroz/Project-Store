@@ -11,10 +11,10 @@ const Cart = () => {
   // Local state for cart total
   const [total, setTotal] = React.useState(0);
 
-  // Utilize the custom hook to get cartId and cartItems from the Redux store
+  // custom hook to get cartId and cartItems from the Redux store
   const { cartId, cartItems } = useCartState();
 
-  // Utilize the custom hook to get functions for interacting with the API
+  // custom hook to get functions for interacting with the API
   const { getAllCartItems, handleDeleteCart } = useCartAPI(cartId);
 
   // Fetch cart items when the cartId changes
