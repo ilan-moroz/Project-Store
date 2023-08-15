@@ -37,15 +37,18 @@ const Cart = () => {
     <div className="cartItems">
       <div>
         <h2 className="marginLeft">Your Cart</h2>
+        {/* show when cart is empty */}
         {cartItems.length === 0 && (
           <div className="cartItems__empty marginLeft">Your cart is empty</div>
         )}
+        {/* map all cart items to display in the cart */}
         {cartItems.map((item: CartItem) => (
           <ItemCart item={item} key={item._id} />
         ))}
       </div>
       <div className="cartItems__total marginLeft">
         <h3>Total: &#8362; {total.toFixed(2)}</h3>
+        {/* show only where there is items in the cart */}
         {cartItems.length !== 0 && (
           <Button
             endIcon={<DeleteForeverIcon />}
