@@ -14,7 +14,9 @@ const Products = () => {
 
   return (
     <div>
-      <CategoryNavbar />
+      <div className="productsNavbar">
+        <CategoryNavbar />
+      </div>
       <div className="productCards">
         {/* map all the products and display in card */}
         {products.map((product: Product) => (
