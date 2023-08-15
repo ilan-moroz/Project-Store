@@ -47,7 +47,7 @@ const Cart = () => {
   const handleDeleteCart = async () => {
     try {
       const response = await deleteAllCartItems(cartId);
-      dispatch(deleteAllCartItemsAction());
+      if (response) dispatch(deleteAllCartItemsAction());
       console.log(response);
     } catch (err) {
       console.error(err);
