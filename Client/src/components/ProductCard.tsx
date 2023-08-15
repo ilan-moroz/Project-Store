@@ -23,6 +23,7 @@ type cardProps = {
 
 // card template for displaying products
 const ProductCard: React.FC<cardProps> = ({ product }) => {
+  // Local state for managing quantity of product
   const [quantity, setQuantity] = React.useState(1);
 
   // get the cartId and cartItems from a custom hook
@@ -33,11 +34,12 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
   // handle add item to cart
   const addToCart = async (cartItem: CartItem) => {
     try {
+      // Check if the item already exists in the cart
       const existingItem = cartItems.find(
         item => item.productId === cartItem.productId
       );
       const response = await addItemToCart(cartItem.cartId, cartItem);
-
+      // If item exists, dispatch update action, else dispatch add action
       if (existingItem) {
         dispatch(updateCartItemAction(response));
       } else {
