@@ -67,14 +67,16 @@ const Cart = () => {
       </div>
       <div className="cartItems__total marginLeft">
         <h3>Total: &#8362; {total.toFixed(2)}</h3>
-        <Button
-          endIcon={<DeleteForeverIcon />}
-          size="small"
-          color="error"
-          onClick={handleDeleteCart}
-        >
-          Clear Cart
-        </Button>
+        {cartItems.length !== 0 && (
+          <Button
+            endIcon={<DeleteForeverIcon />}
+            size="small"
+            color="error"
+            onClick={handleDeleteCart}
+          >
+            Clear Cart
+          </Button>
+        )}
       </div>
     </div>
   );
