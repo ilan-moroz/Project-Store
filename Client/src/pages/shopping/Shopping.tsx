@@ -1,13 +1,12 @@
-import { useSelector } from "react-redux";
 import Cart from "../../components/Cart/Cart";
 import Products from "../../components/Products/Products";
 import "./shopping.css";
 import { Resizable } from "re-resizable";
-import { RootState } from "../../redux/Store";
 import AddProduct from "../../components/AddProduct";
+import { useUserState } from "../../hooks/useUserState";
 
 const Shopping = () => {
-  const user = useSelector((state: RootState) => state.user.user);
+  const { user } = useUserState();
 
   return (
     <div className="shopping">

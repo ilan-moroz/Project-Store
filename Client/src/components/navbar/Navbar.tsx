@@ -3,16 +3,16 @@ import logo from "../../assets/images/logo.png";
 import "./navbar.css";
 import MoodIcon from "@mui/icons-material/Mood";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/Store";
+import { useDispatch } from "react-redux";
 import { setLogoutAction } from "../../redux/userReducer";
 import React from "react";
 import SearchInput from "../SearchInput";
 import { removeCartAction } from "../../redux/cartReducer";
+import { useUserState } from "../../hooks/useUserState";
 
 const Navbar = () => {
-  // Accessing the user object from the Redux store
-  const user = useSelector((state: RootState) => state.user.user);
+  // custom hook to get user from the Redux store
+  const { user } = useUserState();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

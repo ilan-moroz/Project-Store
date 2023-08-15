@@ -9,16 +9,16 @@ import FormInput from "../FormInput";
 import { login } from "../../api/userApi";
 import { toast } from "react-toastify";
 import { setLoginAction } from "../../redux/userReducer";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/Store";
+import { useDispatch } from "react-redux";
 import StartShopping from "../StartShopping";
 import Button from "../Button/Button";
 import { checkShoppingCart } from "../../api/cartApi";
 import { setCartAction } from "../../redux/cartReducer";
+import { useUserState } from "../../hooks/useUserState";
 
 export const Login = () => {
-  // Accessing the user object from the Redux store
-  const user = useSelector((state: RootState) => state.user.user);
+  // custom hook to get user from the Redux store
+  const { user } = useUserState();
 
   const {
     register,
