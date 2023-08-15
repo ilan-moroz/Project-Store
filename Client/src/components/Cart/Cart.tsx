@@ -19,10 +19,8 @@ const Cart = () => {
 
   // Fetch cart items when the cartId changes
   React.useEffect(() => {
-    console.log("fetching cart items");
     getAllCartItems(cartId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cartId]);
+  }, [cartId, getAllCartItems]);
 
   // Recalculate total whenever cart items change
   React.useEffect(() => {
