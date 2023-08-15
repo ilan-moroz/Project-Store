@@ -72,7 +72,7 @@ const AddProduct = () => {
         <FormInput
           register={register("imagePath")}
           name="imagePath"
-          label=""
+          label="Product image"
           type="file"
           error={!!errors.imagePath}
           helperText={errors.imagePath?.message}

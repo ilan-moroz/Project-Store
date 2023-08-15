@@ -1,4 +1,4 @@
-import { TextField, MenuItem } from "@mui/material";
+import { TextField, MenuItem, Box } from "@mui/material";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { capitalizeWords } from "../utils/capitalizeWords";
 
@@ -49,6 +49,24 @@ const FormInput: React.FC<FormInputProps> = ({
           </MenuItem>
         ))}
       </TextField>
+    );
+  }
+
+  // If it's a file type input
+  if (type === "file") {
+    return (
+      <Box sx={{ marginBottom: "1.5rem" }}>
+        <label htmlFor={name}>{label}</label>
+        <TextField
+          {...register}
+          type="file"
+          name={name}
+          variant="outlined"
+          fullWidth
+          error={error}
+          helperText={helperText}
+        />
+      </Box>
     );
   }
 
