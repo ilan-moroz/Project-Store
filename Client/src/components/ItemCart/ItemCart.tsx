@@ -67,6 +67,10 @@ const ItemCart: React.FC<cardProps> = ({ item }) => {
             startIcon={<EditIcon />}
             size="small"
             color="success"
+            sx={{
+              padding: "2px 5px",
+              fontSize: "0.7rem",
+            }}
           >
             Update
           </Button>

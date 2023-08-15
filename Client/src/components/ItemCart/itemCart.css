@@ -40,6 +40,7 @@
   top: 0;
   right: 0;
   transition: all 0.5s;
+  margin-top: 0.3rem;
 }
 
 .cartItem:hover .cartItem__delete {
