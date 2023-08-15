@@ -7,8 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import NumberInput from "./NumberInput";
 import { addItemToCart } from "../api/cartApi";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../redux/Store";
+import { useDispatch } from "react-redux";
 import { CartItem } from "../models/CartItem";
 import { Product } from "../models/Product";
 import { Box } from "@mui/material";
@@ -16,6 +15,7 @@ import {
   addItemToCartAction,
   updateCartItemAction,
 } from "../redux/cartReducer";
+import { useCartState } from "../hooks/useCartState";
 
 type cardProps = {
   product: Product;
@@ -25,14 +25,10 @@ type cardProps = {
 const ProductCard: React.FC<cardProps> = ({ product }) => {
   const [quantity, setQuantity] = React.useState(1);
 
-  const cart = useSelector((state: RootState) => state.shoppingCart.cart);
-  const cartId = cart?._id || "";
+  // get the cartId and cartItems from a custom hook
+  const { cartId, cartItems } = useCartState();
 
   const dispatch = useDispatch();
-
-  const cartItems = useSelector(
-    (state: RootState) => state.shoppingCart.cartItems
-  );
 
   // handle add item to cart
   const addToCart = async (cartItem: CartItem) => {
