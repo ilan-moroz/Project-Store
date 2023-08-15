@@ -6,8 +6,11 @@ import NumberInput from "../NumberInput";
 import React from "react";
 import { Button, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { deleteCartItem } from "../../api/cartApi";
-import { deleteItemFromCartAction } from "../../redux/cartReducer";
+import { deleteCartItem, updateCartItem } from "../../api/cartApi";
+import {
+  deleteItemFromCartAction,
+  updateCartItemAction,
+} from "../../redux/cartReducer";
 import EditIcon from "@mui/icons-material/Edit";
 
 type cardProps = {
@@ -45,6 +48,20 @@ const ItemCart: React.FC<cardProps> = ({ item }) => {
     }
   };
 
+  const handleUpdateItem = async (item: CartItem) => {
+    try {
+      const response = await updateCartItem({
+        ...item,
+        quantity: quantity,
+        generalPrice: quantity * product!.price,
+      });
+      if (response) dispatch(updateCartItemAction(response));
+      setShowButton(false);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div className="cartItem">
       <div className="cartItem__imageName">
@@ -71,6 +88,7 @@ const ItemCart: React.FC<cardProps> = ({ item }) => {
               padding: "2px 5px",
               fontSize: "0.7rem",
             }}
+            onClick={() => handleUpdateItem(item)}
           >
             Update
           </Button>

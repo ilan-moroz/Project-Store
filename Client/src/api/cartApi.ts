@@ -1,3 +1,4 @@
+import { CartItem } from "../models/CartItem";
 import api from "./apiConfig";
 
 // Function to check if user has an cart and if no create it
@@ -30,11 +31,22 @@ export const getCartItems = async (cartId: string) => {
   }
 };
 
+// delete item from cart
 export const deleteCartItem = async (cartId: string, productId: String) => {
   try {
     const response = await api.delete(
       `cart/deleteCartItem/${cartId}/${productId}`
     );
+    if (response.status === 200) return response.data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+// update cart item
+export const updateCartItem = async (item: CartItem) => {
+  try {
+    const response = await api.put(`cart/updateCartItem`, item);
     if (response.status === 200) return response.data;
   } catch (err) {
     throw err;
