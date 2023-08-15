@@ -8,6 +8,8 @@
 
 .category {
   padding: 0 1rem;
+  list-style: none;
+  text-decoration: none;
 }
 
 .category:not(:last-child) {
@@ -15,7 +17,15 @@
 }
 
 .category__link {
-  text-decoration: none;
   text-transform: uppercase;
   white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.category__link:hover {
+  color: white;
+  background-color: rgb(103, 32, 180);
+  box-shadow: 0 1rem 2rem rgba(255, 255, 255, 0.4);
+  transform: rotate(5deg) scale(1.3);
 }

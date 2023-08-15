@@ -5,6 +5,7 @@ import CardComp from "../ProductCard";
 import CategoryNavbar from "../CategoryNavbar/CategoryNavbar";
 import "./products.css";
 import { RootState } from "../../redux/Store";
+import React from "react";
 
 const Products = () => {
   // get all products from backend using custom hook
@@ -12,14 +13,26 @@ const Products = () => {
   // display all products from the state
   const products = useSelector((state: RootState) => state.products.products);
 
+  const [selectedCategory, setSelectedCategory] = React.useState<string | null>(
+    null
+  );
+
+  const handleCategorySelect = (categoryId: string) => {
+    setSelectedCategory(categoryId);
+  };
+
+  const filteredProducts = selectedCategory
+    ? products.filter(product => product.categoryId === selectedCategory)
+    : products;
+
   return (
     <div>
       <div className="productsNavbar">
-        <CategoryNavbar />
+        <CategoryNavbar onSelectCategory={handleCategorySelect} />
       </div>
       <div className="productCards">
         {/* map all the products and display in card */}
-        {products.map((product: Product) => (
+        {filteredProducts.map((product: Product) => (
           <CardComp product={product} key={product._id} />
         ))}
       </div>
