@@ -6,7 +6,7 @@ import {
 } from "../redux/cartReducer";
 import { useCallback } from "react";
 
-export const useCartAPI = (cartId: string) => {
+export const useCartApi = (cartId: string) => {
   const dispatch = useDispatch();
 
   // Function to fetch all items in the cart from the API

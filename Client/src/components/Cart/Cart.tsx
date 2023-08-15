@@ -5,7 +5,7 @@ import "./cart.css";
 import { Button } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useCartState } from "../../hooks/useCartState";
-import { useCartAPI } from "../../hooks/useCartApi";
+import { useCartApi } from "../../hooks/useCartApi";
 
 const Cart = () => {
   // Local state for cart total
@@ -15,7 +15,7 @@ const Cart = () => {
   const { cartId, cartItems } = useCartState();
 
   // custom hook to get functions for interacting with the API
-  const { getAllCartItems, handleDeleteCart } = useCartAPI(cartId);
+  const { getAllCartItems, handleDeleteCart } = useCartApi(cartId);
 
   // Fetch cart items when the cartId changes
   React.useEffect(() => {

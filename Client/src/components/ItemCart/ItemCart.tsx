@@ -1,73 +1,49 @@
-import { useDispatch, useSelector } from "react-redux";
 import { CartItem } from "../../models/CartItem";
-import { RootState } from "../../redux/Store";
 import "./itemCart.css";
 import NumberInput from "../NumberInput";
 import React from "react";
 import { Button, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { deleteCartItem, updateCartItem } from "../../api/cartApi";
-import {
-  deleteItemFromCartAction,
-  updateCartItemAction,
-} from "../../redux/cartReducer";
 import EditIcon from "@mui/icons-material/Edit";
+import { useProductState } from "../../hooks/useProductState";
+import { useCartItemApi } from "../../hooks/useCartItemApi";
 
 type cardProps = {
   item: CartItem;
 };
 
 const ItemCart: React.FC<cardProps> = ({ item }) => {
-  const products = useSelector((state: RootState) => state.products.products);
+  // custom hook to get products from the Redux store
+  const { products } = useProductState();
+  // Find the product associated with this cart item
   const product = products.find(product => product._id === item.productId);
 
+  // get the functions from custom hook
+  const { handleDeleteCartItem, handleUpdateItem } = useCartItemApi();
+
+  // Local state to track quantity and whether to show the update button
   const [quantity, setQuantity] = React.useState(item.quantity);
   const [showButton, setShowButton] = React.useState(false);
 
+  // Toggle the visibility of the update button based on quantity change
   const handleQuantityChange = (newValue: number) => {
-    if (newValue !== item.quantity) {
-      setShowButton(true);
-    } else {
-      setShowButton(false);
-    }
+    setShowButton(newValue !== item.quantity);
   };
-
-  const dispatch = useDispatch();
 
   React.useEffect(() => {
     setQuantity(item.quantity);
   }, [item.quantity]);
-
-  const handleDelete = async () => {
-    try {
-      const response = await deleteCartItem(item.cartId, item.productId);
-      if (response)
-        dispatch(deleteItemFromCartAction(response.cartId, response.productId));
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const handleUpdateItem = async (item: CartItem) => {
-    try {
-      const response = await updateCartItem({
-        ...item,
-        quantity: quantity,
-        generalPrice: quantity * product!.price,
-      });
-      if (response) dispatch(updateCartItemAction(response));
-      setShowButton(false);
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   return (
     <div className="cartItem">
       <div className="cartItem__imageName">
         <h3>{product?.productName}</h3>
         <div className="cartItem__delete">
-          <IconButton aria-label="delete" color="error" onClick={handleDelete}>
+          <IconButton
+            aria-label="delete"
+            color="error"
+            onClick={() => handleDeleteCartItem(item.cartId, item.productId)}
+          >
             <DeleteIcon />
           </IconButton>
         </div>
@@ -88,7 +64,7 @@ const ItemCart: React.FC<cardProps> = ({ item }) => {
               padding: "2px 5px",
               fontSize: "0.7rem",
             }}
-            onClick={() => handleUpdateItem(item)}
+            onClick={() => handleUpdateItem(item, quantity, product!.price)}
           >
             Update
           </Button>
