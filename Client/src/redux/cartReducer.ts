@@ -1,11 +1,13 @@
 import { CartItem } from "../models/CartItem";
 import { ShoppingCart } from "../models/ShoppingCart";
 
+// Initial state
 export interface CartState {
   cart: ShoppingCart | null;
   cartItems: CartItem[];
 }
 
+// all possible action types
 export enum CartActionType {
   setCart = "setCart",
   removeCart = "removeCart",
@@ -16,11 +18,13 @@ export enum CartActionType {
   deleteAllCartItems = "deleteAllCartItems",
 }
 
+// Defining the action structure
 export interface CartAction {
   type: CartActionType;
   payload?: any;
 }
 
+// Functions to dispatch actions
 export const setCartAction = (cart: ShoppingCart): CartAction => {
   return { type: CartActionType.setCart, payload: cart };
 };
@@ -55,6 +59,7 @@ export const deleteItemFromCartAction = (
   };
 };
 
+// Reducer function to handle state changes based on actions
 export const cartReducer = (
   currentState: CartState = {
     cart: null,
