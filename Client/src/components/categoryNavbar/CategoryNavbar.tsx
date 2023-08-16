@@ -2,6 +2,12 @@ import React from "react";
 import { useCategory } from "../../hooks/useCategory";
 import { Category } from "../../models/Category";
 import "./categoryNavbar.css";
+import { useCategoryState } from "../../hooks/useCategoryState";
+import {
+  resetSelectedCategoryAction,
+  setSelectedCategoryAction,
+} from "../../redux/categoryReducer";
+import { useDispatch } from "react-redux";
 
 type CategoryProps = {
   onSelectCategory: (Category: string) => void;
@@ -12,9 +18,9 @@ const CategoryNavbar: React.FC<CategoryProps> = ({ onSelectCategory }) => {
   const catagories = useCategory();
 
   // State to track the currently active category
-  const [activeCategory, setActiveCategory] = React.useState<string | null>(
-    null
-  );
+  const { selectedCategory } = useCategoryState();
+
+  const dispatch = useDispatch();
 
   return (
     <div className="categoryNavbar">
@@ -23,17 +29,17 @@ const CategoryNavbar: React.FC<CategoryProps> = ({ onSelectCategory }) => {
         <ul
           // Apply 'active' class if the category is currently active
           className={`category ${
-            category._id === activeCategory ? "active" : ""
+            category._id === selectedCategory ? "active" : ""
           }`}
           key={category._id}
           onClick={() => {
             // If clicked category is already active, deactivate it
-            if (activeCategory === category._id) {
-              setActiveCategory(null);
+            if (selectedCategory === category._id) {
+              dispatch(resetSelectedCategoryAction());
               onSelectCategory("");
             } else {
               // Otherwise, activate the clicked category
-              setActiveCategory(category._id);
+              dispatch(setSelectedCategoryAction(category._id));
               onSelectCategory(category._id);
             }
           }}
