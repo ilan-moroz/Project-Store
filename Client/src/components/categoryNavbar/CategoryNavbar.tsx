@@ -8,6 +8,7 @@ import {
   setSelectedCategoryAction,
 } from "../../redux/categoryReducer";
 import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 type CategoryProps = {
   onSelectCategory: (Category: string) => void;
@@ -34,6 +35,15 @@ const CategoryNavbar: React.FC<CategoryProps> = ({ onSelectCategory }) => {
       onSelectCategory(category._id);
     }
   };
+
+  const location = useLocation();
+
+  // reset selected category when location changes
+  React.useEffect(() => {
+    dispatch(resetSelectedCategoryAction());
+    onSelectCategory("");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
 
   return (
     <div className="categoryNavbar">
