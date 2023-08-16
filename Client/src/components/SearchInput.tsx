@@ -18,6 +18,9 @@ export default function SearchInput() {
   const { selectedCategory } = useCategoryState();
   const { products } = useProductState();
 
+  // Use a ref to track if we've dispatched products on category change
+  const hasDispatchedOnceRef = React.useRef(false);
+
   const dispatch = useDispatch();
 
   // Function to handle the search functionality
@@ -34,18 +37,23 @@ export default function SearchInput() {
         // Reset the selected category in the store
         dispatch(resetSelectedCategoryAction());
       }
+      // Reset the ref after a search, allowing the category effect to run again if needed
+      hasDispatchedOnceRef.current = false;
     } catch (err: any) {
       toast.warning(err.response.data.message);
       console.error(err);
     }
   };
 
-  // Effect to run when the selected category changes
+  // Effect hook to handle product dispatch when a category is selected
   React.useEffect(() => {
-    if (selectedCategory) {
-      // When a category is selected, display its products and clear the search input
+    if (selectedCategory && !hasDispatchedOnceRef.current) {
+      // When a category is selected for the first time, dispatch its products and clear the search input
       dispatch(searchProductsAction(products));
       setSearchString("");
+      console.log("asd");
+      // Update the ref to indicate that we've dispatched once
+      hasDispatchedOnceRef.current = true;
     }
   }, [selectedCategory, dispatch, products]);
 
