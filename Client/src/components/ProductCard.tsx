@@ -52,7 +52,16 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
   };
 
   return (
-    <Card sx={{ width: "12rem", textAlign: "center" }} key={product._id}>
+    <Card
+      sx={{
+        width: "12rem",
+        textAlign: "center",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+      }}
+      key={product._id}
+    >
       <CardMedia
         sx={{ height: 100, backgroundSize: "contain" }}
         image={`http://localhost:4000/${product.imagePath}`}
