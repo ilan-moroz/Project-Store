@@ -8,10 +8,15 @@ import { useDispatch } from "react-redux";
 import { searchProductsAction } from "../redux/productReducer";
 import { toast } from "react-toastify";
 import { resetSelectedCategoryAction } from "../redux/categoryReducer";
+import { useCategoryState } from "../hooks/useCategoryState";
+import { useProductState } from "../hooks/useProductState";
 
 export default function SearchInput() {
   // State to manage the search string entered by the user
   const [searchString, setSearchString] = React.useState("");
+  // Fetch the currently selected category and products list using custom hooks
+  const { selectedCategory } = useCategoryState();
+  const { products } = useProductState();
 
   const dispatch = useDispatch();
 
@@ -21,10 +26,12 @@ export default function SearchInput() {
       event.preventDefault(); // Prevent default form submission
     }
     try {
-      // Call the API to get the products based on the search string
+      // Fetch products based on the user's search string
       const response = await searchProducts(searchString);
       if (response) {
+        // Dispatch the found products to the Redux store
         dispatch(searchProductsAction(response));
+        // Reset the selected category in the store
         dispatch(resetSelectedCategoryAction());
       }
     } catch (err: any) {
@@ -32,6 +39,15 @@ export default function SearchInput() {
       console.error(err);
     }
   };
+
+  // Effect to run when the selected category changes
+  React.useEffect(() => {
+    if (selectedCategory) {
+      // When a category is selected, display its products and clear the search input
+      dispatch(searchProductsAction(products));
+      setSearchString("");
+    }
+  }, [selectedCategory, dispatch, products]);
 
   return (
     <Paper
@@ -50,6 +66,7 @@ export default function SearchInput() {
         placeholder="Search Products"
         inputProps={{ "aria-label": "Search Products" }}
         onChange={e => setSearchString(e.target.value)}
+        value={searchString}
       />
       <IconButton
         type="submit"
