@@ -23,8 +23,10 @@ export default function SearchInput() {
     try {
       // Call the API to get the products based on the search string
       const response = await searchProducts(searchString);
-      dispatch(searchProductsAction(response));
-      dispatch(resetSelectedCategoryAction());
+      if (response) {
+        dispatch(searchProductsAction(response));
+        dispatch(resetSelectedCategoryAction());
+      }
     } catch (err: any) {
       toast.warning(err.response.data.message);
       console.error(err);
