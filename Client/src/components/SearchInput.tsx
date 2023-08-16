@@ -7,6 +7,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { searchProductsAction } from "../redux/productReducer";
 import { toast } from "react-toastify";
+import { resetSelectedCategoryAction } from "../redux/categoryReducer";
 
 export default function SearchInput() {
   // State to manage the search string entered by the user
@@ -23,6 +24,7 @@ export default function SearchInput() {
       // Call the API to get the products based on the search string
       const response = await searchProducts(searchString);
       dispatch(searchProductsAction(response));
+      dispatch(resetSelectedCategoryAction());
     } catch (err: any) {
       toast.warning(err.response.data.message);
       console.error(err);

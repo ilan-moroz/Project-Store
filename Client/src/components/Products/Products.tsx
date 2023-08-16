@@ -3,26 +3,29 @@ import { Product } from "../../models/Product";
 import CardComp from "../ProductCard";
 import CategoryNavbar from "../CategoryNavbar/CategoryNavbar";
 import "./products.css";
-import React from "react";
 import { useProductState } from "../../hooks/useProductState";
+import { useDispatch } from "react-redux";
+import { useCategoryState } from "../../hooks/useCategoryState";
+import {
+  resetSelectedCategoryAction,
+  setSelectedCategoryAction,
+} from "../../redux/categoryReducer";
 
 const Products = () => {
   // get all products from backend using custom hook
   useProduct();
-  // custom hook to get products from the Redux store
+  // custom hooks to get searchProducts and selectedCategory from the Redux store
   const { searchProducts } = useProductState();
+  const { selectedCategory } = useCategoryState();
 
-  // Local state to track the currently selected category for filtering
-  const [selectedCategory, setSelectedCategory] = React.useState<string | null>(
-    null
-  );
+  const dispatch = useDispatch();
 
   // Handler to toggle category selection for product filtering
   const handleCategorySelect = (categoryId: string) => {
     if (selectedCategory === categoryId) {
-      setSelectedCategory(null);
+      dispatch(resetSelectedCategoryAction());
     } else {
-      setSelectedCategory(categoryId);
+      dispatch(setSelectedCategoryAction(categoryId));
     }
   };
 

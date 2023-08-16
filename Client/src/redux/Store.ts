@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import { userReducer } from "./userReducer";
 import { productReducer } from "./productReducer";
 import { cartReducer } from "./cartReducer";
+import { categoryReducer } from "./categoryReducer";
 
 // This configuration allows the userReducer,cartReducer to be persisted in local storage
 const userPersistConfig = {
@@ -25,6 +26,7 @@ const reducers = {
   user: persistedUserReducer,
   products: productReducer,
   shoppingCart: persistedCartReducer,
+  category: categoryReducer,
 };
 
 // Configuring the Redux store
