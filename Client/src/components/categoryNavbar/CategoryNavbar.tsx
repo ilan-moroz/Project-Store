@@ -22,6 +22,19 @@ const CategoryNavbar: React.FC<CategoryProps> = ({ onSelectCategory }) => {
 
   const dispatch = useDispatch();
 
+  // handler for category selection
+  const handleSelectCategory = (category: Category) => {
+    // If clicked category is already active, deactivate it
+    if (selectedCategory === category._id) {
+      dispatch(resetSelectedCategoryAction());
+      onSelectCategory("");
+    } else {
+      // Otherwise, activate the clicked category
+      dispatch(setSelectedCategoryAction(category._id));
+      onSelectCategory(category._id);
+    }
+  };
+
   return (
     <div className="categoryNavbar">
       {/* map all categories to display */}
@@ -33,15 +46,7 @@ const CategoryNavbar: React.FC<CategoryProps> = ({ onSelectCategory }) => {
           }`}
           key={category._id}
           onClick={() => {
-            // If clicked category is already active, deactivate it
-            if (selectedCategory === category._id) {
-              dispatch(resetSelectedCategoryAction());
-              onSelectCategory("");
-            } else {
-              // Otherwise, activate the clicked category
-              dispatch(setSelectedCategoryAction(category._id));
-              onSelectCategory(category._id);
-            }
+            handleSelectCategory(category);
           }}
         >
           <li className="category__link purpleText">{category.categoryName}</li>
