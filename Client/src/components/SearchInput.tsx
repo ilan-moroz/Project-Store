@@ -5,7 +5,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import { searchProducts } from "../api/productApi";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { getAllProductsAction } from "../redux/productReducer";
+import { searchProductsAction } from "../redux/productReducer";
+import { toast } from "react-toastify";
 
 export default function SearchInput() {
   // State to manage the search string entered by the user
@@ -21,8 +22,9 @@ export default function SearchInput() {
     try {
       // Call the API to get the products based on the search string
       const response = await searchProducts(searchString);
-      // dispatch(getAllProductsAction(response));
-    } catch (err) {
+      dispatch(searchProductsAction(response));
+    } catch (err: any) {
+      toast.warning(err.response.data.message);
       console.error(err);
     }
   };
@@ -49,7 +51,6 @@ export default function SearchInput() {
         type="submit"
         sx={{ p: "10px", color: "rgb(103, 32, 180)" }}
         aria-label="search"
-        onClick={() => handleSearch()}
       >
         <SearchIcon />
       </IconButton>

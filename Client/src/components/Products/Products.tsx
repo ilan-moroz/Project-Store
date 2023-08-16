@@ -10,7 +10,7 @@ const Products = () => {
   // get all products from backend using custom hook
   useProduct();
   // custom hook to get products from the Redux store
-  const { products } = useProductState();
+  const { searchProducts } = useProductState();
 
   // Local state to track the currently selected category for filtering
   const [selectedCategory, setSelectedCategory] = React.useState<string | null>(
@@ -28,8 +28,8 @@ const Products = () => {
 
   // Filter products based on the selected category, or display all if no category is selected
   const filteredProducts = selectedCategory
-    ? products.filter(product => product.categoryId === selectedCategory)
-    : products;
+    ? searchProducts.filter(product => product.categoryId === selectedCategory)
+    : searchProducts;
 
   return (
     <div>
