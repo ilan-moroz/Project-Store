@@ -41,3 +41,16 @@ export const editProduct = async (req: Request, res: Response) => {};
 
 // Function to delete a product from the database
 export const deleteProduct = async (req: Request, res: Response) => {};
+
+// function to search for specific products
+export const searchProducts = async (req: Request, res: Response) => {
+  const { productName } = req.query;
+  try {
+    const searchedProducts = await ProductModel.find({
+      productName: { $regex: productName },
+    });
+    res.status(200).json(searchedProducts);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+};
