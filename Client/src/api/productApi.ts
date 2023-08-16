@@ -19,3 +19,15 @@ export const getProducts = async () => {
     throw err;
   }
 };
+
+// api request to get all products matching the search term
+export const searchProducts = async (searchString: string) => {
+  try {
+    const response = await api.get(
+      `product/searchProducts?productName=${searchString}`
+    );
+    if (response.status === 200) return response.data;
+  } catch (err) {
+    throw err;
+  }
+};

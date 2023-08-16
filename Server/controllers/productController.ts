@@ -45,10 +45,16 @@ export const deleteProduct = async (req: Request, res: Response) => {};
 // function to search for specific products
 export const searchProducts = async (req: Request, res: Response) => {
   const { productName } = req.query;
+
   try {
     const searchedProducts = await ProductModel.find({
-      productName: { $regex: productName },
+      productName: { $regex: productName, $options: "i" },
     });
+
+    if (searchedProducts.length === 0) {
+      return res.status(404).json({ message: "No products found." });
+    }
+
     res.status(200).json(searchedProducts);
   } catch (error: any) {
     res.status(500).json({ error: error.message });
