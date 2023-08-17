@@ -5,7 +5,7 @@ import { Resizable } from "re-resizable";
 import AddProduct from "../../components/AddProduct";
 import { useUserState } from "../../hooks/useUserState";
 import { useCartState } from "../../hooks/useCartState";
-import OrderForm from "../../components/OrderForm";
+import OrderForm from "../../components/OrderForm/OrderForm";
 
 const Shopping = () => {
   const { user } = useUserState();
