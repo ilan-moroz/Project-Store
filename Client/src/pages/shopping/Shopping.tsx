@@ -5,6 +5,7 @@ import { Resizable } from "re-resizable";
 import AddProduct from "../../components/AddProduct";
 import { useUserState } from "../../hooks/useUserState";
 import { useCartState } from "../../hooks/useCartState";
+import OrderForm from "../../components/OrderForm";
 
 const Shopping = () => {
   const { user } = useUserState();
@@ -26,7 +27,7 @@ const Shopping = () => {
         </div>
       </Resizable>
       <div className="shopping__main">
-        <Products />
+        {finishedOrder ? <Products /> : <OrderForm />}
       </div>
     </div>
   );
