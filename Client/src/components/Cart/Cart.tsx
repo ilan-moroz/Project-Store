@@ -65,10 +65,11 @@ const Cart = () => {
               "&:hover": {
                 backgroundColor: "rgb(130, 93, 242)",
               },
+              marginRight: "0.3rem",
             }}
             onClick={handleFinishOrder}
           >
-            Order
+            {!finishedOrder ? "Order" : "Back To Shooping"}
           </Button>
         )}
         {/* show only where there is items in the cart */}
