@@ -47,7 +47,17 @@ const Cart = () => {
       </div>
       <div className="cartItems__total marginLeft">
         <h3>Total: &#8362; {total.toFixed(2)}</h3>
-        <Button variant="contained" endIcon={<ShoppingCartIcon />} size="small">
+        <Button
+          variant="contained"
+          endIcon={<ShoppingCartIcon />}
+          size="small"
+          sx={{
+            backgroundColor: "rgb(103, 32, 180)",
+            "&:hover": {
+              backgroundColor: "rgb(130, 93, 242)",
+            },
+          }}
+        >
           Place Order
         </Button>
         {/* show only where there is items in the cart */}
