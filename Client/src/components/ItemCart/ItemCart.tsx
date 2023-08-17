@@ -81,13 +81,17 @@ const ItemCart: React.FC<cardProps> = ({ item }) => {
       )}
       <div className="cartItem__price">
         <p> Price: &#8362; {product?.price} </p>
-        <div className="numberInputWrapper">
-          <NumberInput
-            onValueChange={setQuantity}
-            quantity={quantity}
-            onQuantityChange={handleQuantityChange}
-          />
-        </div>
+        {!finishedOrder ? (
+          <div className="numberInputWrapper">
+            <NumberInput
+              onValueChange={setQuantity}
+              quantity={quantity}
+              onQuantityChange={handleQuantityChange}
+            />
+          </div>
+        ) : (
+          <div>Amount: {item.quantity}</div>
+        )}
         <p> Total Price: &#8362; {item.generalPrice.toFixed(2)}</p>
       </div>
     </div>
