@@ -58,7 +58,7 @@ const Cart = () => {
             },
           }}
         >
-          Place Order
+          Order
         </Button>
         {/* show only where there is items in the cart */}
         {cartItems.length !== 0 && (
