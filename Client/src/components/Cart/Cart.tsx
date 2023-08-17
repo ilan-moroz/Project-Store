@@ -2,10 +2,11 @@ import React from "react";
 import ItemCart from "../ItemCart/ItemCart";
 import { CartItem } from "../../models/CartItem";
 import "./cart.css";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useCartState } from "../../hooks/useCartState";
 import { useCartApi } from "../../hooks/useCartApi";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const Cart = () => {
   // Local state for cart total
@@ -46,6 +47,9 @@ const Cart = () => {
       </div>
       <div className="cartItems__total marginLeft">
         <h3>Total: &#8362; {total.toFixed(2)}</h3>
+        <IconButton color="primary" aria-label="add to shopping cart">
+  <ShoppingCartIcon />
+</IconButton>
         {/* show only where there is items in the cart */}
         {cartItems.length !== 0 && (
           <Button
