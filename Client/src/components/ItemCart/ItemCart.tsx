@@ -59,7 +59,7 @@ const ItemCart: React.FC<cardProps> = ({ item }) => {
           className="cartItem__image"
         />
       </div>
-      {showButton && (
+      {showButton && !finishedOrder && (
         <div className="updateButton">
           <Button
             variant="outlined"
@@ -70,7 +70,10 @@ const ItemCart: React.FC<cardProps> = ({ item }) => {
               padding: "2px 5px",
               fontSize: "0.7rem",
             }}
-            onClick={() => handleUpdateItem(item, quantity, product!.price)}
+            onClick={() => {
+              handleUpdateItem(item, quantity, product!.price);
+              setShowButton(false);
+            }}
           >
             Update
           </Button>
