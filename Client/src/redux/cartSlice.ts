@@ -6,11 +6,13 @@ import { ShoppingCart } from "../models/ShoppingCart";
 interface CartState {
   cart: ShoppingCart | null;
   cartItems: CartItem[];
+  finishedOrder: boolean;
 }
 
 const initialState: CartState = {
   cart: null,
   cartItems: [],
+  finishedOrder: false,
 };
 
 const cartSlice = createSlice({
@@ -49,6 +51,9 @@ const cartSlice = createSlice({
     },
     deleteAllCartItems: state => {
       state.cartItems = [];
+    },
+    setFinishedOrder: state => {
+      state.finishedOrder = true;
     },
   },
 });
