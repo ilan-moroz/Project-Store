@@ -2,6 +2,7 @@ import { IconButton, TextField } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import React from "react";
+import { useCartState } from "../hooks/useCartState";
 
 type NumberInputProps = {
   quantity: number;
@@ -14,6 +15,8 @@ const NumberInput: React.FC<NumberInputProps> = ({
   quantity,
   onQuantityChange,
 }) => {
+  // custom hook to get finishedOrder state from the Redux store
+  const { finishedOrder } = useCartState();
   // Handler to increase the quantity value
   const handleIncrease = () => {
     const newValue = quantity < 99 ? quantity + 1 : quantity;
@@ -30,13 +33,15 @@ const NumberInput: React.FC<NumberInputProps> = ({
 
   return (
     <div className="numberInput">
-      <IconButton
-        sx={{ color: "rgb(70,23,155)" }}
-        aria-label="decrease product"
-        onClick={handleDecrease}
-      >
-        <RemoveIcon />
-      </IconButton>
+      {!finishedOrder && (
+        <IconButton
+          sx={{ color: "rgb(70,23,155)" }}
+          aria-label="decrease product"
+          onClick={handleDecrease}
+        >
+          <RemoveIcon />
+        </IconButton>
+      )}
       <TextField
         id="productQuantity"
         type="number"
@@ -57,13 +62,15 @@ const NumberInput: React.FC<NumberInputProps> = ({
           },
         }}
       />
-      <IconButton
-        sx={{ color: "rgb(70,23,155)" }}
-        aria-label="increase product"
-        onClick={handleIncrease}
-      >
-        <AddIcon />
-      </IconButton>
+      {!finishedOrder && (
+        <IconButton
+          sx={{ color: "rgb(70,23,155)" }}
+          aria-label="increase product"
+          onClick={handleIncrease}
+        >
+          <AddIcon />
+        </IconButton>
+      )}
     </div>
   );
 };

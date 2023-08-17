@@ -7,6 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { useProductState } from "../../hooks/useProductState";
 import { useCartItemApi } from "../../hooks/useCartItemApi";
+import { useCartState } from "../../hooks/useCartState";
 
 type cardProps = {
   item: CartItem;
@@ -15,6 +16,9 @@ type cardProps = {
 const ItemCart: React.FC<cardProps> = ({ item }) => {
   // custom hook to get products from the Redux store
   const { products } = useProductState();
+  // custom hook to get finishedOrder state from the Redux store
+  const { finishedOrder } = useCartState();
+
   // Find the product associated with this cart item
   const product = products.find(product => product._id === item.productId);
 
@@ -38,15 +42,17 @@ const ItemCart: React.FC<cardProps> = ({ item }) => {
     <div className="cartItem">
       <div className="cartItem__imageName">
         <h3>{product?.productName}</h3>
-        <div className="cartItem__delete">
-          <IconButton
-            aria-label="delete"
-            color="error"
-            onClick={() => handleDeleteCartItem(item.cartId, item.productId)}
-          >
-            <DeleteIcon />
-          </IconButton>
-        </div>
+        {!finishedOrder && (
+          <div className="cartItem__delete">
+            <IconButton
+              aria-label="delete"
+              color="error"
+              onClick={() => handleDeleteCartItem(item.cartId, item.productId)}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </div>
+        )}
         <img
           src={`http://localhost:4000/${product?.imagePath}`}
           alt={product?.productName}

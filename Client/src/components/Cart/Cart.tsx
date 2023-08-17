@@ -15,7 +15,7 @@ const Cart = () => {
   const [total, setTotal] = React.useState(0);
 
   // custom hook to get cartId and cartItems from the Redux store
-  const { cartId, cartItems } = useCartState();
+  const { cartId, cartItems, finishedOrder } = useCartState();
 
   // custom hook to get functions for interacting with the API
   const { getAllCartItems, handleDeleteCart } = useCartApi(cartId);
@@ -70,7 +70,7 @@ const Cart = () => {
           Order
         </Button>
         {/* show only where there is items in the cart */}
-        {cartItems.length !== 0 && (
+        {cartItems.length !== 0 && !finishedOrder && (
           <Button
             endIcon={<DeleteForeverIcon />}
             size="small"

@@ -27,7 +27,7 @@ const Shopping = () => {
         </div>
       </Resizable>
       <div className="shopping__main">
-        {finishedOrder ? <Products /> : <OrderForm />}
+        {!finishedOrder ? <Products /> : <OrderForm />}
       </div>
     </div>
   );
