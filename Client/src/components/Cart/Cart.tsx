@@ -7,6 +7,8 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useCartState } from "../../hooks/useCartState";
 import { useCartApi } from "../../hooks/useCartApi";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useDispatch } from "react-redux";
+import { setFinishedOrder } from "../../redux/cartSlice";
 
 const Cart = () => {
   // Local state for cart total
@@ -17,6 +19,8 @@ const Cart = () => {
 
   // custom hook to get functions for interacting with the API
   const { getAllCartItems, handleDeleteCart } = useCartApi(cartId);
+
+  const dispatch = useDispatch();
 
   // Fetch cart items when the cartId changes
   React.useEffect(() => {
@@ -31,6 +35,10 @@ const Cart = () => {
     );
     setTotal(computedTotal);
   }, [cartItems]);
+
+  const handleFinishOrder = () => {
+    dispatch(setFinishedOrder());
+  };
 
   return (
     <div className="cartItems">
@@ -57,6 +65,7 @@ const Cart = () => {
               backgroundColor: "rgb(130, 93, 242)",
             },
           }}
+          onClick={handleFinishOrder}
         >
           Order
         </Button>

@@ -11,5 +11,10 @@ export const useCartState = () => {
     (state: RootState) => state.shoppingCart.cartItems
   );
 
-  return { cartId, cartItems };
+  // Get cartItems from the Redux store
+  const finishedOrder = useSelector(
+    (state: RootState) => state.shoppingCart.finishedOrder
+  );
+
+  return { cartId, cartItems, finishedOrder };
 };

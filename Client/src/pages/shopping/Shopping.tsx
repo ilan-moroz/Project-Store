@@ -4,9 +4,11 @@ import "./shopping.css";
 import { Resizable } from "re-resizable";
 import AddProduct from "../../components/AddProduct";
 import { useUserState } from "../../hooks/useUserState";
+import { useCartState } from "../../hooks/useCartState";
 
 const Shopping = () => {
   const { user } = useUserState();
+  const { finishedOrder } = useCartState();
 
   return (
     <div className="shopping">

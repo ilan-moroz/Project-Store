@@ -53,7 +53,7 @@ const cartSlice = createSlice({
       state.cartItems = [];
     },
     setFinishedOrder: state => {
-      state.finishedOrder = true;
+      state.finishedOrder = !state.finishedOrder;
     },
   },
 });
@@ -67,6 +67,7 @@ export const {
   updateCartItem,
   deleteItemFromCart,
   deleteAllCartItems,
+  setFinishedOrder,
 } = cartSlice.actions;
 
 // Exporting the reducer
