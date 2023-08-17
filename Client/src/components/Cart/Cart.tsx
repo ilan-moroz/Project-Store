@@ -40,6 +40,27 @@ const Cart = () => {
     dispatch(setFinishedOrder());
   };
 
+  const [searchQuery, setSearchQuery] = React.useState("");
+
+  React.useEffect(() => {
+    let timer: NodeJS.Timeout;
+    const handleKeyPress = (e: any) => {
+      setSearchQuery(prevQuery => prevQuery + e.key);
+      // Clear any existing timer before setting a new one
+      if (timer) {
+        clearTimeout(timer);
+      }
+      timer = setTimeout(() => {
+        setSearchQuery("");
+      }, 5000);
+    };
+    window.addEventListener("keypress", handleKeyPress);
+    return () => {
+      window.removeEventListener("keypress", handleKeyPress);
+      clearTimeout(timer); // Clear the timer when the component unmounts
+    };
+  }, []);
+
   return (
     <div className="cartItems">
       <div>
@@ -50,7 +71,7 @@ const Cart = () => {
         )}
         {/* map all cart items to display in the cart */}
         {cartItems.map((item: CartItem) => (
-          <ItemCart item={item} key={item._id} />
+          <ItemCart item={item} key={item._id} searchQuery={searchQuery} />
         ))}
       </div>
       <div className="cartItems__total marginLeft">

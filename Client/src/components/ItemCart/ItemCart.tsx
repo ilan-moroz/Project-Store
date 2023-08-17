@@ -11,9 +11,10 @@ import { useCartState } from "../../hooks/useCartState";
 
 type cardProps = {
   item: CartItem;
+  searchQuery: String;
 };
 
-const ItemCart: React.FC<cardProps> = ({ item }) => {
+const ItemCart: React.FC<cardProps> = ({ item, searchQuery }) => {
   // custom hook to get products from the Redux store
   const { products } = useProductState();
   // custom hook to get finishedOrder state from the Redux store
@@ -38,10 +39,23 @@ const ItemCart: React.FC<cardProps> = ({ item }) => {
     setQuantity(item.quantity);
   }, [item.quantity]);
 
+  const highlightedName = product?.productName
+    .split(new RegExp(`(${searchQuery})`, "gi"))
+    .map((str, i) => {
+      if (str.toLowerCase() === searchQuery.toLowerCase() && searchQuery) {
+        return (
+          <span key={i} style={{ backgroundColor: "yellow" }}>
+            {str}
+          </span>
+        );
+      }
+      return str;
+    });
+
   return (
     <div className="cartItem">
       <div className="cartItem__imageName">
-        <h3>{product?.productName}</h3>
+        <h3>{highlightedName}</h3>
         {!finishedOrder && (
           <div className="cartItem__delete">
             <IconButton
