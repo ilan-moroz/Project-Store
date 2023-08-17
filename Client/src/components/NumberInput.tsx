@@ -33,15 +33,13 @@ const NumberInput: React.FC<NumberInputProps> = ({
 
   return (
     <div className="numberInput">
-      {!finishedOrder && (
-        <IconButton
-          sx={{ color: "rgb(70,23,155)" }}
-          aria-label="decrease product"
-          onClick={handleDecrease}
-        >
-          <RemoveIcon />
-        </IconButton>
-      )}
+      <IconButton
+        sx={{ color: "rgb(70,23,155)" }}
+        aria-label="decrease product"
+        onClick={handleDecrease}
+      >
+        <RemoveIcon />
+      </IconButton>
       <TextField
         id="productQuantity"
         type="number"
@@ -62,15 +60,13 @@ const NumberInput: React.FC<NumberInputProps> = ({
           },
         }}
       />
-      {!finishedOrder && (
-        <IconButton
-          sx={{ color: "rgb(70,23,155)" }}
-          aria-label="increase product"
-          onClick={handleIncrease}
-        >
-          <AddIcon />
-        </IconButton>
-      )}
+      <IconButton
+        sx={{ color: "rgb(70,23,155)" }}
+        aria-label="increase product"
+        onClick={handleIncrease}
+      >
+        <AddIcon />
+      </IconButton>
     </div>
   );
 };
