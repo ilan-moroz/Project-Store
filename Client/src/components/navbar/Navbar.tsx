@@ -4,11 +4,11 @@ import "./navbar.css";
 import MoodIcon from "@mui/icons-material/Mood";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setLogoutAction } from "../../redux/userReducer";
+import { setLogout } from "../../redux/userSlice";
 import React from "react";
 import SearchInput from "../SearchInput";
-import { removeCartAction } from "../../redux/cartReducer";
 import { useUserState } from "../../hooks/useUserState";
+import { removeCart } from "../../redux/cartSlice";
 
 const Navbar = () => {
   // custom hook to get user from the Redux store
@@ -30,8 +30,8 @@ const Navbar = () => {
 
   // logout user
   const handleLogout = () => {
-    dispatch(setLogoutAction());
-    dispatch(removeCartAction());
+    dispatch(setLogout());
+    dispatch(removeCart());
     handleClose();
     navigate("/");
   };

@@ -1,7 +1,7 @@
 import React from "react";
 import { getProducts } from "../api/productApi";
 import { useDispatch } from "react-redux";
-import { getAllProductsAction } from "../redux/productReducer";
+import { getAllProducts } from "../redux/productSlice";
 
 // hook to get all products from database
 export const useProduct = () => {
@@ -13,13 +13,13 @@ export const useProduct = () => {
       try {
         const response = await getProducts();
         // dispatch the response to redux
-        dispatch(getAllProductsAction(response));
+        dispatch(getAllProducts(response));
         setProducts(response);
       } catch (err: any) {
         console.error(err);
       }
     };
     fetchData();
-  }, []);
+  }, [dispatch]);
   return products;
 };

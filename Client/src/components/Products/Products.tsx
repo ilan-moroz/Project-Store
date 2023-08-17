@@ -7,9 +7,9 @@ import { useProductState } from "../../hooks/useProductState";
 import { useDispatch } from "react-redux";
 import { useCategoryState } from "../../hooks/useCategoryState";
 import {
-  resetSelectedCategoryAction,
-  setSelectedCategoryAction,
-} from "../../redux/categoryReducer";
+  resetSelectedCategory,
+  setSelectedCategory,
+} from "../../redux/categorySlice";
 
 const Products = () => {
   // get all products from backend using custom hook
@@ -23,9 +23,9 @@ const Products = () => {
   // Handler to toggle category selection for product filtering
   const handleCategorySelect = (categoryId: string) => {
     if (selectedCategory === categoryId) {
-      dispatch(resetSelectedCategoryAction());
+      dispatch(resetSelectedCategory());
     } else {
-      dispatch(setSelectedCategoryAction(categoryId));
+      dispatch(setSelectedCategory(categoryId));
     }
   };
 

@@ -1,10 +1,8 @@
 import { useDispatch } from "react-redux";
-import { deleteCartItem, updateCartItem } from "../api/cartApi";
-import {
-  deleteItemFromCartAction,
-  updateCartItemAction,
-} from "../redux/cartReducer";
+import { deleteCartItem, updateCartItemApi } from "../api/cartApi";
+
 import { CartItem } from "../models/CartItem";
+import { deleteItemFromCart, updateCartItem } from "../redux/cartSlice";
 
 export const useCartItemApi = () => {
   const dispatch = useDispatch();
@@ -13,7 +11,12 @@ export const useCartItemApi = () => {
     try {
       const response = await deleteCartItem(cartId, productId);
       if (response)
-        dispatch(deleteItemFromCartAction(response.cartId, response.productId));
+        dispatch(
+          deleteItemFromCart({
+            cartId: response.cartId,
+            productId: response.productId,
+          })
+        );
     } catch (err) {
       console.error(err);
     }
@@ -25,12 +28,12 @@ export const useCartItemApi = () => {
     price: number
   ) => {
     try {
-      const response = await updateCartItem({
+      const response = await updateCartItemApi({
         ...item,
         quantity,
         generalPrice: quantity * price,
       });
-      if (response) dispatch(updateCartItemAction(response));
+      if (response) dispatch(updateCartItem(response));
     } catch (err) {
       console.error(err);
     }

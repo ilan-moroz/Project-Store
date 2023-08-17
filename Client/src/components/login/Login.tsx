@@ -8,13 +8,13 @@ import { LoginFormValues } from "../../types/LoginFormValues";
 import FormInput from "../FormInput";
 import { login } from "../../api/userApi";
 import { toast } from "react-toastify";
-import { setLoginAction } from "../../redux/userReducer";
+import { setLogin } from "../../redux/userSlice";
 import { useDispatch } from "react-redux";
 import StartShopping from "../StartShopping";
 import Button from "../Button/Button";
 import { checkShoppingCart } from "../../api/cartApi";
-import { setCartAction } from "../../redux/cartReducer";
 import { useUserState } from "../../hooks/useUserState";
+import { setCart } from "../../redux/cartSlice";
 
 export const Login = () => {
   // custom hook to get user from the Redux store
@@ -36,11 +36,11 @@ export const Login = () => {
       const response = await login(data);
       // If login is successful, update the Redux store with the user and token
       if (response) {
-        dispatch(setLoginAction(response.user, response.token));
+        dispatch(setLogin({ user: response.user, token: response.token }));
         // check for cart only for user
         if (response.user.role === "user") {
           const res = await checkShoppingCart(response.user._id);
-          if (res) dispatch(setCartAction(res));
+          if (res) dispatch(setCart(res));
           // if admin logged in navigate to shopping page
         } else navigate("/shopping");
         reset();

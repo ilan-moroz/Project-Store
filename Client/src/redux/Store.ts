@@ -1,10 +1,10 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { userReducer } from "./userReducer";
-import { productReducer } from "./productReducer";
-import { cartReducer } from "./cartReducer";
-import { categoryReducer } from "./categoryReducer";
+import cartSlice from "./cartSlice";
+import categorySlice from "./categorySlice";
+import userSlice from "./userSlice";
+import productSlice from "./productSlice";
 
 // This configuration allows the userReducer,cartReducer to be persisted in local storage
 const userPersistConfig = {
@@ -18,15 +18,15 @@ const cartPersistConfig = {
 };
 
 // This configuration allows the userReducer,cartReducer to be persisted in local storage
-const persistedUserReducer = persistReducer(userPersistConfig, userReducer);
-const persistedCartReducer = persistReducer(cartPersistConfig, cartReducer);
+const persistedUserReducer = persistReducer(userPersistConfig, userSlice);
+const persistedCartReducer = persistReducer(cartPersistConfig, cartSlice);
 
 // Combining all the reducers in the application
 const reducers = {
   user: persistedUserReducer,
-  products: productReducer,
+  products: productSlice,
   shoppingCart: persistedCartReducer,
-  category: categoryReducer,
+  category: categorySlice,
 };
 
 // Configuring the Redux store

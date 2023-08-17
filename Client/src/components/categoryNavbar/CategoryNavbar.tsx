@@ -3,12 +3,12 @@ import { useCategory } from "../../hooks/useCategory";
 import { Category } from "../../models/Category";
 import "./categoryNavbar.css";
 import { useCategoryState } from "../../hooks/useCategoryState";
-import {
-  resetSelectedCategoryAction,
-  setSelectedCategoryAction,
-} from "../../redux/categoryReducer";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
+import {
+  resetSelectedCategory,
+  setSelectedCategory,
+} from "../../redux/categorySlice";
 
 type CategoryProps = {
   onSelectCategory: (Category: string) => void;
@@ -27,11 +27,11 @@ const CategoryNavbar: React.FC<CategoryProps> = ({ onSelectCategory }) => {
   const handleSelectCategory = (category: Category) => {
     // If clicked category is already active, deactivate it
     if (selectedCategory === category._id) {
-      dispatch(resetSelectedCategoryAction());
+      dispatch(resetSelectedCategory());
       onSelectCategory("");
     } else {
       // Otherwise, activate the clicked category
-      dispatch(setSelectedCategoryAction(category._id));
+      dispatch(setSelectedCategory(category._id));
       onSelectCategory(category._id);
     }
   };
@@ -40,7 +40,7 @@ const CategoryNavbar: React.FC<CategoryProps> = ({ onSelectCategory }) => {
 
   // reset selected category when location changes
   React.useEffect(() => {
-    dispatch(resetSelectedCategoryAction());
+    dispatch(resetSelectedCategory());
     onSelectCategory("");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);

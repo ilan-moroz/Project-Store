@@ -1,10 +1,8 @@
 import { useDispatch } from "react-redux";
-import { deleteAllCartItems, getCartItems } from "../api/cartApi";
-import {
-  deleteAllCartItemsAction,
-  setCartItemsAction,
-} from "../redux/cartReducer";
+import { deleteAllCartItemsApi, getCartItems } from "../api/cartApi";
+
 import { useCallback } from "react";
+import { deleteAllCartItems, setCartItems } from "../redux/cartSlice";
 
 export const useCartApi = (cartId: string) => {
   const dispatch = useDispatch();
@@ -14,7 +12,7 @@ export const useCartApi = (cartId: string) => {
     async (id: string) => {
       try {
         const response = await getCartItems(id);
-        dispatch(setCartItemsAction(response));
+        dispatch(setCartItems(response));
       } catch (err) {
         console.error(err);
       }
@@ -25,8 +23,8 @@ export const useCartApi = (cartId: string) => {
   // Function to handle deleting all items from the cart
   const handleDeleteCart = async () => {
     try {
-      const response = await deleteAllCartItems(cartId);
-      if (response) dispatch(deleteAllCartItemsAction());
+      const response = await deleteAllCartItemsApi(cartId);
+      if (response) dispatch(deleteAllCartItems());
       console.log(response);
     } catch (err) {
       console.error(err);

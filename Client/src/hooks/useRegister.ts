@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { checkEmailId, registerUser } from "../api/userApi";
-import { setLoginAction } from "../redux/userReducer";
+import { setLogin } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { User } from "../models/User";
@@ -48,7 +48,7 @@ export function useRegister() {
       const response = await registerUser(formData);
       if (response) {
         // If successful, dispatch login action with response data
-        dispatch(setLoginAction(response.user, response.token));
+        dispatch(setLogin({ user: response.user, token: response.token }));
         // and then navigate to home page
         navigate("/");
       }

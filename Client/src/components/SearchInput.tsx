@@ -2,14 +2,14 @@ import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
-import { searchProducts } from "../api/productApi";
+import { searchProductsApi } from "../api/productApi";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { searchProductsAction } from "../redux/productReducer";
+import { searchProducts } from "../redux/productSlice";
 import { toast } from "react-toastify";
-import { resetSelectedCategoryAction } from "../redux/categoryReducer";
 import { useCategoryState } from "../hooks/useCategoryState";
 import { useProductState } from "../hooks/useProductState";
+import { resetSelectedCategory } from "../redux/categorySlice";
 
 export default function SearchInput() {
   // State to manage the search string entered by the user
@@ -30,12 +30,12 @@ export default function SearchInput() {
     }
     try {
       // Fetch products based on the user's search string
-      const response = await searchProducts(searchString);
+      const response = await searchProductsApi(searchString);
       if (response) {
         // Dispatch the found products to the Redux store
-        dispatch(searchProductsAction(response));
+        dispatch(searchProducts(response));
         // Reset the selected category in the store
-        dispatch(resetSelectedCategoryAction());
+        dispatch(resetSelectedCategory());
       }
       // Reset the ref after a search, allowing the category effect to run again if needed
       hasDispatchedOnceRef.current = false;
@@ -49,7 +49,7 @@ export default function SearchInput() {
   React.useEffect(() => {
     if (selectedCategory && !hasDispatchedOnceRef.current) {
       // When a category is selected for the first time, dispatch its products and clear the search input
-      dispatch(searchProductsAction(products));
+      dispatch(searchProducts(products));
       setSearchString("");
       console.log("asd");
       // Update the ref to indicate that we've dispatched once

@@ -3,11 +3,11 @@ import { resolver } from "../validators/addProductValidators";
 import { AddProductFormValues } from "../types/AddProductFormValues";
 import FormInput from "./FormInput";
 import { useCategory } from "../hooks/useCategory";
-import { addProduct } from "../api/productApi";
+import { addProductApi } from "../api/productApi";
 import { prepareFormData } from "../utils/prepareFormData";
 import Button from "./Button/Button";
 import { useDispatch } from "react-redux";
-import { addProductAction } from "../redux/productReducer";
+import { addProduct } from "../redux/productSlice";
 
 const AddProduct = () => {
   const {
@@ -23,8 +23,8 @@ const AddProduct = () => {
   const onSubmit = handleSubmit(async data => {
     try {
       const formData = prepareFormData(data);
-      const response = await addProduct(formData);
-      if (response) dispatch(addProductAction(response));
+      const response = await addProductApi(formData);
+      if (response) dispatch(addProduct(response));
       reset();
     } catch (err) {
       console.error(err);

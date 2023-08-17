@@ -12,7 +12,7 @@ export const checkShoppingCart = async (userId: string) => {
 };
 
 // function to add item to a cart
-export const addItemToCart = async (cartId: string, cartItem: {}) => {
+export const addItemToCartApi = async (cartId: string, cartItem: {}) => {
   try {
     const response = await api.post(`cart/addItemToCart/${cartId}`, cartItem);
     if (response.status === 201 || 200) return response.data;
@@ -44,7 +44,7 @@ export const deleteCartItem = async (cartId: string, productId: String) => {
 };
 
 // update cart item
-export const updateCartItem = async (item: CartItem) => {
+export const updateCartItemApi = async (item: CartItem) => {
   try {
     const response = await api.put(`cart/updateCartItem`, item);
     if (response.status === 200) return response.data;
@@ -54,7 +54,7 @@ export const updateCartItem = async (item: CartItem) => {
 };
 
 // delete all items from cart
-export const deleteAllCartItems = async (cartId: string) => {
+export const deleteAllCartItemsApi = async (cartId: string) => {
   try {
     const response = await api.delete(`cart/deleteAllCartItems/${cartId}`);
     if (response.status === 200) return response.data;

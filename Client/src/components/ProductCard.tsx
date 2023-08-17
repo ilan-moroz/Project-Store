@@ -6,16 +6,13 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import NumberInput from "./NumberInput";
-import { addItemToCart } from "../api/cartApi";
+import { addItemToCartApi } from "../api/cartApi";
 import { useDispatch } from "react-redux";
 import { CartItem } from "../models/CartItem";
 import { Product } from "../models/Product";
 import { Box } from "@mui/material";
-import {
-  addItemToCartAction,
-  updateCartItemAction,
-} from "../redux/cartReducer";
 import { useCartState } from "../hooks/useCartState";
+import { addItemToCart, updateCartItem } from "../redux/cartSlice";
 
 type cardProps = {
   product: Product;
@@ -38,12 +35,12 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
       const existingItem = cartItems.find(
         item => item.productId === cartItem.productId
       );
-      const response = await addItemToCart(cartItem.cartId, cartItem);
+      const response = await addItemToCartApi(cartItem.cartId, cartItem);
       // If item exists, dispatch update action, else dispatch add action
       if (existingItem) {
-        dispatch(updateCartItemAction(response));
+        dispatch(updateCartItem(response));
       } else {
-        dispatch(addItemToCartAction(response));
+        dispatch(addItemToCart(response));
       }
       setQuantity(1);
     } catch (err) {
