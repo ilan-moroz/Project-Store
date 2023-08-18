@@ -9,10 +9,12 @@ import React from "react";
 import SearchInput from "../SearchInput";
 import { useUserState } from "../../hooks/useUserState";
 import { removeCart } from "../../redux/cartSlice";
+import { useCartState } from "../../hooks/useCartState";
 
 const Navbar = () => {
-  // custom hook to get user from the Redux store
+  // custom hook to get user and finishOrder state from the Redux store
   const { user } = useUserState();
+  const { finishedOrder } = useCartState();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -46,7 +48,7 @@ const Navbar = () => {
         </Link>
       </div>
       {/* show the search only in shopping page */}
-      {location.pathname === "/shopping" && (
+      {location.pathname === "/shopping" && !finishedOrder && (
         <Box
           sx={{
             display: "flex",

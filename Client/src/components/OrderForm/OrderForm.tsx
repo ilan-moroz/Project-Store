@@ -25,8 +25,6 @@ const OrderForm = () => {
     },
   });
 
-  console.log(user);
-
   const onSubmit = handleSubmit(async data => {
     console.log(data);
     reset();
