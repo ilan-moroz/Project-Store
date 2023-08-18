@@ -5,6 +5,8 @@ import FormInput from "../FormInput";
 import { resolver } from "../../validators/orderFormValidator";
 import "./orderForm.css";
 import { useCities } from "../../hooks/useCities";
+import { useUserState } from "../../hooks/useUserState";
+import React from "react";
 
 const OrderForm = () => {
   const {
@@ -16,6 +18,10 @@ const OrderForm = () => {
 
   // Hook to to get all cities from api
   const cities = useCities();
+
+  // custom hook to get user from the Redux store
+  const { user } = useUserState();
+  console.log(user);
 
   const onSubmit = handleSubmit(async data => {
     console.log(data);
@@ -57,7 +63,7 @@ const OrderForm = () => {
           <FormInput
             register={register("creditCard")}
             name="creditCard"
-            label="creditCard"
+            label="Credit Card"
             type="text"
             error={!!errors.creditCard}
             helperText={errors.creditCard?.message}
@@ -75,4 +81,4 @@ const OrderForm = () => {
   );
 };
 
-export default OrderForm;
+export default React.memo(OrderForm);
