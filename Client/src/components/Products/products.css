@@ -6,10 +6,25 @@
   justify-content: flex-start;
   flex-wrap: wrap;
   z-index: 1;
+  animation-name: moveInBottom;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
 }
 
 .productsNavbar {
   position: sticky;
   top: 0;
   z-index: 99;
+}
+
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(10rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0rem);
+  }
 }
