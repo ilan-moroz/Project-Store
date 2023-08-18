@@ -6,10 +6,8 @@ export const createOrder = async (req: Request, res: Response) => {
   const orderDetails: Order = req.body;
   try {
     const newOrder = new OrderModel(orderDetails);
-    if (newOrder) {
-      newOrder.save();
-      res.status(200).json(newOrder);
-    }
+    await newOrder.save();
+    res.status(201).json(newOrder);
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }

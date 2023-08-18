@@ -12,24 +12,24 @@ export const resolver: Resolver<OrderFormValues> = async values => {
   const errors: FormErrors = {};
 
   // Check if the productName is empty.
-  if (!values.city || values.city.length === 0) {
-    errors.city = {
+  if (!values.deliveryCity || values.deliveryCity.length === 0) {
+    errors.deliveryCity = {
       type: "required",
       message: "City name is required",
     };
   }
 
   // Check if the Category is empty.
-  if (!values.street || values.street.length === 0) {
-    errors.street = {
+  if (!values.deliveryStreet || values.deliveryStreet.length === 0) {
+    errors.deliveryStreet = {
       type: "required",
       message: "Street name is required",
     };
   }
 
   // Check if the Category is empty.
-  if (!values.shippingDate || values.shippingDate.length === 0) {
-    errors.shippingDate = {
+  if (!values.deliveryDate || values.deliveryDate.length === 0) {
+    errors.deliveryDate = {
       type: "required",
       message: "Shipping date name is required",
     };
@@ -38,13 +38,13 @@ export const resolver: Resolver<OrderFormValues> = async values => {
   // Check if the image is empty.
   const creditCardRegex = /^(?:\d{13,19})$/;
 
-  if (!values.creditCard) {
-    errors.creditCard = {
+  if (!values.paymentMethodLast4Digits) {
+    errors.paymentMethodLast4Digits = {
       type: "required",
       message: "Credit card is required",
     };
-  } else if (!creditCardRegex.test(values.creditCard)) {
-    errors.creditCard = {
+  } else if (!creditCardRegex.test(values.paymentMethodLast4Digits)) {
+    errors.paymentMethodLast4Digits = {
       type: "invalid",
       message: "Invalid credit card format",
     };

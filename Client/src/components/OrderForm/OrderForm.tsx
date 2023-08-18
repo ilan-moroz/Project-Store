@@ -7,10 +7,17 @@ import "./orderForm.css";
 import { useUserState } from "../../hooks/useUserState";
 import React from "react";
 import { capitalizeWords } from "../../utils/capitalizeWords";
+import { createOrder } from "../../api/orderApi";
+import { Order } from "../../models/Order";
+import { useCartState } from "../../hooks/useCartState";
 
 const OrderForm = () => {
   // custom hook to get user from the Redux store
   const { user } = useUserState();
+  const { cartId, cartItems } = useCartState();
+  const finalPrice = cartItems.reduce((acc, item) => {
+    return acc + item.generalPrice;
+  }, 0);
 
   const {
     register,
@@ -20,14 +27,28 @@ const OrderForm = () => {
   } = useForm<OrderFormValues>({
     resolver,
     defaultValues: {
-      city: capitalizeWords(user?.city ?? ""),
-      street: capitalizeWords(user?.street ?? ""),
+      deliveryCity: capitalizeWords(user?.city ?? ""),
+      deliveryStreet: capitalizeWords(user?.street ?? ""),
     },
   });
 
   const onSubmit = handleSubmit(async data => {
-    console.log(data);
-    reset();
+    try {
+      const last4digits = data.paymentMethodLast4Digits.slice(-4);
+
+      const orderDetails = {
+        ...data,
+        customerId: user?._id ?? "",
+        paymentMethodLast4Digits: last4digits,
+        cartId: cartId,
+        finalPrice: finalPrice,
+      };
+      const response = await createOrder(orderDetails);
+      console.log(response);
+      reset();
+    } catch (err) {
+      console.error(err);
+    }
   });
 
   return (
@@ -37,37 +58,37 @@ const OrderForm = () => {
       <div className="order__form">
         <form onSubmit={onSubmit}>
           <FormInput
-            register={register("city")}
-            name="city"
+            register={register("deliveryCity")}
+            name="deliveryCity"
             label="City"
             type="text"
-            error={!!errors.city}
-            helperText={errors.city?.message}
+            error={!!errors.deliveryCity}
+            helperText={errors.deliveryCity?.message}
           />
           <FormInput
-            register={register("street")}
-            name="street"
+            register={register("deliveryStreet")}
+            name="deliveryStreet"
             label="Street"
             type="text"
-            error={!!errors.street}
-            helperText={errors.street?.message}
+            error={!!errors.deliveryStreet}
+            helperText={errors.deliveryStreet?.message}
           />
           <FormInput
-            register={register("shippingDate")}
-            name="shippingDate"
-            label="Shipping Date"
+            register={register("deliveryDate")}
+            name="deliveryDate"
+            label="Delivery Date"
             type="date"
-            error={!!errors.shippingDate}
-            helperText={errors.shippingDate?.message}
+            error={!!errors.deliveryDate}
+            helperText={errors.deliveryDate?.message}
           />
           <h2 className="order__header-3 header purpleText">Payments</h2>
           <FormInput
-            register={register("creditCard")}
-            name="creditCard"
+            register={register("paymentMethodLast4Digits")}
+            name="paymentMethodLast4Digits"
             label="Credit Card"
             type="text"
-            error={!!errors.creditCard}
-            helperText={errors.creditCard?.message}
+            error={!!errors.paymentMethodLast4Digits}
+            helperText={errors.paymentMethodLast4Digits?.message}
           />
           <div className="order__form--button">
             <Button
