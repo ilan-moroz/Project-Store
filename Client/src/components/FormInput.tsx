@@ -52,14 +52,14 @@ const FormInput: React.FC<FormInputProps> = ({
     );
   }
 
-  // If it's a file type input
-  if (type === "file") {
+  // If it's a file or date type input
+  if (type === "file" || type === "date") {
     return (
       <Box sx={{ marginBottom: "1.5rem" }}>
         <label htmlFor={name}>{label}</label>
         <TextField
           {...register}
-          type="file"
+          type={type}
           name={name}
           variant="outlined"
           fullWidth

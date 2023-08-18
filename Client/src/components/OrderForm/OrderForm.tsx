@@ -4,6 +4,7 @@ import Button from "../Button/Button";
 import FormInput from "../FormInput";
 import { resolver } from "../../validators/orderFormValidator";
 import "./orderForm.css";
+import { useCities } from "../../hooks/useCities";
 
 const OrderForm = () => {
   const {
@@ -13,8 +14,12 @@ const OrderForm = () => {
     formState: { errors },
   } = useForm<OrderFormValues>({ resolver });
 
+  // Hook to to get all cities from api
+  const cities = useCities();
+
   const onSubmit = handleSubmit(async data => {
     console.log(data);
+    reset();
   });
 
   return (
@@ -27,7 +32,8 @@ const OrderForm = () => {
             register={register("city")}
             name="city"
             label="City"
-            type="text"
+            type="select"
+            selectOptions={cities}
             error={!!errors.city}
             helperText={errors.city?.message}
           />
@@ -42,8 +48,8 @@ const OrderForm = () => {
           <FormInput
             register={register("shippingDate")}
             name="shippingDate"
-            label="shippingDate"
-            type="text"
+            label="Shipping Date"
+            type="date"
             error={!!errors.shippingDate}
             helperText={errors.shippingDate?.message}
           />
