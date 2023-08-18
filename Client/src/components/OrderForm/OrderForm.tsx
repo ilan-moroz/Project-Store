@@ -4,23 +4,27 @@ import Button from "../Button/Button";
 import FormInput from "../FormInput";
 import { resolver } from "../../validators/orderFormValidator";
 import "./orderForm.css";
-import { useCities } from "../../hooks/useCities";
 import { useUserState } from "../../hooks/useUserState";
 import React from "react";
+import { capitalizeWords } from "../../utils/capitalizeWords";
 
 const OrderForm = () => {
+  // custom hook to get user from the Redux store
+  const { user } = useUserState();
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<OrderFormValues>({ resolver });
+  } = useForm<OrderFormValues>({
+    resolver,
+    defaultValues: {
+      city: capitalizeWords(user?.city ?? ""),
+      street: capitalizeWords(user?.street ?? ""),
+    },
+  });
 
-  // Hook to to get all cities from api
-  const cities = useCities();
-
-  // custom hook to get user from the Redux store
-  const { user } = useUserState();
   console.log(user);
 
   const onSubmit = handleSubmit(async data => {
@@ -38,8 +42,7 @@ const OrderForm = () => {
             register={register("city")}
             name="city"
             label="City"
-            type="select"
-            selectOptions={cities}
+            type="text"
             error={!!errors.city}
             helperText={errors.city?.message}
           />
