@@ -8,6 +8,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import productRouter from "./Routes/productRoutes";
 import cartRouter from "./Routes/cartRoutes";
+import orderRouter from "./Routes/orderRoutes";
 dotenv.config();
 
 // Create Server
@@ -30,6 +31,7 @@ server.use("/user", userRouter);
 server.use("/category", categoryRouter);
 server.use("/product", productRouter);
 server.use("/cart", cartRouter);
+server.use("/order", orderRouter);
 
 // for security
 server.use(helmet());
