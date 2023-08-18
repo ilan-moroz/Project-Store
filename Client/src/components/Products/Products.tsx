@@ -1,6 +1,6 @@
 import { useProduct } from "../../hooks/useProducts";
 import { Product } from "../../models/Product";
-import CardComp from "../ProductCard";
+import CardComp from "../ProductCard/ProductCard";
 import CategoryNavbar from "../CategoryNavbar/CategoryNavbar";
 import "./products.css";
 import { useProductState } from "../../hooks/useProductState";

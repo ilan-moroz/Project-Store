@@ -5,14 +5,15 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import NumberInput from "./NumberInput";
-import { addItemToCartApi } from "../api/cartApi";
+import NumberInput from "../NumberInput";
+import { addItemToCartApi } from "../../api/cartApi";
 import { useDispatch } from "react-redux";
-import { CartItem } from "../models/CartItem";
-import { Product } from "../models/Product";
+import { CartItem } from "../../models/CartItem";
+import { Product } from "../../models/Product";
 import { Box } from "@mui/material";
-import { useCartState } from "../hooks/useCartState";
-import { addItemToCart, updateCartItem } from "../redux/cartSlice";
+import { useCartState } from "../../hooks/useCartState";
+import { addItemToCart, updateCartItem } from "../../redux/cartSlice";
+import "./productCard.css";
 
 type cardProps = {
   product: Product;
@@ -58,6 +59,7 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
         justifyContent: "space-between",
       }}
       key={product._id}
+      className="singleCard"
     >
       <CardMedia
         sx={{ height: 100, backgroundSize: "contain" }}

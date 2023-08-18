@@ -1,0 +1,7 @@
+.singleCard {
+  transition: all 0.3s;
+}
+
+.singleCard:hover {
+  transform: scale(1.07) translateY(-0.5rem);
+}
