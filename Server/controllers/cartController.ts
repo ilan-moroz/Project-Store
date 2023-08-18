@@ -1,4 +1,3 @@
-import { Product } from "./../../Client/src/models/Product";
 import { CartItemModel, ShoppingCartModel } from "../Models/Store";
 import { Request, Response } from "express";
 
