@@ -10,6 +10,7 @@ import {
   resetSelectedCategory,
   setSelectedCategory,
 } from "../../redux/categorySlice";
+import { motion } from "framer-motion";
 
 const Products = () => {
   // get all products from backend using custom hook
@@ -39,12 +40,20 @@ const Products = () => {
       <div className="productsNavbar">
         <CategoryNavbar onSelectCategory={handleCategorySelect} />
       </div>
-      <div className="productCards">
-        {/* map all the products and display in card */}
-        {filteredProducts.map((product: Product) => (
-          <CardComp product={product} key={product._id} />
-        ))}
-      </div>
+      <motion.div
+        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: "20rem" }}
+        transition={{
+          y: { duration: 1, ease: "easeOut" },
+        }}
+      >
+        <div className="productCards">
+          {/* map all the products and display in card */}
+          {filteredProducts.map((product: Product) => (
+            <CardComp product={product} key={product._id} />
+          ))}
+        </div>
+      </motion.div>
     </div>
   );
 };
