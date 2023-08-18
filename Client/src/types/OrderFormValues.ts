@@ -3,5 +3,5 @@ export type OrderFormValues = {
   city: string;
   street: string;
   shippingDate: string;
-  creditCard: number;
+  creditCard: string;
 };

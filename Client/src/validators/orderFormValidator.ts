@@ -36,10 +36,17 @@ export const resolver: Resolver<OrderFormValues> = async values => {
   }
 
   // Check if the image is empty.
+  const creditCardRegex = /^(?:\d{13,19})$/;
+
   if (!values.creditCard) {
     errors.creditCard = {
       type: "required",
       message: "Credit card is required",
+    };
+  } else if (!creditCardRegex.test(values.creditCard)) {
+    errors.creditCard = {
+      type: "invalid",
+      message: "Invalid credit card format",
     };
   }
 
