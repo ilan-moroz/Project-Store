@@ -9,6 +9,7 @@ import { useCartApi } from "../../hooks/useCartApi";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useDispatch } from "react-redux";
 import { setFinishedOrder } from "../../redux/cartSlice";
+import { AnimatePresence } from "framer-motion";
 
 const Cart = () => {
   // Local state for cart total
@@ -70,9 +71,11 @@ const Cart = () => {
           <div className="cartItems__empty marginLeft">Your cart is empty</div>
         )}
         {/* map all cart items to display in the cart */}
-        {cartItems.map((item: CartItem) => (
-          <ItemCart item={item} key={item._id} searchQuery={searchQuery} />
-        ))}
+        <AnimatePresence>
+          {cartItems.map((item: CartItem) => (
+            <ItemCart item={item} key={item._id} searchQuery={searchQuery} />
+          ))}
+        </AnimatePresence>
       </div>
       <div className="cartItems__total marginLeft">
         <h3>Total: &#8362; {total.toFixed(2)}</h3>

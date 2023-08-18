@@ -8,6 +8,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useProductState } from "../../hooks/useProductState";
 import { useCartItemApi } from "../../hooks/useCartItemApi";
 import { useCartState } from "../../hooks/useCartState";
+import { motion } from "framer-motion";
 
 type cardProps = {
   item: CartItem;
@@ -53,7 +54,16 @@ const ItemCart: React.FC<cardProps> = ({ item, searchQuery }) => {
     });
 
   return (
-    <div className="cartItem">
+    <motion.div
+      className="cartItem"
+      initial={{ opacity: 0, x: -250 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -250 }}
+      transition={{
+        x: { duration: 0.5, ease: "easeIn" },
+        opacity: { duration: 0.5 },
+      }}
+    >
       <div className="cartItem__imageName">
         <h3>{highlightedName}</h3>
         {!finishedOrder && (
@@ -108,7 +118,7 @@ const ItemCart: React.FC<cardProps> = ({ item, searchQuery }) => {
         )}
         <p> Total Price: &#8362; {item.generalPrice.toFixed(2)}</p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
