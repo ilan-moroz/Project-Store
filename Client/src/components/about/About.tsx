@@ -8,7 +8,7 @@ const About = () => {
       <Typography
         variant="h3"
         gutterBottom
-        className="purpleText header"
+        className="purpleText"
         sx={{
           whiteSpace: "nowrap",
           marginTop: "1rem",
