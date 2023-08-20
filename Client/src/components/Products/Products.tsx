@@ -1,4 +1,3 @@
-import { useProduct } from "../../hooks/useProducts";
 import { Product } from "../../models/Product";
 import CardComp from "../ProductCard/ProductCard";
 import CategoryNavbar from "../CategoryNavbar/CategoryNavbar";
@@ -13,8 +12,6 @@ import {
 import { motion } from "framer-motion";
 
 const Products = () => {
-  // get all products from backend using custom hook
-  useProduct();
   // custom hooks to get searchProducts and selectedCategory from the Redux store
   const { searchProducts } = useProductState();
   const { selectedCategory } = useCategoryState();

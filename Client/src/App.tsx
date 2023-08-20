@@ -2,8 +2,12 @@ import { MainRoute } from "./routes/MainRoute";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/Navbar/Navbar";
+import { useProduct } from "./hooks/useProducts";
 
 function App() {
+  // get all products from backend using custom hook
+  useProduct();
+
   return (
     <div className="App">
       <header>
