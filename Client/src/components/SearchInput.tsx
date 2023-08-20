@@ -51,7 +51,6 @@ export default function SearchInput() {
       // When a category is selected for the first time, dispatch its products and clear the search input
       dispatch(searchProducts(products));
       setSearchString("");
-      console.log("asd");
       // Update the ref to indicate that we've dispatched once
       hasDispatchedOnceRef.current = true;
     }
