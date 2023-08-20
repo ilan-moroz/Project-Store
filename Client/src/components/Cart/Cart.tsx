@@ -93,7 +93,7 @@ const Cart = () => {
             }}
             onClick={handleFinishOrder}
           >
-            {!finishedOrder ? "Order" : "Back To Shooping"}
+            {!finishedOrder ? "Order" : "Back To Shopping"}
           </Button>
         )}
         {/* show only where there is items in the cart */}
