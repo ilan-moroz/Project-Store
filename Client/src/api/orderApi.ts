@@ -15,7 +15,7 @@ export const createOrder = async (orderDetails: Order) => {
 export const getOverbookedDates = async () => {
   try {
     const response = await api.get(`order/getOverbookedDates`);
-    if (response.status === 200 || 400) return response.data;
+    if (response.status === 200) return response.data;
   } catch (err) {
     throw err;
   }
