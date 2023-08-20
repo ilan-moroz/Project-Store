@@ -1,16 +1,15 @@
 import saveAs from "file-saver";
 import { Order } from "../models/Order";
 
-export const useReceipt = (orderDetails: Order) => {
-  const downloadReceipt = () => {
+export const useReceipt = () => {
+  const downloadReceipt = (orderDetails: Order) => {
     const receiptText = `
         Receipt
         -------
-        Order Number: 12345
         Date: ${new Date().toLocaleString()}
         Delivery Date:${orderDetails.deliveryDate}
 
-        Total Amount: &#8362;${orderDetails.finalPrice}
+        Total Amount: \u20AA ${orderDetails.finalPrice}
         
       
         Thank you for shopping with us!

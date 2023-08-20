@@ -43,7 +43,7 @@ export default function OrderCompletedModal({
     navigate("/");
   };
 
-  const { downloadReceipt } = useReceipt(orderDetails!);
+  const { downloadReceipt } = useReceipt();
 
   return (
     <div>
@@ -74,7 +74,7 @@ export default function OrderCompletedModal({
             variant="body2"
             component="p"
             sx={{ textDecoration: "underline", cursor: "pointer", mt: 1 }}
-            onClick={downloadReceipt}
+            onClick={() => downloadReceipt(orderDetails!)}
           >
             Download your receipt
           </Typography>

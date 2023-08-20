@@ -1,5 +1,5 @@
 export interface Order {
-  id?: string;
+  _id?: string;
   customerId: string;
   cartId: string;
   finalPrice: number;
