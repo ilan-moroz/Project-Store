@@ -11,15 +11,23 @@ export const useReceipt = () => {
   const { products } = useProductState();
 
   // Filter products that match the cart items based on productId
-  const orderItems = products.filter(product =>
-    cartItems.some(cartItem => cartItem.productId === product._id)
-  );
+  const orderItems = products
+    .map(product => {
+      const cartItem = cartItems.find(item => item.productId === product._id);
+      return {
+        ...product,
+        quantity: cartItem ? cartItem.quantity : 0,
+      };
+    })
+    .filter(item => item.quantity > 0); // this will remove items with quantity 0
 
   // Construct a list of items in string format for the receipt
   const itemsList = orderItems
     .map(
       item =>
-        `${item.productName.padEnd(20, " ")} : \u20AA${item.price.toFixed(2)}`
+        `${item.productName.padEnd(20, " ")} x ${item.quantity} : \u20AA${(
+          item.price * item.quantity
+        ).toFixed(2)}`
     )
     .join("\n");
 
@@ -47,7 +55,6 @@ Total Amount : \u20AA${orderDetails.finalPrice.toFixed(2)}
           
 Thank you for shopping with us! 🙂`;
 
-    // Convert the receipt text to a blob for download
     const blob = new Blob([receiptText], { type: "text/plain" });
     saveAs(blob, "receipt.txt");
   };
