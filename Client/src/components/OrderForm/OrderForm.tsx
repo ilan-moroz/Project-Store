@@ -18,6 +18,7 @@ const OrderForm = () => {
   const { cartId, cartItems } = useCartState();
 
   const [isModalOpen, setModalOpen] = React.useState(false);
+  const [orderDetails, setOrderDetails] = React.useState<Order>();
 
   const finalPrice = cartItems.reduce((acc, item) => {
     return acc + item.generalPrice;
@@ -48,7 +49,10 @@ const OrderForm = () => {
         finalPrice: finalPrice,
       };
       const response = await createOrder(orderDetails);
-      if (response) setModalOpen(true);
+      if (response) {
+        setOrderDetails(response);
+        setModalOpen(true);
+      }
       reset();
     } catch (err) {
       console.error(err);
@@ -61,6 +65,7 @@ const OrderForm = () => {
         <OrderCompletedModal
           onClose={() => setModalOpen(false)}
           isOpen={isModalOpen}
+          orderDetails={orderDetails}
         />
       )}
       <h1 className="order__header-1 header purpleText">Order</h1>

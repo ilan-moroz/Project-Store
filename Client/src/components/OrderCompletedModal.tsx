@@ -7,6 +7,8 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { useNavigate } from "react-router-dom";
 import { setFinishedOrder } from "../redux/cartSlice";
 import { useDispatch } from "react-redux";
+import { useReceipt } from "../hooks/useReceipt";
+import { Order } from "../models/Order";
 
 const style = {
   position: "absolute" as "absolute",
@@ -26,9 +28,11 @@ const style = {
 export default function OrderCompletedModal({
   onClose,
   isOpen,
+  orderDetails,
 }: {
   onClose: () => void;
   isOpen: boolean;
+  orderDetails?: Order;
 }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -38,6 +42,8 @@ export default function OrderCompletedModal({
     dispatch(setFinishedOrder());
     navigate("/");
   };
+
+  const { downloadReceipt } = useReceipt(orderDetails!);
 
   return (
     <div>
@@ -68,9 +74,7 @@ export default function OrderCompletedModal({
             variant="body2"
             component="p"
             sx={{ textDecoration: "underline", cursor: "pointer", mt: 1 }}
-            onClick={() => {
-              // functionality to download receipt can go here
-            }}
+            onClick={downloadReceipt}
           >
             Download your receipt
           </Typography>
