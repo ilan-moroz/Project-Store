@@ -31,7 +31,7 @@ export const resolver: Resolver<OrderFormValues> = async values => {
   if (!values.deliveryDate || values.deliveryDate.length === 0) {
     errors.deliveryDate = {
       type: "required",
-      message: "Shipping date name is required",
+      message: "Shipping date is required",
     };
   }
 
