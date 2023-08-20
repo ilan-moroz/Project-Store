@@ -36,7 +36,7 @@ const OrderForm = () => {
     try {
       const last4digits = data.paymentMethodLast4Digits.slice(-4);
 
-      const orderDetails = {
+      const orderDetails: Order = {
         ...data,
         customerId: user?._id ?? "",
         paymentMethodLast4Digits: last4digits,
