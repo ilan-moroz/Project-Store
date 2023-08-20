@@ -10,3 +10,13 @@ export const createOrder = async (orderDetails: Order) => {
     throw err;
   }
 };
+
+// check how many orders on specified date
+export const checkOrderDate = async (deliveryDate: string) => {
+  try {
+    const response = await api.get(`order/checkOrderDate/${deliveryDate}`);
+    if (response.status === 200 || 400) return response.data;
+  } catch (err) {
+    throw err;
+  }
+};
