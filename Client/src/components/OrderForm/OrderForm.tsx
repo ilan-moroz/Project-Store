@@ -10,11 +10,15 @@ import { capitalizeWords } from "../../utils/capitalizeWords";
 import { createOrder } from "../../api/orderApi";
 import { Order } from "../../models/Order";
 import { useCartState } from "../../hooks/useCartState";
+import OrderCompletedModal from "../OrderCompletedModal";
 
 const OrderForm = () => {
   // custom hook to get user from the Redux store
   const { user } = useUserState();
   const { cartId, cartItems } = useCartState();
+
+  const [isModalOpen, setModalOpen] = React.useState(false);
+
   const finalPrice = cartItems.reduce((acc, item) => {
     return acc + item.generalPrice;
   }, 0);
@@ -44,7 +48,7 @@ const OrderForm = () => {
         finalPrice: finalPrice,
       };
       const response = await createOrder(orderDetails);
-      console.log(response);
+      if (response) setModalOpen(true);
       reset();
     } catch (err) {
       console.error(err);
@@ -53,6 +57,9 @@ const OrderForm = () => {
 
   return (
     <div className="order">
+      {isModalOpen && (
+        <OrderCompletedModal onClose={() => setModalOpen(false)} />
+      )}
       <h1 className="order__header-1 header purpleText">Order</h1>
       <h2 className="order__header-2 header purpleText">Shipping Details</h2>
       <div className="order__form">
