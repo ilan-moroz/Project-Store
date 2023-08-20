@@ -12,9 +12,9 @@ export const createOrder = async (orderDetails: Order) => {
 };
 
 // check how many orders on specified date
-export const checkOrderDate = async (deliveryDate: string) => {
+export const getOverbookedDates = async () => {
   try {
-    const response = await api.get(`order/checkOrderDate/${deliveryDate}`);
+    const response = await api.get(`order/getOverbookedDates`);
     if (response.status === 200 || 400) return response.data;
   } catch (err) {
     throw err;

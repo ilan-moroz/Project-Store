@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { Order, OrderModel } from "../Models/Store";
-import { error } from "console";
 
 // Function to create an order in database
 export const createOrder = async (req: Request, res: Response) => {
@@ -14,15 +13,24 @@ export const createOrder = async (req: Request, res: Response) => {
   }
 };
 
-// check how many orders on specified date
-export const checkOrderDate = async (req: Request, res: Response) => {
-  const { date } = req.params;
+// get all the overbooked dates(more than 3 orders per date)
+export const getOverbookedDates = async (req: Request, res: Response) => {
   try {
-    const orders = await OrderModel.find({ deliveryDate: date });
-    if (orders.length >= 3) {
-      res.status(400).json({ error: "Too many orders for this date" });
-    }
-    res.status(200).json(orders);
+    const overbookedDates = await OrderModel.aggregate([
+      {
+        $group: {
+          _id: "$deliveryDate",
+          count: { $sum: 1 },
+        },
+      },
+      {
+        $match: {
+          count: { $gte: 3 },
+        },
+      },
+    ]);
+    const dates = overbookedDates.map(item => item._id);
+    res.status(200).json(dates);
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
