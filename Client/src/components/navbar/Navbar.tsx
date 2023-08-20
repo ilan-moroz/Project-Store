@@ -8,7 +8,7 @@ import { setLogout } from "../../redux/userSlice";
 import React from "react";
 import SearchInput from "../SearchInput";
 import { useUserState } from "../../hooks/useUserState";
-import { removeCart } from "../../redux/cartSlice";
+import { removeCart, setFinishedOrder } from "../../redux/cartSlice";
 import { useCartState } from "../../hooks/useCartState";
 
 const Navbar = () => {
@@ -34,6 +34,7 @@ const Navbar = () => {
   const handleLogout = () => {
     dispatch(setLogout());
     dispatch(removeCart());
+    if (finishedOrder) dispatch(setFinishedOrder());
     handleClose();
     navigate("/");
   };
