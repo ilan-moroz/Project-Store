@@ -2,6 +2,7 @@ import saveAs from "file-saver";
 import { Order } from "../models/Order";
 import { useCartState } from "./useCartState";
 import { useProductState } from "./useProductState";
+import moment from "moment";
 
 export const useReceipt = () => {
   const { cartItems } = useCartState();
@@ -12,24 +13,31 @@ export const useReceipt = () => {
   );
 
   const itemsList = orderItems
-    .map(item => `Product: ${item.productName}, Price: ${item.price}`)
+    .map(
+      item =>
+        `${item.productName.padEnd(20, " ")} : \u20AA${item.price.toFixed(2)}`
+    )
     .join("\n");
 
   const downloadReceipt = (orderDetails: Order) => {
-    const receiptText = `
-            Receipt
-----------------------------------
-Date: ${new Date().toLocaleString()}
-Delivery Date:${orderDetails.deliveryDate}
-Delivery City:${orderDetails.deliveryCity}
-Delivery Street:${orderDetails.deliveryStreet}
-Last 4 digits of payment method: ${orderDetails.paymentMethodLast4Digits}
-        
-${itemsList}
+    const orderDate = moment().format("DD/MM/YYYY, HH:mm:ss");
 
-Total Amount: \u20AA${orderDetails.finalPrice}
-        
-      
+    const deliveryDate = moment(orderDetails.deliveryDate).format("DD/MM/YYYY");
+
+    const receiptText = `
+Receipt
+----------------------------------
+Order Date   : ${orderDate}
+Delivery Date: ${deliveryDate}
+City         : ${orderDetails.deliveryCity}
+Street       : ${orderDetails.deliveryStreet}
+Payment      : **** **** **** ${orderDetails.paymentMethodLast4Digits}
+          
+Items:
+${itemsList}
+  
+Total Amount : \u20AA${orderDetails.finalPrice.toFixed(2)}
+          
 Thank you for shopping with us! 🙂`;
 
     const blob = new Blob([receiptText], { type: "text/plain" });
