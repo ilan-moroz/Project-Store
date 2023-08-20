@@ -25,6 +25,7 @@ export const register = async (req: Request, res: Response) => {
       res.status(201).json({
         token,
         user: {
+          _id: customer._id,
           firstName: customer.firstName,
           lastName: customer.lastName,
           role: customer.role,

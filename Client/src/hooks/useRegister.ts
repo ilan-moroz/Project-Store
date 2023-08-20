@@ -4,6 +4,8 @@ import { setLogin } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { User } from "../models/User";
+import { checkShoppingCart } from "../api/cartApi";
+import { setCart } from "../redux/cartSlice";
 
 export function useRegister() {
   // form data state
@@ -49,6 +51,9 @@ export function useRegister() {
       if (response) {
         // If successful, dispatch login action with response data
         dispatch(setLogin({ user: response.user, token: response.token }));
+        console.log(response);
+        const res = await checkShoppingCart(response.user._id);
+        if (res) dispatch(setCart(res));
         // and then navigate to home page
         navigate("/");
       }
