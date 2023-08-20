@@ -58,7 +58,10 @@ const OrderForm = () => {
   return (
     <div className="order">
       {isModalOpen && (
-        <OrderCompletedModal onClose={() => setModalOpen(false)} />
+        <OrderCompletedModal
+          onClose={() => setModalOpen(false)}
+          isOpen={isModalOpen}
+        />
       )}
       <h1 className="order__header-1 header purpleText">Order</h1>
       <h2 className="order__header-2 header purpleText">Shipping Details</h2>

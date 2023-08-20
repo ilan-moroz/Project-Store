@@ -4,13 +4,16 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Button from "./Button/Button";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { useNavigate } from "react-router-dom";
+import { setFinishedOrder } from "../redux/cartSlice";
+import { useDispatch } from "react-redux";
 
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 450,
   bgcolor: "background.paper",
   border: "2px solid rgb(103, 32, 180)",
   boxShadow: 24,
@@ -22,17 +25,24 @@ const style = {
 
 export default function OrderCompletedModal({
   onClose,
+  isOpen,
 }: {
   onClose: () => void;
+  isOpen: boolean;
 }) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const handleClose = () => {
     onClose();
+    dispatch(setFinishedOrder());
+    navigate("/");
   };
 
   return (
     <div>
       <Modal
-        open={true}
+        open={isOpen}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -69,6 +79,7 @@ export default function OrderCompletedModal({
               type="button"
               text="Back to Homepage"
               color=" rgb(103, 32, 180)"
+              onClick={handleClose}
             />
           </Box>
         </Box>
