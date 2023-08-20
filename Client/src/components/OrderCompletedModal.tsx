@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Button from "./Button/Button";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle"; // Assuming you have @mui/icons-material package
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const style = {
   position: "absolute" as "absolute",
@@ -15,7 +15,7 @@ const style = {
   border: "2px solid rgb(103, 32, 180)",
   boxShadow: 24,
   p: 4,
-  borderRadius: "10px", // Slightly increased borderRadius for a smoother look
+  borderRadius: "10px",
   textAlign: "center",
   color: "rgb(103, 32, 180)",
 };
