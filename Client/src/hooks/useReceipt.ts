@@ -10,23 +10,21 @@ export const useReceipt = () => {
   // Fetch products using the custom hook
   const { products } = useProductState();
 
-  // Filter products that match the cart items based on productId
-  const orderItems = products
-    .map(product => {
-      const cartItem = cartItems.find(item => item.productId === product._id);
-      return {
-        ...product,
-        quantity: cartItem ? cartItem.quantity : 0,
-      };
-    })
-    .filter(item => item.quantity > 0); // this will remove items with quantity 0
+  // Map cart items to their corresponding products and append quantity information
+  const orderItems = cartItems.map(cartItem => {
+    const product = products.find(prod => prod._id === cartItem.productId);
+    return {
+      ...product,
+      quantity: cartItem.quantity,
+    };
+  });
 
   // Construct a list of items in string format for the receipt
   const itemsList = orderItems
     .map(
       item =>
-        `${item.productName.padEnd(20, " ")} x ${item.quantity} : \u20AA${(
-          item.price * item.quantity
+        `${item.productName!.padEnd(20, " ")} x ${item.quantity} : \u20AA${(
+          item.price! * item.quantity
         ).toFixed(2)}`
     )
     .join("\n");
