@@ -49,11 +49,10 @@ const CreditCardInput = ({
   };
 
   return (
-    <Grid container spacing={4}>
+    <Grid container>
       <Grid item xs={6}>
         <Box marginBottom={2}>
           <TextField
-            fullWidth
             type="text"
             name="name"
             label="Full Name"
@@ -61,26 +60,23 @@ const CreditCardInput = ({
             value={state.name}
             onChange={handleInputChange}
             onFocus={handleInputFocus}
+            sx={{ width: "45%", mr: 2 }}
           />
-        </Box>
-        <Box marginBottom={2}>
           <TextField
-            //... other props
-            fullWidth
             type="number"
             name="number"
             label="Card Number"
             variant="outlined"
-            value={value} // Using the passed down value here
-            onChange={handleInputChangeModified} // Using the modified change handler
+            value={value}
+            onChange={handleInputChangeModified}
             onFocus={handleInputFocus}
             error={error}
             helperText={helperText}
+            sx={{ width: "45%" }}
           />
         </Box>
         <Box marginBottom={2}>
           <TextField
-            fullWidth
             type="text"
             name="expiry"
             label="Expiration Date"
@@ -88,11 +84,9 @@ const CreditCardInput = ({
             value={state.expiry}
             onChange={handleInputChange}
             onFocus={handleInputFocus}
+            sx={{ width: "45%", mr: 2, mt: 3 }}
           />
-        </Box>
-        <Box marginBottom={2}>
           <TextField
-            fullWidth
             type="number"
             name="cvc"
             label="CVC"
@@ -100,6 +94,7 @@ const CreditCardInput = ({
             value={state.cvc}
             onChange={handleInputChange}
             onFocus={handleInputFocus}
+            sx={{ width: "45%", mt: 3 }}
           />
         </Box>
       </Grid>
