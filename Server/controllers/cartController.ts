@@ -5,11 +5,13 @@ import { Request, Response } from "express";
 export const checkShoppingCart = async (req: Request, res: Response) => {
   const { userId } = req.params;
   try {
-    const shoppingCart = await ShoppingCartModel.findOne({
+    // use the last created shopping cart
+    const latestShoppingCart = await ShoppingCartModel.findOne({
       customerId: userId,
-    });
-    if (shoppingCart) {
-      res.status(200).json(shoppingCart);
+    }).sort({ createdAt: -1 }); // sorting in descending order
+
+    if (latestShoppingCart) {
+      res.status(200).json(latestShoppingCart);
     } else {
       const newShoppingCart = new ShoppingCartModel({ customerId: userId });
       await newShoppingCart.save();
