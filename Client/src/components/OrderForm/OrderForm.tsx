@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { OrderFormValues } from "../../types/OrderFormValues";
 import Button from "../Button/Button";
 import FormInput from "../FormInput";
@@ -7,10 +7,11 @@ import "./orderForm.css";
 import { useUserState } from "../../hooks/useUserState";
 import React from "react";
 import { capitalizeWords } from "../../utils/capitalizeWords";
-import { createOrder } from "../../api/orderApi";
 import { Order } from "../../models/Order";
 import { useCartState } from "../../hooks/useCartState";
 import OrderCompletedModal from "../OrderCompletedModal";
+import { createOrder } from "../../api/orderApi";
+import OrderDatePicker from "../OrderDatePicker";
 
 const OrderForm = () => {
   // custom hook to get user from the Redux store
@@ -28,6 +29,7 @@ const OrderForm = () => {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors },
   } = useForm<OrderFormValues>({
     resolver,
@@ -88,13 +90,12 @@ const OrderForm = () => {
             error={!!errors.deliveryStreet}
             helperText={errors.deliveryStreet?.message}
           />
-          <FormInput
-            register={register("deliveryDate")}
+          <Controller
             name="deliveryDate"
-            label="Delivery Date"
-            type="date"
-            error={!!errors.deliveryDate}
-            helperText={errors.deliveryDate?.message}
+            control={control}
+            render={({ field }) => (
+              <OrderDatePicker value={field.value} onChange={field.onChange} />
+            )}
           />
           <h2 className="order__header-3 header purpleText">Payments</h2>
           <FormInput
