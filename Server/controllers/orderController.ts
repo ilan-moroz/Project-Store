@@ -40,3 +40,13 @@ export const getOverbookedDates = async (req: Request, res: Response) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// get the amount of all orders
+export const getOrdersAmount = async (req: Request, res: Response) => {
+  try {
+    const orderCount = await OrderModel.countDocuments();
+    res.status(200).json(orderCount);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+};
