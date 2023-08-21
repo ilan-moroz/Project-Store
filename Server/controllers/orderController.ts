@@ -12,7 +12,7 @@ export const createOrder = async (req: Request, res: Response) => {
       customerId: newOrder.customerId,
     });
     await newShoppingCart.save();
-    res.status(201).json(newOrder);
+    res.status(201).json({ newOrder, newShoppingCart });
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }

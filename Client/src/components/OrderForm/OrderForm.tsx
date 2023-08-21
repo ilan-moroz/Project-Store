@@ -13,6 +13,8 @@ import OrderCompletedModal from "../OrderCompletedModal";
 import { createOrder } from "../../api/orderApi";
 import OrderDatePicker from "../OrderDatePicker";
 import dayjs from "dayjs";
+import { setCart } from "../../redux/cartSlice";
+import { useDispatch } from "react-redux";
 
 const OrderForm = () => {
   // custom hook to get user from the Redux store
@@ -40,6 +42,8 @@ const OrderForm = () => {
     },
   });
 
+  const dispatch = useDispatch();
+
   const onSubmit = handleSubmit(async data => {
     try {
       const last4digits = data.paymentMethodLast4Digits.slice(-4);
@@ -55,6 +59,7 @@ const OrderForm = () => {
       if (response) {
         setOrderDetails(response);
         setModalOpen(true);
+        dispatch(setCart(response.newShoppingCart));
       }
       reset();
     } catch (err) {
