@@ -15,6 +15,7 @@ import OrderDatePicker from "../OrderDatePicker";
 import dayjs from "dayjs";
 import { setCart } from "../../redux/cartSlice";
 import { useDispatch } from "react-redux";
+import CreditCardInput from "../CreditCardInput";
 
 const OrderForm = () => {
   // custom hook to get user from the Redux store
@@ -109,13 +110,25 @@ const OrderForm = () => {
             )}
           />
           <h2 className="order__header-3 header purpleText">Payments</h2>
-          <FormInput
+          {/* <FormInput
             register={register("paymentMethodLast4Digits")}
             name="paymentMethodLast4Digits"
             label="Credit Card"
             type="text"
             error={!!errors.paymentMethodLast4Digits}
             helperText={errors.paymentMethodLast4Digits?.message}
+          /> */}
+          <Controller
+            name="paymentMethodLast4Digits"
+            control={control}
+            render={({ field }) => (
+              <CreditCardInput
+                value={field.value}
+                onChange={field.onChange}
+                error={!!errors.paymentMethodLast4Digits}
+                helperText={errors.paymentMethodLast4Digits?.message}
+              />
+            )}
           />
           <div className="order__form--button">
             <Button

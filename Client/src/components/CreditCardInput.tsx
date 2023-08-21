@@ -1,0 +1,119 @@
+import React, { useState, ChangeEvent, FocusEvent } from "react";
+import Cards from "react-credit-cards-2";
+import { TextField, Grid, Box } from "@mui/material";
+
+import "../../node_modules/react-credit-cards-2/dist/es/styles-compiled.css";
+
+interface CardState {
+  number: string;
+  expiry: string;
+  cvc: string;
+  name: string;
+  focus: Focused;
+}
+
+type Focused = "number" | "expiry" | "cvc" | "name";
+
+const CreditCardInput = ({
+  onChange,
+  value,
+  error,
+  helperText,
+}: {
+  onChange: (value: string) => void;
+  value: string;
+  error: boolean;
+  helperText?: string;
+}) => {
+  const [state, setState] = useState<CardState>({
+    number: "",
+    expiry: "",
+    cvc: "",
+    name: "",
+    focus: "number",
+  });
+
+  const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = evt.target;
+    setState(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleInputFocus = (evt: FocusEvent<HTMLInputElement>) => {
+    setState(prev => ({ ...prev, focus: evt.target.name as Focused }));
+  };
+
+  const handleInputChangeModified = (evt: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = evt.target;
+    setState(prev => ({ ...prev, [name]: value }));
+    if (name === "number") onChange(value);
+  };
+
+  return (
+    <Grid container spacing={4}>
+      <Grid item xs={6}>
+        <Box marginBottom={2}>
+          <TextField
+            fullWidth
+            type="text"
+            name="name"
+            label="Full Name"
+            variant="outlined"
+            value={state.name}
+            onChange={handleInputChange}
+            onFocus={handleInputFocus}
+          />
+        </Box>
+        <Box marginBottom={2}>
+          <TextField
+            //... other props
+            fullWidth
+            type="number"
+            name="number"
+            label="Card Number"
+            variant="outlined"
+            value={value} // Using the passed down value here
+            onChange={handleInputChangeModified} // Using the modified change handler
+            onFocus={handleInputFocus}
+            error={error}
+            helperText={helperText}
+          />
+        </Box>
+        <Box marginBottom={2}>
+          <TextField
+            fullWidth
+            type="text"
+            name="expiry"
+            label="Expiration Date"
+            variant="outlined"
+            value={state.expiry}
+            onChange={handleInputChange}
+            onFocus={handleInputFocus}
+          />
+        </Box>
+        <Box marginBottom={2}>
+          <TextField
+            fullWidth
+            type="number"
+            name="cvc"
+            label="CVC"
+            variant="outlined"
+            value={state.cvc}
+            onChange={handleInputChange}
+            onFocus={handleInputFocus}
+          />
+        </Box>
+      </Grid>
+      <Grid item xs={6}>
+        <Cards
+          number={state.number}
+          expiry={state.expiry}
+          cvc={state.cvc}
+          name={state.name}
+          focused={state.focus}
+        />
+      </Grid>
+    </Grid>
+  );
+};
+
+export default CreditCardInput;
