@@ -1,0 +1,26 @@
+.startShopping-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f6f9;
+}
+
+.startShopping-card {
+  max-width: 400px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.startShopping-text {
+  margin-bottom: 16px;
+}
+
+.startShopping-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.startShopping-actions {
+  justify-content: center;
+}

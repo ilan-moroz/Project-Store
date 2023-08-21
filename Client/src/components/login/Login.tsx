@@ -10,7 +10,7 @@ import { login } from "../../api/userApi";
 import { toast } from "react-toastify";
 import { setLogin } from "../../redux/userSlice";
 import { useDispatch } from "react-redux";
-import StartShopping from "../StartShopping";
+import StartShopping from "../StartShopping/StartShopping";
 import Button from "../Button/Button";
 import { checkShoppingCart } from "../../api/cartApi";
 import { useUserState } from "../../hooks/useUserState";
