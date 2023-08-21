@@ -23,7 +23,7 @@ export const useReceipt = () => {
   const itemsList = orderItems
     .map(
       item =>
-        `${item.productName!.padEnd(20, " ")} x ${item.quantity} : \u20AA${(
+        `${item.productName!.padEnd(25, " ")} x ${item.quantity} : \u20AA${(
           item.price! * item.quantity
         ).toFixed(2)}`
     )
