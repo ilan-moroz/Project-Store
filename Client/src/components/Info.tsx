@@ -1,5 +1,12 @@
+import { useProductState } from "../hooks/useProductState";
+
 const Info = () => {
-  return <div className="info center">info</div>;
+  const products = useProductState();
+  return (
+    <div className="info center">
+      Available products in our store: {products.products.length}
+    </div>
+  );
 };
 
 export default Info;
