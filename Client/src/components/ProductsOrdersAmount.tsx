@@ -37,7 +37,14 @@ const ProductsOrdersAmount = () => {
 
   return (
     <Box display="flex" justifyContent="center" mt={4}>
-      <Paper elevation={4} style={{ padding: "1rem", maxWidth: "31rem" }}>
+      <Paper
+        elevation={4}
+        style={{
+          padding: "1rem",
+          maxWidth: "31rem",
+          backgroundColor: "#f7f7f7",
+        }}
+      >
         <Box display="flex" justifyContent="space-between" mb={2}>
           <Box display="flex" alignItems="center">
             <StorefrontIcon color="primary" fontSize="large" />
