@@ -12,9 +12,9 @@ import { useCartState } from "../../hooks/useCartState";
 import "./startShopping.css";
 
 const StartShopping = () => {
-  const cartItems = useCartState();
+  const { cartItems } = useCartState();
 
-  const hasItemsInCart = cartItems.cartItems.length > 0;
+  const hasItemsInCart = cartItems.length > 0;
 
   return (
     <div className="startShopping-container">
@@ -30,7 +30,7 @@ const StartShopping = () => {
         </CardContent>
         <CardActions className="startShopping-actions">
           <IconButton color="secondary">
-            <Badge badgeContent={cartItems.cartItems.length} color="error">
+            <Badge badgeContent={cartItems.length} color="error">
               <Link to="/shopping" className="startShopping-link">
                 <ShoppingCartIcon fontSize="large" />
               </Link>

@@ -1,10 +1,10 @@
 import { useProductState } from "../hooks/useProductState";
 
 const Info = () => {
-  const products = useProductState();
+  const { products } = useProductState();
   return (
     <div className="info center">
-      Available products in our store: {products.products.length}
+      Available products in our store: {products.length}
     </div>
   );
 };
