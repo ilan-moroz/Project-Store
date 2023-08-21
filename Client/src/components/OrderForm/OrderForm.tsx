@@ -12,6 +12,7 @@ import { useCartState } from "../../hooks/useCartState";
 import OrderCompletedModal from "../OrderCompletedModal";
 import { createOrder } from "../../api/orderApi";
 import OrderDatePicker from "../OrderDatePicker";
+import dayjs from "dayjs";
 
 const OrderForm = () => {
   // custom hook to get user from the Redux store
@@ -94,7 +95,12 @@ const OrderForm = () => {
             name="deliveryDate"
             control={control}
             render={({ field }) => (
-              <OrderDatePicker value={field.value} onChange={field.onChange} />
+              <OrderDatePicker
+                value={field.value || null}
+                onChange={(date: Date | null) => {
+                  field.onChange(dayjs(date).format("YYYY-MM-DD"));
+                }}
+              />
             )}
           />
           <h2 className="order__header-3 header purpleText">Payments</h2>
