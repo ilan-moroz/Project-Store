@@ -20,3 +20,13 @@ export const getOverbookedDates = async () => {
     throw err;
   }
 };
+
+// get the amount of all orders
+export const getOrdersAmount = async () => {
+  try {
+    const response = await api.get(`order/getOrdersAmount`);
+    if (response.status === 200) return response.data;
+  } catch (err) {
+    throw err;
+  }
+};
