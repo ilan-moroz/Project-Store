@@ -30,6 +30,7 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
   // get the cartId and cartItems and user from a custom hook
   const { cartId, cartItems } = useCartState();
   const { user } = useUserState();
+  const isAdmin = user?.role === "admin";
 
   const dispatch = useDispatch();
 
@@ -67,7 +68,7 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
         key={product._id}
         className="singleCard"
       >
-        {user?.role === "admin" && (
+        {isAdmin && (
           <IconButton
             aria-label="edit"
             sx={{ width: "2rem", position: "absolute", top: 0, right: 0 }}
@@ -92,13 +93,13 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
           <Typography variant="body2" color="text.secondary">
             &#8362; {product.price.toFixed(2)}
           </Typography>
-          {user?.role !== "admin" && (
+          {!isAdmin && (
             <Box sx={{ marginTop: "0.7rem", marginBottom: "-1.5rem" }}>
               <NumberInput onValueChange={setQuantity} quantity={quantity} />
             </Box>
           )}
         </CardContent>
-        {user?.role !== "admin" && (
+        {!isAdmin && (
           <CardActions sx={{ justifyContent: "center" }}>
             <Button
               size="small"
