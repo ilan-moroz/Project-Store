@@ -54,6 +54,10 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
     }
   };
 
+  const editProduct = () => {
+    console.log(product._id);
+  };
+
   return (
     <Box className="cardBox">
       <Card
@@ -75,7 +79,11 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
               justifyContent: "flex-end",
             }}
           >
-            <IconButton aria-label="edit" sx={{ width: "2rem" }}>
+            <IconButton
+              aria-label="edit"
+              sx={{ width: "2rem" }}
+              onClick={editProduct}
+            >
               <EditIcon />
             </IconButton>
           </Box>
