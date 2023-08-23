@@ -5,11 +5,13 @@ import { Product } from "../models/Product";
 interface ProductState {
   products: Product[];
   searchProducts: Product[];
+  editProductId: string | null;
 }
 
 const initialState: ProductState = {
   products: [],
   searchProducts: [],
+  editProductId: null,
 };
 
 // create a slice
@@ -29,6 +31,10 @@ const productSlice = createSlice({
     // Handle the action to search for products
     searchProducts: (state, action: PayloadAction<Product[]>) => {
       state.searchProducts = action.payload;
+    },
+    // Handle the action to edit product
+    editProductId: (state, action: PayloadAction<string | null>) => {
+      state.editProductId = action.payload;
     },
   },
 });
