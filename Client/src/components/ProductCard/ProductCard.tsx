@@ -69,12 +69,16 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
         className="singleCard"
       >
         {isAdmin && (
-          <IconButton
-            aria-label="edit"
-            sx={{ width: "2rem", position: "absolute", top: 0, right: 0 }}
+          <Box
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
           >
-            <EditIcon />
-          </IconButton>
+            <IconButton aria-label="edit" sx={{ width: "2rem" }}>
+              <EditIcon />
+            </IconButton>
+          </Box>
         )}
         <CardMedia
           sx={{ height: 100, backgroundSize: "contain" }}
