@@ -34,9 +34,14 @@ const Navbar = () => {
   const handleLogout = () => {
     dispatch(setLogout());
     dispatch(removeCart());
-    if (finishedOrder) dispatch(setFinishedOrder());
+    hideFinishedOrder();
     handleClose();
     navigate("/");
+  };
+
+  // close the finish order
+  const hideFinishedOrder = () => {
+    if (finishedOrder) dispatch(setFinishedOrder());
   };
 
   const location = useLocation();
@@ -45,7 +50,7 @@ const Navbar = () => {
     <div className="navbar">
       <div className="navbar__logo">
         <Link to="/">
-          <img src={logo} alt="store logo" />
+          <img src={logo} alt="store logo" onClick={hideFinishedOrder} />
         </Link>
       </div>
       {/* show the search only in shopping page */}
