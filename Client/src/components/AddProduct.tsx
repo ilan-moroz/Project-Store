@@ -19,19 +19,9 @@ const AddProduct = () => {
     register,
     handleSubmit,
     reset,
-    setValue,
     formState: { errors },
   } = useForm<AddProductFormValues>({ resolver });
   const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (productToEdit) {
-      setValue("productName", productToEdit.productName);
-      setValue("categoryId", productToEdit.categoryId);
-      setValue("price", productToEdit.price);
-      setValue("imagePath", productToEdit.imagePath);
-    }
-  }, [productToEdit, setValue]);
 
   // what happens when the form is submitted.
   const onSubmit = handleSubmit(async data => {
@@ -60,17 +50,16 @@ const AddProduct = () => {
       <form onSubmit={onSubmit}>
         <FormInput
           register={register("productName")}
+          value={productToEdit?.productName ?? ""}
           name="productName"
           label="Product Name"
           type="text"
           error={!!errors.productName}
           helperText={errors.productName?.message}
-          InputLabelProps={{
-            shrink: true,
-          }}
         />
         <FormInput
           register={register("categoryId")}
+          value={productToEdit?.categoryId ?? ""}
           name="categoryId"
           label="Category Name"
           type="select"
@@ -80,14 +69,12 @@ const AddProduct = () => {
         />
         <FormInput
           register={register("price")}
+          value={productToEdit?.price ? String(productToEdit.price) : ""}
           name="price"
           label="Price"
           type="number"
           error={!!errors.price}
           helperText={errors.price?.message}
-          InputLabelProps={{
-            shrink: true,
-          }}
         />
         <FormInput
           register={register("imagePath")}
