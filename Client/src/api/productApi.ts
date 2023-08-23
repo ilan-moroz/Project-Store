@@ -1,3 +1,4 @@
+import { Product } from "../models/Product";
 import api from "./apiConfig";
 
 // api post request to add product
@@ -26,6 +27,16 @@ export const searchProductsApi = async (searchString: string) => {
     const response = await api.get(
       `product/searchProducts?productName=${searchString}`
     );
+    if (response.status === 200) return response.data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+// api request to update a product
+export const editProduct = async (product: Product) => {
+  try {
+    const response = await api.put(`product/editProduct`, product);
     if (response.status === 200) return response.data;
   } catch (err) {
     throw err;

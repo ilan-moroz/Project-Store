@@ -27,13 +27,20 @@ const AddProduct = () => {
 
   // what happens when the form is submitted.
   const onSubmit = handleSubmit(async data => {
-    try {
-      const formData = prepareFormData(data);
-      const response = await addProductApi(formData);
-      if (response) dispatch(addProduct(response));
-      reset();
-    } catch (err) {
-      console.error(err);
+    if (!productToEdit) {
+      try {
+        const formData = prepareFormData(data);
+        const response = await addProductApi(formData);
+        if (response) dispatch(addProduct(response));
+        reset();
+      } catch (err) {
+        console.error(err);
+      }
+    } else {
+      try {
+      } catch (err) {
+        console.error(err);
+      }
     }
   });
 

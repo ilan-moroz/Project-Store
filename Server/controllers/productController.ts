@@ -1,5 +1,6 @@
 import { Product, ProductModel } from "../Models/Store";
 import { Request, Response } from "express";
+import fs from "fs";
 
 // Function to add a new product to the database
 export const addProduct = async (req: Request, res: Response) => {
@@ -37,10 +38,33 @@ export const getAllProducts = async (req: Request, res: Response) => {
 };
 
 // Function to edit a product in the database
-export const editProduct = async (req: Request, res: Response) => {};
+export const editProduct = async (req: Request, res: Response) => {
+  const product: Product = req.body;
+  const imagePath = req.file!.path;
 
-// Function to delete a product from the database
-export const deleteProduct = async (req: Request, res: Response) => {};
+  try {
+    const existingProduct = await ProductModel.findOne({ _id: product._id });
+    if (!existingProduct) {
+      return res.status(404).json({ message: "product not found" });
+    }
+
+    if (
+      imagePath &&
+      existingProduct.imagePath &&
+      fs.existsSync(existingProduct.imagePath)
+    ) {
+      fs.unlinkSync(existingProduct.imagePath);
+    }
+
+    const updatedProduct = await ProductModel.findByIdAndUpdate(product._id, {
+      ...product,
+      imagePath,
+    });
+    res.status(200).json(updatedProduct);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 // function to search for specific products
 export const searchProducts = async (req: Request, res: Response) => {
