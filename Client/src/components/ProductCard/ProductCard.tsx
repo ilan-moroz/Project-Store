@@ -14,6 +14,9 @@ import { Box } from "@mui/material";
 import { useCartState } from "../../hooks/useCartState";
 import { addItemToCart, updateCartItem } from "../../redux/cartSlice";
 import "./productCard.css";
+import { useUserState } from "../../hooks/useUserState";
+import EditIcon from "@mui/icons-material/Edit";
+import IconButton from "@mui/material/IconButton";
 
 type cardProps = {
   product: Product;
@@ -24,8 +27,9 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
   // Local state for managing quantity of product
   const [quantity, setQuantity] = React.useState(1);
 
-  // get the cartId and cartItems from a custom hook
+  // get the cartId and cartItems and user from a custom hook
   const { cartId, cartItems } = useCartState();
+  const { user } = useUserState();
 
   const dispatch = useDispatch();
 
@@ -63,6 +67,14 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
         key={product._id}
         className="singleCard"
       >
+        {user?.role === "admin" && (
+          <IconButton
+            aria-label="edit"
+            sx={{ width: "2rem", position: "absolute", top: 0, right: 0 }}
+          >
+            <EditIcon />
+          </IconButton>
+        )}
         <CardMedia
           sx={{ height: 100, backgroundSize: "contain" }}
           image={`http://localhost:4000/${product.imagePath}`}
