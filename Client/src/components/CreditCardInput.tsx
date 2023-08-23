@@ -49,7 +49,7 @@ const CreditCardInput = ({
   };
 
   return (
-    <Grid container>
+    <Grid container sx={{ mt: -2, mb: 2 }}>
       <Grid item xs={6}>
         <Box marginBottom={2}>
           <TextField
