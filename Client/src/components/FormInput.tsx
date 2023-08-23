@@ -1,4 +1,4 @@
-import { TextField, MenuItem, Box } from "@mui/material";
+import { TextField, MenuItem, Box, InputLabelProps } from "@mui/material";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { capitalizeWords } from "../utils/capitalizeWords";
 
@@ -10,6 +10,7 @@ interface FormInputProps {
   type: string;
   helperText: string | undefined;
   selectOptions?: string[]; // array of select options
+  InputLabelProps?: Partial<InputLabelProps>;
 }
 
 // reusable form input component
@@ -21,6 +22,7 @@ const FormInput: React.FC<FormInputProps> = ({
   type,
   helperText,
   selectOptions,
+  InputLabelProps,
 }) => {
   // If it's a select type input
   if (type === "select" && selectOptions) {
@@ -79,6 +81,7 @@ const FormInput: React.FC<FormInputProps> = ({
       label={label}
       variant="outlined"
       fullWidth
+      InputLabelProps={InputLabelProps}
       error={error}
       helperText={helperText}
       inputProps={{ step: "0.01" }}

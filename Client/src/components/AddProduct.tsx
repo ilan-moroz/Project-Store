@@ -8,16 +8,30 @@ import { prepareFormData } from "../utils/prepareFormData";
 import Button from "./Button/Button";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../redux/productSlice";
+import { useProductState } from "../hooks/useProductState";
+import React from "react";
 
 const AddProduct = () => {
+  // check if there product to edit
+  const { productToEdit } = useProductState();
+
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<AddProductFormValues>({ resolver });
-
   const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (productToEdit) {
+      setValue("productName", productToEdit.productName);
+      setValue("categoryId", productToEdit.categoryId);
+      setValue("price", productToEdit.price);
+      setValue("imagePath", productToEdit.imagePath);
+    }
+  }, [productToEdit, setValue]);
 
   // what happens when the form is submitted.
   const onSubmit = handleSubmit(async data => {
@@ -51,6 +65,9 @@ const AddProduct = () => {
           type="text"
           error={!!errors.productName}
           helperText={errors.productName?.message}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
         <FormInput
           register={register("categoryId")}
@@ -68,6 +85,9 @@ const AddProduct = () => {
           type="number"
           error={!!errors.price}
           helperText={errors.price?.message}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
         <FormInput
           register={register("imagePath")}
