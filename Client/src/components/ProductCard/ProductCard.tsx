@@ -92,26 +92,30 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
           <Typography variant="body2" color="text.secondary">
             &#8362; {product.price.toFixed(2)}
           </Typography>
-          <Box sx={{ marginTop: "0.7rem", marginBottom: "-1.5rem" }}>
-            <NumberInput onValueChange={setQuantity} quantity={quantity} />
-          </Box>
+          {user?.role !== "admin" && (
+            <Box sx={{ marginTop: "0.7rem", marginBottom: "-1.5rem" }}>
+              <NumberInput onValueChange={setQuantity} quantity={quantity} />
+            </Box>
+          )}
         </CardContent>
-        <CardActions sx={{ justifyContent: "center" }}>
-          <Button
-            size="small"
-            sx={{ color: "rgb(70,23,155)" }}
-            onClick={() => {
-              addToCart({
-                productId: product._id!,
-                generalPrice: product.price * quantity,
-                quantity: quantity,
-                cartId: cartId,
-              });
-            }}
-          >
-            Add to cart
-          </Button>
-        </CardActions>
+        {user?.role !== "admin" && (
+          <CardActions sx={{ justifyContent: "center" }}>
+            <Button
+              size="small"
+              sx={{ color: "rgb(70,23,155)" }}
+              onClick={() => {
+                addToCart({
+                  productId: product._id!,
+                  generalPrice: product.price * quantity,
+                  quantity: quantity,
+                  cartId: cartId,
+                });
+              }}
+            >
+              Add to cart
+            </Button>
+          </CardActions>
+        )}
       </Card>
     </Box>
   );
