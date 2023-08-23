@@ -84,7 +84,11 @@ const AddProduct = () => {
           error={!!errors.imagePath}
           helperText={errors.imagePath?.message}
         />
-        <Button type="submit" text="add product" color=" rgb(103, 32, 180)" />
+        <Button
+          type="submit"
+          text={productToEdit ? "edit product" : "add product"}
+          color=" rgb(103, 32, 180)"
+        />
       </form>
     </div>
   );
