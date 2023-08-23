@@ -1,16 +1,17 @@
-import { TextField, MenuItem, Box } from "@mui/material";
-import { UseFormRegisterReturn } from "react-hook-form";
+import { TextField, MenuItem, Box, InputLabelProps } from "@mui/material";
+import { Controller, UseFormRegisterReturn } from "react-hook-form";
 import { capitalizeWords } from "../utils/capitalizeWords";
 
 interface FormInputProps {
   register?: UseFormRegisterReturn;
+  control?: any;
   name: string;
   label: string;
   error: boolean;
   type: string;
   helperText: string | undefined;
   selectOptions?: string[]; // array of select options
-  value?: string;
+  InputLabelProps?: Partial<InputLabelProps>;
 }
 
 // reusable form input component
@@ -22,35 +23,40 @@ const FormInput: React.FC<FormInputProps> = ({
   type,
   helperText,
   selectOptions,
-  value,
+  InputLabelProps,
+  control,
 }) => {
   // If it's a select type input
   if (type === "select" && selectOptions) {
     return (
-      <TextField
-        {...register}
-        value={value}
+      <Controller
         name={name}
-        select
-        label={label}
-        variant="outlined"
-        fullWidth
-        error={error}
-        helperText={helperText}
-        sx={{ marginBottom: "1.5rem" }}
-      >
-        {selectOptions.map((option: any, index: number) => (
-          <MenuItem
-            // check if an array or object is provided
-            key={typeof option === "object" ? option._id : index}
-            value={typeof option === "object" ? option._id : option}
+        control={control}
+        defaultValue=""
+        render={({ field }) => (
+          <TextField
+            {...field}
+            label={label}
+            select
+            fullWidth
+            error={error}
+            helperText={helperText}
+            InputLabelProps={InputLabelProps}
+            sx={{ mb: "1.5rem" }}
           >
-            {typeof option === "object"
-              ? option.categoryName
-              : capitalizeWords(option)}
-          </MenuItem>
-        ))}
-      </TextField>
+            {selectOptions.map((option: any, index: number) => (
+              <MenuItem
+                key={typeof option === "object" ? option._id : index}
+                value={typeof option === "object" ? option._id : option}
+              >
+                {typeof option === "object"
+                  ? option.categoryName
+                  : capitalizeWords(option)}
+              </MenuItem>
+            ))}
+          </TextField>
+        )}
+      />
     );
   }
 
@@ -79,8 +85,8 @@ const FormInput: React.FC<FormInputProps> = ({
       name={name}
       type={type}
       label={label}
-      value={value}
       variant="outlined"
+      InputLabelProps={InputLabelProps}
       fullWidth
       error={error}
       helperText={helperText}

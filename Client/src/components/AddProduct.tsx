@@ -19,6 +19,8 @@ const AddProduct = () => {
     register,
     handleSubmit,
     reset,
+    setValue,
+    control,
     formState: { errors },
   } = useForm<AddProductFormValues>({ resolver });
   const dispatch = useDispatch();
@@ -38,6 +40,15 @@ const AddProduct = () => {
   // Get the categories using a custom hook
   const catagories = useCategory();
 
+  React.useEffect(() => {
+    if (productToEdit) {
+      setValue("productName", productToEdit.productName);
+      setValue("price", productToEdit.price);
+      setValue("categoryId", productToEdit.categoryId);
+      setValue("imagePath", productToEdit.imagePath);
+    }
+  }, [productToEdit, setValue]);
+
   return (
     <div
       className="addProduct"
@@ -50,45 +61,55 @@ const AddProduct = () => {
       <form onSubmit={onSubmit}>
         <FormInput
           register={register("productName")}
-          value={productToEdit?.productName ?? ""}
           name="productName"
           label="Product Name"
           type="text"
           error={!!errors.productName}
           helperText={errors.productName?.message}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
         <FormInput
-          register={register("categoryId")}
-          value={productToEdit?.categoryId ?? ""}
           name="categoryId"
           label="Category Name"
           type="select"
+          control={control}
           selectOptions={catagories}
           error={!!errors.categoryId}
           helperText={errors.categoryId?.message}
         />
         <FormInput
           register={register("price")}
-          value={productToEdit?.price ? String(productToEdit.price) : ""}
           name="price"
           label="Price"
           type="number"
           error={!!errors.price}
           helperText={errors.price?.message}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
         <FormInput
           register={register("imagePath")}
           name="imagePath"
-          label="Product image"
+          label={
+            productToEdit
+              ? "Select new image or leave it empty"
+              : "Product image"
+          }
           type="file"
           error={!!errors.imagePath}
           helperText={errors.imagePath?.message}
         />
-        <Button
-          type="submit"
-          text={productToEdit ? "edit product" : "add product"}
-          color=" rgb(103, 32, 180)"
-        />
+        <div className="login__form--buttons">
+          <Button
+            type="submit"
+            text={productToEdit ? "edit product" : "add product"}
+            color=" rgb(103, 32, 180)"
+          />
+          <Button type="reset" text="cancel" color=" rgb(109, 112, 104)" />
+        </div>
       </form>
     </div>
   );
