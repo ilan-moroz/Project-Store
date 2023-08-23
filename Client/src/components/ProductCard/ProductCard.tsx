@@ -17,6 +17,7 @@ import "./productCard.css";
 import { useUserState } from "../../hooks/useUserState";
 import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
+import { productToEdit } from "../../redux/productSlice";
 
 type cardProps = {
   product: Product;
@@ -54,8 +55,8 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
     }
   };
 
-  const editProduct = () => {
-    console.log(product._id);
+  const handleEditProduct = () => {
+    dispatch(productToEdit(product));
   };
 
   return (
@@ -82,7 +83,7 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
             <IconButton
               aria-label="edit"
               sx={{ width: "2rem" }}
-              onClick={editProduct}
+              onClick={handleEditProduct}
             >
               <EditIcon />
             </IconButton>
