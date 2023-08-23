@@ -34,6 +34,7 @@ const Register = () => {
   // Set up form handling using react-hook-form
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterFormValues>({
@@ -42,7 +43,7 @@ const Register = () => {
 
   // Hook to handle registration steps
   const { firstStepSubmit, secondStepSubmit, finalSubmit } = useRegister();
-  // Hook to to get all cities from api 
+  // Hook to to get all cities from api
   const cities = useCities();
 
   // Handler for the first step form submission
@@ -152,10 +153,10 @@ const Register = () => {
             <div className="secondStepInputs">
               <form onSubmit={secondStepHandle}>
                 <FormInput
-                  register={register("city")}
                   name="city"
                   label="City"
                   type="select"
+                  control={control}
                   selectOptions={cities}
                   error={!!errors.city}
                   helperText={errors.city?.message}
