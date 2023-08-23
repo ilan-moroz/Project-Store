@@ -27,6 +27,7 @@ const productSlice = createSlice({
     // Handle the action to add a product
     addProduct: (state, action: PayloadAction<Product>) => {
       state.products.push(action.payload);
+      state.searchProducts.push(action.payload);
     },
     // Handle the action to search for products
     searchProducts: (state, action: PayloadAction<Product[]>) => {
