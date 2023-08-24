@@ -50,3 +50,21 @@ export const getOrdersAmount = async (req: Request, res: Response) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// get last order of user by user id
+export const getLastOrder = async (req: Request, res: Response) => {
+  const { userId } = req.params;
+  try {
+    const lastOrder = await OrderModel.find({ customerId: userId }).sort({
+      createdAt: -1,
+    });
+
+    if (!lastOrder) {
+      return res.status(404).json({ message: "No order found for this user." });
+    }
+
+    res.status(200).json(lastOrder);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+};
