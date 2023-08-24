@@ -10,6 +10,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useDispatch } from "react-redux";
 import { setFinishedOrder } from "../../redux/cartSlice";
 import { AnimatePresence } from "framer-motion";
+import useSearchQuery from "../../hooks/useSearchQuery";
 
 const Cart = () => {
   // Local state for cart total price
@@ -54,28 +55,8 @@ const Cart = () => {
     dispatch(setFinishedOrder());
   };
 
-  // Local state to capture and store search queries
-  const [searchQuery, setSearchQuery] = React.useState("");
-
-  //capture keypress and update the search query
-  React.useEffect(() => {
-    let timer: NodeJS.Timeout;
-    const handleKeyPress = (e: KeyboardEvent) => {
-      setSearchQuery(prevQuery => prevQuery + e.key);
-      // Clear any existing timer before setting a new one
-      if (timer) {
-        clearTimeout(timer);
-      }
-      timer = setTimeout(() => {
-        setSearchQuery("");
-      }, 5000);
-    };
-    window.addEventListener("keypress", handleKeyPress);
-    return () => {
-      window.removeEventListener("keypress", handleKeyPress);
-      clearTimeout(timer); // Clear the timer when the component unmounts
-    };
-  }, []);
+  // get the search query string from a custom hook
+  const searchQuery = useSearchQuery();
 
   // check if cart is empty
   const isCartEmpty = cartItems.length === 0;
