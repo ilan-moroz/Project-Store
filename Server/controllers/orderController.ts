@@ -62,7 +62,7 @@ export const getLastOrder = async (req: Request, res: Response) => {
       .select("orderExecutionDate -_id");
 
     if (!lastOrder) {
-      return res.status(404).json({ message: "No order found for this user." });
+      return res.status(200).json({ message: "No order found for this user." });
     }
 
     res.status(200).json(lastOrder);
