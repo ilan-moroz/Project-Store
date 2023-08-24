@@ -13,7 +13,7 @@ const useTotalCartPrice = (cartItems: CartItem[]) => {
     setTotalPrice(computedTotal);
   }, [cartItems]); // Recompute the total only if cartItems change
 
-  return totalPrice;
+  return totalPrice.toFixed(2);
 };
 
 export default useTotalCartPrice;
