@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 import { deleteAllCartItemsApi, getCartItems } from "../api/cartApi";
-
 import { useCallback } from "react";
 import { deleteAllCartItems, setCartItems } from "../redux/cartSlice";
 

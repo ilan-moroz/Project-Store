@@ -2,7 +2,7 @@ import React from "react";
 import ItemCart from "../ItemCart/ItemCart";
 import { CartItem } from "../../models/CartItem";
 import "./cart.css";
-import { Button } from "@mui/material";
+import { Button, LinearProgress } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useCartState } from "../../hooks/useCartState";
 import { useCartApi } from "../../hooks/useCartApi";
@@ -12,10 +12,12 @@ import { setFinishedOrder } from "../../redux/cartSlice";
 import { AnimatePresence } from "framer-motion";
 
 const Cart = () => {
-  // Local state for cart total
-  const [total, setTotal] = React.useState(0);
+  // Local state for cart total price
+  const [totalPrice, setTotalPrice] = React.useState(0);
+  // local state for loading
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  // custom hook to get cartId and cartItems from the Redux store
+  //custom hook to get cartId, cartItems, and finishedOrder from the Redux store
   const { cartId, cartItems, finishedOrder } = useCartState();
 
   // custom hook to get functions for interacting with the API
@@ -25,27 +27,40 @@ const Cart = () => {
 
   // Fetch cart items when the cartId changes
   React.useEffect(() => {
-    getAllCartItems(cartId);
+    const fetchItems = async () => {
+      setIsLoading(true);
+      // Promise to fetch the items
+      const fetchPromise = getAllCartItems(cartId);
+      // Promise to delay for 1 second
+      const delayPromise = new Promise(resolve => setTimeout(resolve, 1000));
+      // Wait for both promises to complete before setting loading to false
+      await Promise.all([fetchPromise, delayPromise]);
+      setIsLoading(false);
+    };
+    fetchItems();
   }, [cartId, getAllCartItems]);
 
-  // Recalculate total whenever cart items change
+  // Recalculate total price whenever cart items change
   React.useEffect(() => {
     const computedTotal = cartItems.reduce(
       (acc, item) => acc + item.generalPrice,
       0
     );
-    setTotal(computedTotal);
+    setTotalPrice(computedTotal);
   }, [cartItems]);
 
+  // Handler to mark the order as finished
   const handleFinishOrder = () => {
     dispatch(setFinishedOrder());
   };
 
+  // Local state to capture and store search queries
   const [searchQuery, setSearchQuery] = React.useState("");
 
+  //capture keypress and update the search query
   React.useEffect(() => {
     let timer: NodeJS.Timeout;
-    const handleKeyPress = (e: any) => {
+    const handleKeyPress = (e: KeyboardEvent) => {
       setSearchQuery(prevQuery => prevQuery + e.key);
       // Clear any existing timer before setting a new one
       if (timer) {
@@ -62,52 +77,67 @@ const Cart = () => {
     };
   }, []);
 
+  // check if cart is empty
+  const isCartEmpty = cartItems.length === 0;
+
   return (
     <div className="cartItems">
-      <div>
-        <h2 className="marginLeft">Your Cart</h2>
-        {/* show when cart is empty */}
-        {cartItems.length === 0 && (
-          <div className="cartItems__empty marginLeft">Your cart is empty</div>
-        )}
-        {/* map all cart items to display in the cart */}
-        <AnimatePresence>
-          {cartItems.map((item: CartItem) => (
-            <ItemCart item={item} key={item._id} searchQuery={searchQuery} />
-          ))}
-        </AnimatePresence>
-      </div>
-      <div className="cartItems__total marginLeft">
-        <h3>Total: &#8362; {total.toFixed(2)}</h3>
-        {cartItems.length !== 0 && (
-          <Button
-            variant="contained"
-            endIcon={<ShoppingCartIcon />}
-            size="small"
-            sx={{
-              backgroundColor: "rgb(103, 32, 180)",
-              "&:hover": {
-                backgroundColor: "rgb(130, 93, 242)",
-              },
-              marginRight: "0.3rem",
-            }}
-            onClick={handleFinishOrder}
-          >
-            {!finishedOrder ? "Order" : "Back To Shopping"}
-          </Button>
-        )}
-        {/* show only where there is items in the cart */}
-        {cartItems.length !== 0 && !finishedOrder && (
-          <Button
-            endIcon={<DeleteForeverIcon />}
-            size="small"
-            color="error"
-            onClick={handleDeleteCart}
-          >
-            Clear Cart
-          </Button>
-        )}
-      </div>
+      {isLoading ? (
+        <LinearProgress />
+      ) : (
+        <>
+          <div>
+            <h2 className="marginLeft">Your Cart</h2>
+            {/* show when cart is empty */}
+            {isCartEmpty && (
+              <div className="cartItems__empty marginLeft">
+                Your cart is empty
+              </div>
+            )}
+            {/* map all cart items to display in the cart */}
+            <AnimatePresence>
+              {cartItems.map((item: CartItem) => (
+                <ItemCart
+                  item={item}
+                  key={item._id}
+                  searchQuery={searchQuery}
+                />
+              ))}
+            </AnimatePresence>
+          </div>
+          <div className="cartItems__total marginLeft">
+            <h3>Total: &#8362; {totalPrice.toFixed(2)}</h3>
+            {!isCartEmpty && (
+              <Button
+                variant="contained"
+                endIcon={<ShoppingCartIcon />}
+                size="small"
+                sx={{
+                  backgroundColor: "rgb(103, 32, 180)",
+                  "&:hover": {
+                    backgroundColor: "rgb(130, 93, 242)",
+                  },
+                  marginRight: "0.3rem",
+                }}
+                onClick={handleFinishOrder}
+              >
+                {!finishedOrder ? "Order" : "Back To Shopping"}
+              </Button>
+            )}
+            {/* show only where there is items in the cart */}
+            {!isCartEmpty && !finishedOrder && (
+              <Button
+                endIcon={<DeleteForeverIcon />}
+                size="small"
+                color="error"
+                onClick={handleDeleteCart}
+              >
+                Clear Cart
+              </Button>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 };
