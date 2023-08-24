@@ -15,9 +15,11 @@ import useTotalCartPrice from "../../hooks/useTotalCartPrice";
 import { rearrangeDate } from "../../utils/rearrangeDate";
 import React from "react";
 import { getLastOrder } from "../../api/orderApi";
+import { useUserState } from "../../hooks/useUserState";
 
 const StartShopping = () => {
   const { cartItems, cart } = useCartState();
+  const { user } = useUserState();
 
   const totalPrice = useTotalCartPrice(cartItems);
 
@@ -46,7 +48,7 @@ const StartShopping = () => {
             component="div"
             className="startShopping-text"
           >
-            Welcome back!
+            Welcome{user && user.firstName ? `, ${user.firstName}` : ""}!
             <Box>{hasItemsInCart ? "Continue" : "Start"} shopping now.</Box>
           </Typography>
           {hasItemsInCart ? (
