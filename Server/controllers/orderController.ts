@@ -55,9 +55,11 @@ export const getOrdersAmount = async (req: Request, res: Response) => {
 export const getLastOrder = async (req: Request, res: Response) => {
   const { userId } = req.params;
   try {
-    const lastOrder = await OrderModel.find({ customerId: userId }).sort({
-      createdAt: -1,
-    });
+    const lastOrder = await OrderModel.findOne({ customerId: userId })
+      .sort({
+        orderExecutionDate: -1,
+      })
+      .select("orderExecutionDate -_id");
 
     if (!lastOrder) {
       return res.status(404).json({ message: "No order found for this user." });

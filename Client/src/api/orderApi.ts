@@ -30,3 +30,13 @@ export const getOrdersAmount = async () => {
     throw err;
   }
 };
+
+// get the last order of the user
+export const getLastOrder = async (userId: string) => {
+  try {
+    const response = await api.get(`order/getLastOrder/${userId}`);
+    if (response.status === 200) return response.data;
+  } catch (err) {
+    throw err;
+  }
+};
