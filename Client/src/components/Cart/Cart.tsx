@@ -11,12 +11,11 @@ import { useDispatch } from "react-redux";
 import { setFinishedOrder } from "../../redux/cartSlice";
 import { AnimatePresence } from "framer-motion";
 import useSearchQuery from "../../hooks/useSearchQuery";
+import useLoading from "../../hooks/useLoading";
 
 const Cart = () => {
   // Local state for cart total price
   const [totalPrice, setTotalPrice] = React.useState(0);
-  // local state for loading
-  const [isLoading, setIsLoading] = React.useState(false);
 
   //custom hook to get cartId, cartItems, and finishedOrder from the Redux store
   const { cartId, cartItems, finishedOrder } = useCartState();
@@ -27,18 +26,8 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   // Fetch cart items when the cartId changes
-  React.useEffect(() => {
-    const fetchItems = async () => {
-      setIsLoading(true);
-      // Promise to fetch the items
-      const fetchPromise = getAllCartItems(cartId);
-      // Promise to delay for 1 second
-      const delayPromise = new Promise(resolve => setTimeout(resolve, 1000));
-      // Wait for both promises to complete before setting loading to false
-      await Promise.all([fetchPromise, delayPromise]);
-      setIsLoading(false);
-    };
-    fetchItems();
+  const isLoading = useLoading(async () => {
+    await getAllCartItems(cartId);
   }, [cartId, getAllCartItems]);
 
   // Recalculate total price whenever cart items change
