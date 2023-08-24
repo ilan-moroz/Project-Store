@@ -2,7 +2,7 @@ import { CartItem } from "../../models/CartItem";
 import "./itemCart.css";
 import NumberInput from "../NumberInput";
 import React from "react";
-import { Button, IconButton } from "@mui/material";
+import { Button, Grow, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { useProductState } from "../../hooks/useProductState";
@@ -85,22 +85,24 @@ const ItemCart: React.FC<cardProps> = ({ item, searchQuery }) => {
       </div>
       {showButton && !finishedOrder && (
         <div className="updateButton">
-          <Button
-            variant="outlined"
-            startIcon={<EditIcon />}
-            size="small"
-            color="success"
-            sx={{
-              padding: "2px 5px",
-              fontSize: "0.7rem",
-            }}
-            onClick={() => {
-              handleUpdateItem(item, quantity, product!.price);
-              setShowButton(false);
-            }}
-          >
-            Update
-          </Button>
+          <Grow in>
+            <Button
+              variant="outlined"
+              startIcon={<EditIcon />}
+              size="small"
+              color="success"
+              sx={{
+                padding: "2px 5px",
+                fontSize: "0.7rem",
+              }}
+              onClick={() => {
+                handleUpdateItem(item, quantity, product!.price);
+                setShowButton(false);
+              }}
+            >
+              Update
+            </Button>
+          </Grow>
         </div>
       )}
       <div className="cartItem__price">
