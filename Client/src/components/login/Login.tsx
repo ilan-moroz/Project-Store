@@ -53,11 +53,11 @@ export const Login = () => {
   });
 
   return (
-    <div className="login">
+    <>
       {user ? (
         <StartShopping />
       ) : (
-        <>
+        <div className="login">
           <div className="login__header center">
             <Typography
               variant="h3"
@@ -104,8 +104,8 @@ export const Login = () => {
               Don't have an account yet? <Link to="/register">Register!</Link>
             </div>
           </div>
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 };

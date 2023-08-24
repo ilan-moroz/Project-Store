@@ -32,13 +32,14 @@ const StartShopping = () => {
             component="div"
             className="startShopping-text"
           >
-            Welcome back! {hasItemsInCart ? "Continue" : "Start"} shopping now.
+            Welcome back!
+            <Box>{hasItemsInCart ? "Continue" : "Start"} shopping now.</Box>
           </Typography>
           {hasItemsInCart && (
-            <>
+            <Box sx={{ mt: 2 }}>
               <Box>Cart Created at: {cartCreatedAt}</Box>
-              <Box>Current Cart Price: ${totalPrice}</Box>
-            </>
+              <Box>Current Cart Price: &#8362;{totalPrice}</Box>
+            </Box>
           )}
         </CardContent>
         <CardActions className="startShopping-actions">
