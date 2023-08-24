@@ -16,7 +16,7 @@ type CategoryProps = {
 
 const CategoryNavbar: React.FC<CategoryProps> = ({ onSelectCategory }) => {
   // get all categories from a custom hook
-  const catagories = useCategory();
+  const categories = useCategory();
 
   // State to track the currently active category
   const { selectedCategory } = useCategoryState();
@@ -48,7 +48,7 @@ const CategoryNavbar: React.FC<CategoryProps> = ({ onSelectCategory }) => {
   return (
     <div className="categoryNavbar">
       {/* map all categories to display */}
-      {catagories.map((category: Category) => (
+      {categories.map((category: Category) => (
         <ul
           // Apply 'active' class if the category is currently active
           className={`category ${

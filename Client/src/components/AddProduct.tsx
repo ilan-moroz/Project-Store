@@ -58,7 +58,7 @@ const AddProduct = () => {
   });
 
   // Get the categories using a custom hook
-  const catagories = useCategory();
+  const categories = useCategory();
 
   React.useEffect(() => {
     if (productToEdit) {
@@ -95,7 +95,7 @@ const AddProduct = () => {
           label="Category Name"
           type="select"
           control={control}
-          selectOptions={catagories}
+          selectOptions={categories}
           error={!!errors.categoryId}
           helperText={errors.categoryId?.message}
         />

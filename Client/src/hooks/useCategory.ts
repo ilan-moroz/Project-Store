@@ -3,7 +3,7 @@ import { getAllCategories } from "../api/categoryApi";
 
 // hook to get all categories from database
 export const useCategory = () => {
-  const [catagories, setCategories] = React.useState([]);
+  const [categories, setCategories] = React.useState([]);
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -16,5 +16,5 @@ export const useCategory = () => {
     };
     fetchData();
   }, []);
-  return catagories;
+  return categories;
 };
