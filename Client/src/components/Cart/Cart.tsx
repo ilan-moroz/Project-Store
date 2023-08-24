@@ -67,7 +67,7 @@ const Cart = () => {
             </AnimatePresence>
           </div>
           <div className="cartItems__total marginLeft">
-            <h3>Total: &#8362; {totalPrice.toFixed(2)}</h3>
+            <h3>Total: &#8362; {totalPrice}</h3>
             {!isCartEmpty && (
               <Button
                 variant="contained"
