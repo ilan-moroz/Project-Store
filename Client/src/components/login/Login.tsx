@@ -15,10 +15,16 @@ import Button from "../Button/Button";
 import { checkShoppingCart } from "../../api/cartApi";
 import { useUserState } from "../../hooks/useUserState";
 import { setCart } from "../../redux/cartSlice";
+import { useCartState } from "../../hooks/useCartState";
+import { useCartApi } from "../../hooks/useCartApi";
 
 export const Login = () => {
   // custom hook to get user from the Redux store
   const { user } = useUserState();
+  const { cartId } = useCartState();
+
+  // custom hook to get functions for interacting with the API
+  const { getAllCartItems } = useCartApi(cartId);
 
   const {
     register,
@@ -40,7 +46,10 @@ export const Login = () => {
         // check for cart only for user
         if (response.user.role === "user") {
           const res = await checkShoppingCart(response.user._id);
-          if (res) dispatch(setCart(res));
+          if (res) {
+            dispatch(setCart(res));
+            getAllCartItems(res._id);
+          }
           // if admin logged in navigate to shopping page
         } else navigate("/shopping");
         reset();
