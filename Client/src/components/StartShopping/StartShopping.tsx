@@ -18,17 +18,20 @@ import { getLastOrder } from "../../api/orderApi";
 import { useUserState } from "../../hooks/useUserState";
 
 const StartShopping = () => {
+  // Fetch cart and user state using custom hooks
   const { cartItems, cart } = useCartState();
   const { user } = useUserState();
 
+  // Calculate total price of items in the cart
   const totalPrice = useTotalCartPrice(cartItems);
-
+  // check if there are items in the cart
   const hasItemsInCart = cartItems.length > 0;
-
+  // Re-arrange cart creation date if items exist in the cart
   const cartCreatedAt = hasItemsInCart ? rearrangeDate(cart!.createdAt) : null;
-
+  // State to keep track of the last order made by the user
   const [lastOrder, setLastOrder] = React.useState("");
 
+  // Effect to fetch the last order details when the cart changes
   React.useEffect(() => {
     const userLastOrder = async () => {
       if (cart && cart.customerId) {
