@@ -68,16 +68,18 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          height: "17rem",
+          height: "18rem",
+          boxShadow: "0px 5px 10px rgba(0,0,0,0.1)",
         }}
         key={product._id}
         className="singleCard"
       >
         {isAdmin && (
           <Box
-            style={{
+            sx={{
               display: "flex",
               justifyContent: "flex-end",
+              padding: "0.5rem",
             }}
           >
             <IconButton
@@ -90,7 +92,7 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
           </Box>
         )}
         <CardMedia
-          sx={{ height: 100, backgroundSize: "contain" }}
+          sx={{ height: 120, backgroundSize: "contain" }}
           image={`http://localhost:4000/${product.imagePath}`}
           title={product.productName}
         />
@@ -99,15 +101,19 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
             gutterBottom
             variant="h5"
             component="div"
-            sx={{ fontSize: "1rem" }}
+            sx={{ fontSize: "1.2rem", fontWeight: "500" }}
           >
             {product.productName}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ fontWeight: "bold" }}
+          >
             &#8362; {product.price.toFixed(2)}
           </Typography>
           {!isAdmin && (
-            <Box sx={{ marginTop: "0.7rem", marginBottom: "-1.5rem" }}>
+            <Box sx={{ marginTop: "1rem", marginBottom: "-1rem" }}>
               <NumberInput onValueChange={setQuantity} quantity={quantity} />
             </Box>
           )}
@@ -115,8 +121,14 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
         {!isAdmin && (
           <CardActions sx={{ justifyContent: "center" }}>
             <Button
-              size="small"
-              sx={{ color: "rgb(70,23,155)" }}
+              size="medium"
+              sx={{
+                color: "white",
+                backgroundColor: "rgb(103, 32, 180)",
+                "&:hover": {
+                  backgroundColor: "rgb(130, 93, 242)",
+                },
+              }}
               onClick={() => {
                 addToCart({
                   productId: product._id!,
