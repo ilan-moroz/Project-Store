@@ -12,16 +12,16 @@ import { setFinishedOrder } from "../../redux/cartSlice";
 import { AnimatePresence } from "framer-motion";
 import useSearchQuery from "../../hooks/useSearchQuery";
 import useLoading from "../../hooks/useLoading";
+import useTotalCartPrice from "../../hooks/useTotalCartPrice";
 
 const Cart = () => {
-  // Local state for cart total price
-  const [totalPrice, setTotalPrice] = React.useState(0);
-
   //custom hook to get cartId, cartItems, and finishedOrder from the Redux store
   const { cartId, cartItems, finishedOrder } = useCartState();
 
   // custom hook to get functions for interacting with the API
   const { getAllCartItems, handleDeleteCart } = useCartApi(cartId);
+
+  const totalPrice = useTotalCartPrice(cartItems);
 
   const dispatch = useDispatch();
 
@@ -29,15 +29,6 @@ const Cart = () => {
   const isLoading = useLoading(async () => {
     await getAllCartItems(cartId);
   }, [cartId, getAllCartItems]);
-
-  // Recalculate total price whenever cart items change
-  React.useEffect(() => {
-    const computedTotal = cartItems.reduce(
-      (acc, item) => acc + item.generalPrice,
-      0
-    );
-    setTotalPrice(computedTotal);
-  }, [cartItems]);
 
   // Handler to mark the order as finished
   const handleFinishOrder = () => {
