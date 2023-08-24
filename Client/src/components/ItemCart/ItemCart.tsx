@@ -55,7 +55,7 @@ const ItemCart: React.FC<cardProps> = ({ item, searchQuery }) => {
     });
 
   return (
-    // animate the cart item
+    // animate the cart
     <motion.div
       className="cartItem"
       initial={{ opacity: 0, x: -250 }}
