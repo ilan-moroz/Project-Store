@@ -2,6 +2,9 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/Store";
 
 export const useCartState = () => {
+  // get the cart state
+  const cart = useSelector((state: RootState) => state.shoppingCart.cart);
+
   // Get cartId from the Redux store
   const cartId =
     useSelector((state: RootState) => state.shoppingCart.cart?._id) ?? "";
@@ -16,5 +19,5 @@ export const useCartState = () => {
     (state: RootState) => state.shoppingCart.finishedOrder
   );
 
-  return { cartId, cartItems, finishedOrder };
+  return { cartId, cartItems, finishedOrder, cart };
 };

@@ -5,16 +5,23 @@ import {
   IconButton,
   Typography,
   Badge,
+  Box,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
 import { useCartState } from "../../hooks/useCartState";
 import "./startShopping.css";
+import useTotalCartPrice from "../../hooks/useTotalCartPrice";
+import { rearrangeDate } from "../../utils/rearrangeDate";
 
 const StartShopping = () => {
-  const { cartItems } = useCartState();
+  const { cartItems, cart } = useCartState();
+
+  const totalPrice = useTotalCartPrice(cartItems);
 
   const hasItemsInCart = cartItems.length > 0;
+
+  const cartCreatedAt = rearrangeDate(cart!.createdAt);
 
   return (
     <div className="startShopping-container">
@@ -27,6 +34,12 @@ const StartShopping = () => {
           >
             Welcome back! {hasItemsInCart ? "Continue" : "Start"} shopping now.
           </Typography>
+          {hasItemsInCart && (
+            <>
+              <Box>Cart Created at: {cartCreatedAt}</Box>
+              <Box>Current Cart Price: ${totalPrice}</Box>
+            </>
+          )}
         </CardContent>
         <CardActions className="startShopping-actions">
           <IconButton color="secondary">
