@@ -34,7 +34,7 @@ export const searchProductsApi = async (searchString: string) => {
 };
 
 // api request to update a product
-export const editProduct = async (
+export const editProductApi = async (
   product: Product | FormData,
   productId: string
 ) => {

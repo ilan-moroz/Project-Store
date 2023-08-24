@@ -33,14 +33,30 @@ const productSlice = createSlice({
     searchProducts: (state, action: PayloadAction<Product[]>) => {
       state.searchProducts = action.payload;
     },
-    // Handle the action to edit product
+    // set the product to update in the store
     productToEdit: (state, action: PayloadAction<Product | null>) => {
       state.productToEdit = action.payload;
+    },
+    // handle the action to update a product
+    editProduct: (state, action: PayloadAction<Product>) => {
+      const index = state.products.findIndex(
+        product => product._id === action.payload._id
+      );
+      if (index !== -1) {
+        state.products[index] = action.payload;
+        state.searchProducts[index] = action.payload;
+        state.productToEdit = null;
+      }
     },
   },
 });
 
-export const { getAllProducts, addProduct, searchProducts, productToEdit } =
-  productSlice.actions;
+export const {
+  getAllProducts,
+  addProduct,
+  searchProducts,
+  productToEdit,
+  editProduct,
+} = productSlice.actions;
 
 export default productSlice.reducer;

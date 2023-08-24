@@ -3,11 +3,11 @@ import { resolver } from "../validators/addProductValidators";
 import { AddProductFormValues } from "../types/AddProductFormValues";
 import FormInput from "./FormInput";
 import { useCategory } from "../hooks/useCategory";
-import { addProductApi, editProduct } from "../api/productApi";
+import { addProductApi, editProductApi } from "../api/productApi";
 import { prepareFormData } from "../utils/prepareFormData";
 import Button from "./Button/Button";
 import { useDispatch } from "react-redux";
-import { addProduct } from "../redux/productSlice";
+import { addProduct, editProduct } from "../redux/productSlice";
 import { useProductState } from "../hooks/useProductState";
 import React from "react";
 import { Product } from "../models/Product";
@@ -40,7 +40,9 @@ const AddProduct = () => {
   const editProductDatabase = async (data: Product) => {
     try {
       const formData = prepareFormData(data);
-      const response = await editProduct(formData, productToEdit!._id!);
+      const response = await editProductApi(formData, productToEdit!._id!);
+      dispatch(editProduct(response));
+      reset();
     } catch (err) {
       console.error(err);
     }
