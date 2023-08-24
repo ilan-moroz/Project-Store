@@ -39,11 +39,12 @@ export const getAllProducts = async (req: Request, res: Response) => {
 
 // Function to edit a product in the database
 export const editProduct = async (req: Request, res: Response) => {
-  const product: Product = req.body;
-  const imagePath = req.file!.path;
+  const { productId } = req.params;
+  const product = req.body;
+  const imagePath = req.file?.path;
 
   try {
-    const existingProduct = await ProductModel.findOne({ _id: product._id });
+    const existingProduct = await ProductModel.findOne({ _id: productId });
     if (!existingProduct) {
       return res.status(404).json({ message: "product not found" });
     }
@@ -56,10 +57,14 @@ export const editProduct = async (req: Request, res: Response) => {
       fs.unlinkSync(existingProduct.imagePath);
     }
 
-    const updatedProduct = await ProductModel.findByIdAndUpdate(product._id, {
-      ...product,
-      imagePath,
-    });
+    const updatedProduct = await ProductModel.findByIdAndUpdate(
+      productId,
+      {
+        ...product,
+        imagePath,
+      },
+      { new: true }
+    );
     res.status(200).json(updatedProduct);
   } catch (error: any) {
     res.status(500).json({ error: error.message });

@@ -20,7 +20,7 @@ export const verifyToken = async (
     req.user = verified;
     next();
   } catch (err: any) {
-    console.log(err);
+    console.error(err);
     res.status(500).json({ error: err.message });
   }
 };

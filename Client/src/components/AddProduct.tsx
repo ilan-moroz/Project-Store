@@ -3,13 +3,14 @@ import { resolver } from "../validators/addProductValidators";
 import { AddProductFormValues } from "../types/AddProductFormValues";
 import FormInput from "./FormInput";
 import { useCategory } from "../hooks/useCategory";
-import { addProductApi } from "../api/productApi";
+import { addProductApi, editProduct } from "../api/productApi";
 import { prepareFormData } from "../utils/prepareFormData";
 import Button from "./Button/Button";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../redux/productSlice";
 import { useProductState } from "../hooks/useProductState";
 import React from "react";
+import { Product } from "../models/Product";
 
 const AddProduct = () => {
   // check if there product to edit
@@ -25,22 +26,32 @@ const AddProduct = () => {
   } = useForm<AddProductFormValues>({ resolver });
   const dispatch = useDispatch();
 
+  const addProductDatabase = async (data: Product) => {
+    try {
+      const formData = prepareFormData(data);
+      const response = await addProductApi(formData);
+      if (response) dispatch(addProduct(response));
+      reset();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const editProductDatabase = async (data: Product) => {
+    try {
+      const formData = prepareFormData(data);
+      const response = await editProduct(formData, productToEdit!._id!);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   // what happens when the form is submitted.
   const onSubmit = handleSubmit(async data => {
     if (!productToEdit) {
-      try {
-        const formData = prepareFormData(data);
-        const response = await addProductApi(formData);
-        if (response) dispatch(addProduct(response));
-        reset();
-      } catch (err) {
-        console.error(err);
-      }
+      addProductDatabase(data);
     } else {
-      try {
-      } catch (err) {
-        console.error(err);
-      }
+      editProductDatabase(data);
     }
   });
 

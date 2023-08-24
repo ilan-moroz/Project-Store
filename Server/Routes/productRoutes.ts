@@ -13,6 +13,10 @@ const productRouter = express.Router();
 productRouter.post("/addProduct", upload.single("imagePath"), addProduct);
 productRouter.get("/getAllProducts", getAllProducts);
 productRouter.get("/searchProducts", searchProducts);
-productRouter.put("/editProduct", editProduct);
+productRouter.put(
+  "/editProduct/:productId",
+  upload.single("imagePath"),
+  editProduct
+);
 
 export default productRouter;

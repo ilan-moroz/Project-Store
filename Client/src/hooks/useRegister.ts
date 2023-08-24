@@ -51,7 +51,6 @@ export function useRegister() {
       if (response) {
         // If successful, dispatch login action with response data
         dispatch(setLogin({ user: response.user, token: response.token }));
-        console.log(response);
         const res = await checkShoppingCart(response.user._id);
         if (res) dispatch(setCart(res));
         // and then navigate to home page

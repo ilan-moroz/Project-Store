@@ -25,7 +25,6 @@ export const useCartApi = (cartId: string) => {
     try {
       const response = await deleteAllCartItemsApi(cartId);
       if (response) dispatch(deleteAllCartItems());
-      console.log(response);
     } catch (err) {
       console.error(err);
     }

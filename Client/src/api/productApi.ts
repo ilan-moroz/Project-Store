@@ -34,9 +34,12 @@ export const searchProductsApi = async (searchString: string) => {
 };
 
 // api request to update a product
-export const editProduct = async (product: Product) => {
+export const editProduct = async (
+  product: Product | FormData,
+  productId: string
+) => {
   try {
-    const response = await api.put(`product/editProduct`, product);
+    const response = await api.put(`product/editProduct/${productId}`, product);
     if (response.status === 200) return response.data;
   } catch (err) {
     throw err;
