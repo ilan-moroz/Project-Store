@@ -40,6 +40,7 @@ const ItemCart: React.FC<cardProps> = ({ item, searchQuery }) => {
     setQuantity(item.quantity);
   }, [item.quantity]);
 
+  // function to highlight the searched product
   const highlightedName = product?.productName
     .split(new RegExp(`(${searchQuery})`, "gi"))
     .map((str, i) => {
@@ -54,6 +55,7 @@ const ItemCart: React.FC<cardProps> = ({ item, searchQuery }) => {
     });
 
   return (
+    // animate the cart item
     <motion.div
       className="cartItem"
       initial={{ opacity: 0, x: -250 }}
