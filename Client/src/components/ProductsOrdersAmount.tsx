@@ -41,7 +41,7 @@ const ProductsOrdersAmount = () => {
         elevation={4}
         style={{
           padding: "1rem",
-          maxWidth: "31rem",
+          width: "24rem",
           backgroundColor: "#f7f7f7",
         }}
       >
