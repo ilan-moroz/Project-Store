@@ -14,6 +14,12 @@ const initialState: ProductState = {
   productToEdit: null,
 };
 
+// helper function ro update product in the array
+const updateProductInArray = (array: Product[], updatedProduct: Product) =>
+  array.map(product =>
+    product._id === updatedProduct._id ? updatedProduct : product
+  );
+
 // create a slice
 const productSlice = createSlice({
   name: "product",
@@ -39,14 +45,12 @@ const productSlice = createSlice({
     },
     // handle the action to update a product
     editProduct: (state, action: PayloadAction<Product>) => {
-      const index = state.products.findIndex(
-        product => product._id === action.payload._id
+      state.products = updateProductInArray(state.products, action.payload);
+      state.searchProducts = updateProductInArray(
+        state.searchProducts,
+        action.payload
       );
-      if (index !== -1) {
-        state.products[index] = action.payload;
-        state.searchProducts[index] = action.payload;
-        state.productToEdit = null;
-      }
+      state.productToEdit = null;
     },
   },
 });
