@@ -85,7 +85,7 @@ const ItemCart: React.FC<cardProps> = ({ item, searchQuery }) => {
       </div>
       {showButton && !finishedOrder && (
         <div className="updateButton">
-          <Grow in>
+          <Grow in timeout={1000}>
             <Button
               variant="outlined"
               startIcon={<EditIcon />}
