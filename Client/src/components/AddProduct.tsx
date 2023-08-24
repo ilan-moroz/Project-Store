@@ -58,7 +58,7 @@ const AddProduct = () => {
   });
 
   // Get the categories using a custom hook
-  const categories = useCategory();
+  const { categories } = useCategory();
 
   React.useEffect(() => {
     if (productToEdit) {

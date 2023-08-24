@@ -9,6 +9,7 @@ import {
   resetSelectedCategory,
   setSelectedCategory,
 } from "../../redux/categorySlice";
+import { CircularProgress } from "@mui/material";
 
 type CategoryProps = {
   onSelectCategory: (Category: string) => void;
@@ -16,7 +17,7 @@ type CategoryProps = {
 
 const CategoryNavbar: React.FC<CategoryProps> = ({ onSelectCategory }) => {
   // get all categories from a custom hook
-  const categories = useCategory();
+  const { categories, isLoading } = useCategory();
 
   // State to track the currently active category
   const { selectedCategory } = useCategoryState();
@@ -47,21 +48,29 @@ const CategoryNavbar: React.FC<CategoryProps> = ({ onSelectCategory }) => {
 
   return (
     <div className="categoryNavbar">
-      {/* map all categories to display */}
-      {categories.map((category: Category) => (
-        <ul
-          // Apply 'active' class if the category is currently active
-          className={`category ${
-            category._id === selectedCategory ? "active" : ""
-          }`}
-          key={category._id}
-          onClick={() => {
-            handleSelectCategory(category);
-          }}
-        >
-          <li className="category__link purpleText">{category.categoryName}</li>
-        </ul>
-      ))}
+      {isLoading ? (
+        <CircularProgress size={17} />
+      ) : (
+        <>
+          {/* map all categories to display */}
+          {categories.map((category: Category) => (
+            <ul
+              // Apply 'active' class if the category is currently active
+              className={`category ${
+                category._id === selectedCategory ? "active" : ""
+              }`}
+              key={category._id}
+              onClick={() => {
+                handleSelectCategory(category);
+              }}
+            >
+              <li className="category__link purpleText">
+                {category.categoryName}
+              </li>
+            </ul>
+          ))}
+        </>
+      )}
     </div>
   );
 };
