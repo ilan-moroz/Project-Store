@@ -1,7 +1,6 @@
-import React, { useState, ChangeEvent, FocusEvent } from "react";
+import { useState, ChangeEvent, FocusEvent } from "react";
 import Cards from "react-credit-cards-2";
 import { TextField, Grid, Box } from "@mui/material";
-
 import "../../node_modules/react-credit-cards-2/dist/es/styles-compiled.css";
 
 interface CardState {

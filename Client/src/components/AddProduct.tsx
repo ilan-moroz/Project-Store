@@ -26,6 +26,7 @@ const AddProduct = () => {
   } = useForm<AddProductFormValues>({ resolver });
   const dispatch = useDispatch();
 
+  // Function to add a product to the database
   const addProductDatabase = async (data: Product) => {
     try {
       const formData = prepareFormData(data);
@@ -37,6 +38,7 @@ const AddProduct = () => {
     }
   };
 
+    // Function to edit an existing product in the database
   const editProductDatabase = async (data: Product) => {
     try {
       const formData = prepareFormData(data);
@@ -48,7 +50,7 @@ const AddProduct = () => {
     }
   };
 
-  // what happens when the form is submitted.
+  // Handler for form submission
   const onSubmit = handleSubmit(async data => {
     if (!productToEdit) {
       addProductDatabase(data);
@@ -60,6 +62,7 @@ const AddProduct = () => {
   // Get the categories using a custom hook
   const { categories } = useCategory();
 
+    // useEffect hook to populate form fields if there's a product to edit
   React.useEffect(() => {
     if (productToEdit) {
       setValue("productName", productToEdit.productName);
