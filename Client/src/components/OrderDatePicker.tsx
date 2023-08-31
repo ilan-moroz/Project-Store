@@ -8,7 +8,7 @@ import { DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { Box } from "@mui/material";
 
 // This component provides a date picker for selecting the delivery date, with overbooked dates disabled.
-const OrderDatePicker = ({ value, onChange }: any) => {
+const OrderDatePicker = ({ value, onChange, error, helperText }: any) => {
   // State to store overbooked dates
   const [overbookedDates, setOverbookedDates] = React.useState<string[]>([]);
 
@@ -42,7 +42,29 @@ const OrderDatePicker = ({ value, onChange }: any) => {
             shouldDisableDate={isDateOverbooked}
             value={value}
             onChange={onChange}
+            sx={
+              error
+                ? {
+                    border: "1.6px solid rgb(211, 47, 47)",
+                    borderRadius: "0.3rem",
+                  }
+                : {}
+            }
           />
+          {error && (
+            <div
+              style={{
+                color: "rgb(211, 47, 47)",
+                fontSize: "0.8rem",
+                display: "flex",
+                justifyContent: "flex-start",
+                marginLeft: "0.9rem",
+                fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+              }}
+            >
+              {helperText}
+            </div>
+          )}
         </DemoItem>
       </LocalizationProvider>
     </Box>
