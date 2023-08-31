@@ -12,7 +12,6 @@ export const verifyToken = async (
 ) => {
   try {
     let token = req.header("Authorization");
-    console.log(token);
     if (!token) return res.status(401).json({ error: "Access denied" });
     if (token.startsWith("Bearer ")) {
       token = token.slice(7, token.length);
