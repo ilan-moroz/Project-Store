@@ -109,6 +109,8 @@ const OrderForm = () => {
                 onChange={(date: Date | null) => {
                   field.onChange(dayjs(date).format("YYYY-MM-DD"));
                 }}
+                error={!!errors.deliveryDate}
+                helperText={errors.deliveryDate?.message}
               />
             )}
           />
