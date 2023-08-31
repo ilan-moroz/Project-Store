@@ -2,22 +2,25 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CartItem } from "../models/CartItem";
 import { ShoppingCart } from "../models/ShoppingCart";
 
-// Initial state
+// Define the type of the state
 interface CartState {
   cart: ShoppingCart | null;
   cartItems: CartItem[];
   finishedOrder: boolean;
 }
 
+// Initial state
 const initialState: CartState = {
   cart: null,
   cartItems: [],
   finishedOrder: false,
 };
 
+// create a slice
 const cartSlice = createSlice({
   name: "cart",
   initialState,
+  // Define reducer functions and their corresponding action creators
   reducers: {
     setCart: (state, action: PayloadAction<ShoppingCart>) => {
       state.cart = action.payload;
