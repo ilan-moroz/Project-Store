@@ -122,11 +122,13 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
           <CardActions sx={{ justifyContent: "center" }}>
             <Button
               size="medium"
+              variant="outlined"
               sx={{
-                color: "white",
-                backgroundColor: "rgb(103, 32, 180)",
+                color: "rgb(103, 32, 180)",
+                borderColor: "rgb(103, 32, 180)",
                 "&:hover": {
-                  backgroundColor: "rgb(130, 93, 242)",
+                  backgroundColor: "rgb(103, 32, 180)",
+                  color: "white",
                 },
               }}
               onClick={() => {
