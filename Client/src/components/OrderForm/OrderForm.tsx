@@ -110,14 +110,6 @@ const OrderForm = () => {
             )}
           />
           <h2 className="order__header-3 header purpleText">Payments</h2>
-          {/* <FormInput
-            register={register("paymentMethodLast4Digits")}
-            name="paymentMethodLast4Digits"
-            label="Credit Card"
-            type="text"
-            error={!!errors.paymentMethodLast4Digits}
-            helperText={errors.paymentMethodLast4Digits?.message}
-          /> */}
           <Controller
             name="paymentMethodLast4Digits"
             control={control}
