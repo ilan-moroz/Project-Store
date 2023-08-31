@@ -11,13 +11,13 @@ const api = axios.create({
 api.interceptors.request.use(
   config => {
     // Retrieve the persisted users from local storage
-    const persistedUsers = localStorage.getItem("persist:users");
+    const persistedUser = localStorage.getItem("persist:user");
     let token;
 
-    if (persistedUsers) {
-      const users = JSON.parse(persistedUsers);
-      if (users.token) {
-        token = JSON.parse(users.token);
+    if (persistedUser) {
+      const user = JSON.parse(persistedUser);
+      if (user.token) {
+        token = user.token.replace(/^"|"$/g, "");
       }
     }
     if (token) {
