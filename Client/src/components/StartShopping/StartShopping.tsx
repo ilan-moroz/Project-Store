@@ -71,13 +71,13 @@ const StartShopping = () => {
           )}
         </CardContent>
         <CardActions className="startShopping-actions">
-          <IconButton color="secondary">
-            <Badge badgeContent={cartItems.length} color="error">
-              <Link to="/shopping" className="startShopping-link">
+          <Link to="/shopping" className="startShopping-link">
+            <IconButton color="secondary">
+              <Badge badgeContent={cartItems.length} color="error">
                 <ShoppingCartIcon fontSize="large" />
-              </Link>
-            </Badge>
-          </IconButton>
+              </Badge>
+            </IconButton>
+          </Link>
         </CardActions>
       </Card>
     </div>
