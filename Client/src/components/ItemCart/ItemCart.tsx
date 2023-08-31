@@ -58,12 +58,12 @@ const ItemCart: React.FC<cardProps> = ({ item, searchQuery }) => {
     // Animation properties for cart item entry/exit
     <motion.div
       className="cartItem"
-      initial={{ opacity: 0, x: -250 }}
+      initial={{ opacity: 0, x: -350 }}
       animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -250 }}
+      exit={{ opacity: 0, x: -350 }}
       transition={{
-        x: { duration: 0.5, ease: "easeIn" },
-        opacity: { duration: 0.5 },
+        x: { duration: 0.3, ease: "linear" },
+        opacity: { duration: 0.3 },
       }}
     >
       <div className="cartItem__imageName">
