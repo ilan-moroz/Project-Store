@@ -23,8 +23,8 @@
   }
 }
 
-/* For screens that are 992px wide or less */
-@media screen and (max-width: 992px) {
+/* For screens that are 1200px wide or less */
+@media screen and (max-width: 1200px) {
   .Main {
     grid-template-columns: 1fr; /* All elements will stack vertically */
   }
