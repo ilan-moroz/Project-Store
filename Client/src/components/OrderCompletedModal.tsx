@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { useReceipt } from "../hooks/useReceipt";
 import { Order } from "../models/Order";
 
+// Modal styles configuration
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
@@ -34,15 +35,18 @@ export default function OrderCompletedModal({
   isOpen: boolean;
   orderDetails?: Order;
 }) {
+  // Hooks for navigation and dispatching actions
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // Close handler for the modal
   const handleClose = () => {
     onClose();
-    dispatch(setFinishedOrder());
-    navigate("/");
+    dispatch(setFinishedOrder()); // Reset cart state
+    navigate("/"); // Navigate to homepage
   };
 
+  // Custom hook to handle receipt download
   const { downloadReceipt } = useReceipt();
 
   return (

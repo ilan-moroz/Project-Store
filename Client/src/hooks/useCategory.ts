@@ -5,6 +5,7 @@ import useLoading from "./useLoading";
 export const useCategory = () => {
   const [categories, setCategories] = React.useState([]);
 
+  // fetch all categories from database
   const fetchData = async () => {
     try {
       const response = await getAllCategories();

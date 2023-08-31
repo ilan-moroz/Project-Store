@@ -24,6 +24,7 @@ const CreditCardInput = ({
   error: boolean;
   helperText?: string;
 }) => {
+  // Local state for holding card details
   const [state, setState] = useState<CardState>({
     number: "",
     expiry: "",
@@ -32,15 +33,18 @@ const CreditCardInput = ({
     focus: "number",
   });
 
+  // Handle changes to input fields
   const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = evt.target;
     setState(prev => ({ ...prev, [name]: value }));
   };
 
+  // Handle input focus events
   const handleInputFocus = (evt: FocusEvent<HTMLInputElement>) => {
     setState(prev => ({ ...prev, focus: evt.target.name as Focused }));
   };
 
+  // Handle card number changes and call the external onChange function
   const handleInputChangeModified = (evt: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = evt.target;
     setState(prev => ({ ...prev, [name]: value }));
