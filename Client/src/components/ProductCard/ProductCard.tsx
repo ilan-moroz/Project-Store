@@ -63,12 +63,12 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
     <Box className="cardBox">
       <Card
         sx={{
-          width: "12rem",
+          width: { xs: "12rem", xl: "18rem" }, // Change width based on screen size
           textAlign: "center",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          height: "18rem",
+          height: { xs: "15rem", lg: "18rem", xl: "24rem" },
           boxShadow: "0px 5px 10px rgba(0,0,0,0.1)",
         }}
         key={product._id}
@@ -92,7 +92,7 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
           </Box>
         )}
         <CardMedia
-          sx={{ height: 120, backgroundSize: "contain" }}
+          sx={{ height: { xs: 120, xl: 150 }, backgroundSize: "contain" }}
           image={`http://localhost:4000/${product.imagePath}`}
           title={product.productName}
         />
