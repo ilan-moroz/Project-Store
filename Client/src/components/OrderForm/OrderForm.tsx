@@ -18,13 +18,15 @@ import { useDispatch } from "react-redux";
 import CreditCardInput from "../CreditCardInput";
 
 const OrderForm = () => {
-  // custom hook to get user from the Redux store
+  // custom hook to get user and cart state from the Redux store
   const { user } = useUserState();
   const { cartId, cartItems } = useCartState();
 
+  // Local state for modal visibility and order details
   const [isModalOpen, setModalOpen] = React.useState(false);
   const [orderDetails, setOrderDetails] = React.useState<Order>();
 
+  // Calculate the final price from cart items
   const finalPrice = cartItems.reduce((acc, item) => {
     return acc + item.generalPrice;
   }, 0);
@@ -45,10 +47,11 @@ const OrderForm = () => {
 
   const dispatch = useDispatch();
 
+  // Function to execute on form submit
   const onSubmit = handleSubmit(async data => {
     try {
       const last4digits = data.paymentMethodLast4Digits.slice(-4);
-
+      // Construct order details object
       const orderDetails: Order = {
         ...data,
         customerId: user?._id ?? "",
