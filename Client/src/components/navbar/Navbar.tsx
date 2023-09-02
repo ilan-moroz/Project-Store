@@ -10,6 +10,7 @@ import SearchInput from "../SearchInput";
 import { useUserState } from "../../hooks/useUserState";
 import { removeCart, setFinishedOrder } from "../../redux/cartSlice";
 import { useCartState } from "../../hooks/useCartState";
+import { useMediaQuery } from "react-responsive";
 
 const Navbar = () => {
   // custom hook to get user and finishOrder state from the Redux store
@@ -46,6 +47,10 @@ const Navbar = () => {
 
   const location = useLocation();
 
+  // check the screen size
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width:  50em)" });
+  const isSmallScreen = useMediaQuery({ query: "(max-width:  37.5em)" });
+
   return (
     <div className="navbar">
       <div className="navbar__logo">
@@ -54,21 +59,27 @@ const Navbar = () => {
         </Link>
       </div>
       {/* show the search only in shopping page */}
-      {location.pathname === "/shopping" && !finishedOrder && (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "20%",
-          }}
-        >
-          <SearchInput />
-        </Box>
-      )}
+      {location.pathname === "/shopping" &&
+        !finishedOrder &&
+        !isSmallScreen && (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "20%",
+            }}
+          >
+            <SearchInput />
+          </Box>
+        )}
       <div className="navbar__contact ">
-        <p>Phone: 08-6725423</p>
-        <p>Email: superstore@gmail.com</p>
+        {!isSmallScreen && (
+          <>
+            <p>Phone: 08-6725423</p>
+            <p>Email: superstore@gmail.com</p>
+          </>
+        )}
         <div className="navbar__username center">
           <Chip
             icon={<MoodIcon style={{ color: "rgb(103,32,180)" }} />}
@@ -77,7 +88,7 @@ const Navbar = () => {
             sx={{
               color: "rgb(103,32,180)",
               width: "min-content",
-              fontSize: "1.1rem",
+              fontSize: isTabletOrMobile ? "0.8rem" : "1.1rem",
               margin: "1rem 0 0 2rem",
             }}
             aria-controls={open ? "basic-menu" : undefined}
