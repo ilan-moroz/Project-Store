@@ -1,10 +1,14 @@
 import { Typography } from "@mui/material";
 import storeImage from "../../assets/images/store.png";
 import "./about.css";
+import useResponsive from "../../hooks/useResponsive";
 
 const About = () => {
+  // check the screen size
+  const { isSmallScreen, isXsScreen } = useResponsive();
+
   return (
-    <div className="about center">
+    <div className="about ">
       <Typography
         variant="h3"
         gutterBottom
@@ -14,7 +18,7 @@ const About = () => {
           marginTop: "1rem",
           fontFamily: "Josefin Sans",
           fontWeight: 500,
-          fontSize: "3.5rem",
+          fontSize: isXsScreen ? "2rem" : isSmallScreen ? "2.5rem" : "3.5rem",
         }}
       >
         Welcome to SuperStore!

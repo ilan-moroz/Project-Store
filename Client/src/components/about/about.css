@@ -1,8 +1,23 @@
 .storeImage {
   width: 50%;
+  height: 100%;
 }
 
 .about {
   font-size: 1.1rem;
-  overflow: scroll;
+  text-align: center;
+}
+
+@media screen and (max-width: 75em) {
+  .about {
+    font-size: 0.8rem;
+  }
+  .about p {
+    padding: 0 2rem;
+  }
+
+  .storeImage {
+    width: 20%;
+    height: 100%;
+  }
 }

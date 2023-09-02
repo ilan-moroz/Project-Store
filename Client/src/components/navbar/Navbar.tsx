@@ -10,7 +10,7 @@ import SearchInput from "../SearchInput";
 import { useUserState } from "../../hooks/useUserState";
 import { removeCart, setFinishedOrder } from "../../redux/cartSlice";
 import { useCartState } from "../../hooks/useCartState";
-import { useMediaQuery } from "react-responsive";
+import useResponsive from "../../hooks/useResponsive";
 
 const Navbar = () => {
   // custom hook to get user and finishOrder state from the Redux store
@@ -48,8 +48,7 @@ const Navbar = () => {
   const location = useLocation();
 
   // check the screen size
-  const isTabletOrMobile = useMediaQuery({ query: "(max-width:  50em)" });
-  const isSmallScreen = useMediaQuery({ query: "(max-width:  37.5em)" });
+  const { isTabletOrMobile, isXsScreen } = useResponsive();
 
   return (
     <div className="navbar">
@@ -59,22 +58,20 @@ const Navbar = () => {
         </Link>
       </div>
       {/* show the search only in shopping page */}
-      {location.pathname === "/shopping" &&
-        !finishedOrder &&
-        !isSmallScreen && (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              width: "20%",
-            }}
-          >
-            <SearchInput />
-          </Box>
-        )}
+      {location.pathname === "/shopping" && !finishedOrder && !isXsScreen && (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "20%",
+          }}
+        >
+          <SearchInput />
+        </Box>
+      )}
       <div className="navbar__contact ">
-        {!isSmallScreen && (
+        {!isXsScreen && (
           <>
             <p>Phone: 08-6725423</p>
             <p>Email: superstore@gmail.com</p>

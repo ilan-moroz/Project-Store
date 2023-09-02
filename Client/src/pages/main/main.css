@@ -1,6 +1,7 @@
 .Main {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
 }
 
 .Main > main,
@@ -9,26 +10,22 @@
   grid-column: span 1;
 }
 
-.Main > main {
+.Main > main,
+.Main > section,
+.Main > aside {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 65vh;
-}
-
-/* For screens that are 1600px wide or less */
-@media screen and (max-width: 1600px) {
-  .Main > main {
-    height: 80vh;
-  }
 }
 
 /* For screens that are 1200px wide or less */
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 75em) {
   .Main {
-    grid-template-columns: 1fr; /* All elements will stack vertically */
+    grid-template-columns: 1fr;
   }
   .Main > main {
-    height: 100vh;
+    height: min-content;
+    width: 70%;
+    margin: 2rem auto;
   }
 }
