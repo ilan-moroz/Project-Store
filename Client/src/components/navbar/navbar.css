@@ -4,10 +4,8 @@
   justify-content: space-between;
   height: 11.5vh;
   align-items: center;
-}
 
-@media only screen and (min-width: 112.5em) {
-  .navbar {
+  @media only screen and (min-width: 112.5em) {
     height: 8vh;
   }
 }
@@ -25,4 +23,22 @@
 
 .navbar__username {
   margin-top: -0.7rem;
+}
+
+@media only screen and (max-width: 68.47em) {
+  .navbar__contact {
+    font-size: 1rem;
+  }
+  .navbar__logo img {
+    width: 20rem;
+  }
+}
+
+@media only screen and (max-width: 50em) {
+  .navbar__contact {
+    font-size: 0.8rem;
+  }
+  .navbar__logo img {
+    width: 15rem;
+  }
 }

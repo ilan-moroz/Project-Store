@@ -64,7 +64,7 @@ export default function SearchInput() {
         p: "2px 4px",
         display: "flex",
         alignItems: "center",
-        width: 400,
+        width: "100%",
         border: "solid 1px rgb(103, 32, 180)",
       }}
     >

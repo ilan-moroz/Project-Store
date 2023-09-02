@@ -60,6 +60,7 @@ const Navbar = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            width: "20%",
           }}
         >
           <SearchInput />
