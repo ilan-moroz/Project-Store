@@ -12,6 +12,7 @@
 }
 
 .cartOrAddProduct {
+  width: 38rem;
   background-color: #f0f0f0;
   height: 100%;
   border-right: 1px solid darkgray;
@@ -22,4 +23,15 @@
   width: 100vw;
   height: 100%;
   overflow: scroll;
+}
+
+@media only screen and (max-width: 65.62em) {
+  .shopping {
+    flex-direction: column-reverse;
+    height: auto;
+  }
+
+  .cartOrAddProduct {
+    width: 100%;
+  }
 }
