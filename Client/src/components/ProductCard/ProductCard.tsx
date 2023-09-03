@@ -68,7 +68,7 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          height: { xs: "15rem", lg: "18rem", xl: "24rem" },
+          height: { xs: "18rem", lg: "18rem", xl: "24rem" },
           boxShadow: "0px 5px 10px rgba(0,0,0,0.1)",
         }}
         key={product._id}
@@ -92,7 +92,7 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
           </Box>
         )}
         <CardMedia
-          sx={{ height: { xs: 120, xl: 150 }, backgroundSize: "contain" }}
+          sx={{ height: 150, backgroundSize: "contain" }}
           image={`http://localhost:4000/${product.imagePath}`}
           title={product.productName}
         />
