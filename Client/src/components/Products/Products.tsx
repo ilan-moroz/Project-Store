@@ -10,8 +10,15 @@ import {
   setSelectedCategory,
 } from "../../redux/categorySlice";
 import { motion } from "framer-motion";
+import CartIcon from "../CartIcon";
+import useResponsive from "../../hooks/useResponsive";
+import { RefObject } from "react";
 
-const Products = () => {
+interface ProductsProps {
+  cartRef: RefObject<HTMLElement>;
+}
+
+const Products: React.FC<ProductsProps> = ({ cartRef }) => {
   // custom hooks to get searchProducts and selectedCategory from the Redux store
   const { searchProducts } = useProductState();
   const { selectedCategory } = useCategoryState();
@@ -32,6 +39,12 @@ const Products = () => {
     ? searchProducts.filter(product => product.categoryId === selectedCategory)
     : searchProducts;
 
+  const { isXsDesktop } = useResponsive();
+
+  const handleCartClick = () => {
+    cartRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div>
       <div className="productsNavbar">
@@ -44,6 +57,11 @@ const Products = () => {
           y: { duration: 1, ease: "easeOut" },
         }}
       >
+        {isXsDesktop && (
+          <div className="cartIcon" onClick={handleCartClick}>
+            <CartIcon />
+          </div>
+        )}
         <div className="productCards">
           {/* map all the products and display in card */}
           {filteredProducts.map((product: Product) => (

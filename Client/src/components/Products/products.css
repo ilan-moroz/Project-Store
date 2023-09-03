@@ -13,3 +13,9 @@
   top: 0;
   z-index: 99;
 }
+
+.cartIcon {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem 0.5rem 0 0;
+}
