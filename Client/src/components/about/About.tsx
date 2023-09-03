@@ -5,7 +5,7 @@ import useResponsive from "../../hooks/useResponsive";
 
 const About = () => {
   // check the screen size
-  const { isSmallScreen, isXsScreen } = useResponsive();
+  const { isXsScreen } = useResponsive();
 
   return (
     <div className="about ">
@@ -18,7 +18,7 @@ const About = () => {
           marginTop: "1rem",
           fontFamily: "Josefin Sans",
           fontWeight: 500,
-          fontSize: isXsScreen ? "2rem" : isSmallScreen ? "2.5rem" : "3.5rem",
+          fontSize: isXsScreen ? "1.9rem" : "3.5rem",
         }}
       >
         Welcome to SuperStore!

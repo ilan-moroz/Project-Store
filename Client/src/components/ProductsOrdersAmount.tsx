@@ -4,6 +4,7 @@ import { useProductState } from "../hooks/useProductState";
 import { Typography, Box, Paper, CircularProgress } from "@mui/material";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import useResponsive from "../hooks/useResponsive";
 
 const ProductsOrdersAmount = () => {
   // Fetching the products data from the Redux store using a custom hook
@@ -35,13 +36,15 @@ const ProductsOrdersAmount = () => {
     ordersAmount();
   }, []);
 
+  const { isSmallDesktop } = useResponsive();
+
   return (
-    <Box display="flex" justifyContent="center" mt={4}>
+    <Box display="flex" justifyContent="center" mt={4} sx={{ padding: "1rem" }}>
       <Paper
         elevation={4}
         style={{
           padding: "1rem",
-          width: "24rem",
+          width: isSmallDesktop ? "20rem" : "24rem",
           backgroundColor: "#f7f7f7",
         }}
       >

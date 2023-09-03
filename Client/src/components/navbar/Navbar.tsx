@@ -48,7 +48,7 @@ const Navbar = () => {
   const location = useLocation();
 
   // check the screen size
-  const { isTabletOrMobile, isXsScreen } = useResponsive();
+  const { isXsScreen } = useResponsive();
 
   return (
     <div className="navbar">
@@ -85,7 +85,7 @@ const Navbar = () => {
             sx={{
               color: "rgb(103,32,180)",
               width: "min-content",
-              fontSize: isTabletOrMobile ? "0.8rem" : "1.1rem",
+              fontSize: "1.1rem",
               margin: "1rem 0 0 2rem",
             }}
             aria-controls={open ? "basic-menu" : undefined}

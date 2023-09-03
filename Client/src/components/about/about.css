@@ -9,9 +9,6 @@
 }
 
 @media screen and (max-width: 75em) {
-  .about {
-    font-size: 0.8rem;
-  }
   .about p {
     padding: 0 2rem;
   }

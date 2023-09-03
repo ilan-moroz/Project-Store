@@ -26,18 +26,12 @@
 }
 
 @media only screen and (max-width: 68.47em) {
-  .navbar__contact {
-    font-size: 1rem;
-  }
   .navbar__logo img {
     width: 20rem;
   }
 }
 
 @media only screen and (max-width: 50em) {
-  .navbar__contact {
-    font-size: 0.8rem;
-  }
   .navbar__logo img {
     width: 15rem;
   }
@@ -46,11 +40,5 @@
 @media only screen and (max-width: 37.5em) {
   .navbar__logo img {
     width: 12rem;
-  }
-}
-
-@media only screen and (max-width: 30em) {
-  .navbar__logo img {
-    width: 8rem;
   }
 }
