@@ -71,7 +71,7 @@ const Register = () => {
   };
 
   return (
-    <Box sx={{ width: "30%", margin: "2rem auto" }}>
+    <Box sx={{ width: "40%", margin: "2rem auto" }}>
       <Typography
         variant="h3"
         gutterBottom
