@@ -1,13 +1,4 @@
-import {
-  Card,
-  CardActions,
-  CardContent,
-  IconButton,
-  Typography,
-  Badge,
-  Box,
-} from "@mui/material";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Card, CardActions, CardContent, Typography, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useCartState } from "../../hooks/useCartState";
 import "./startShopping.css";
@@ -16,6 +7,7 @@ import { rearrangeDate } from "../../utils/rearrangeDate";
 import React from "react";
 import { getLastOrder } from "../../api/orderApi";
 import { useUserState } from "../../hooks/useUserState";
+import CartIcon from "../CartIcon";
 
 const StartShopping = () => {
   // Fetch cart and user state using custom hooks
@@ -72,11 +64,7 @@ const StartShopping = () => {
         </CardContent>
         <CardActions className="startShopping-actions">
           <Link to="/shopping" className="startShopping-link">
-            <IconButton color="secondary">
-              <Badge badgeContent={cartItems.length} color="error">
-                <ShoppingCartIcon fontSize="large" />
-              </Badge>
-            </IconButton>
+            <CartIcon />
           </Link>
         </CardActions>
       </Card>
