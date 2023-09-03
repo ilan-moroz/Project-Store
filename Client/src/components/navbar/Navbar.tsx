@@ -48,7 +48,7 @@ const Navbar = () => {
   const location = useLocation();
 
   // check the screen size
-  const { isXsScreen, isTabletOrMobile } = useResponsive();
+  const { isXsScreen, isTabletOrMobile, isXXsScreen } = useResponsive();
 
   return (
     <div className="navbar">
@@ -58,7 +58,7 @@ const Navbar = () => {
         </Link>
       </div>
       {/* show the search only in shopping page */}
-      {location.pathname === "/shopping" && !finishedOrder && !isXsScreen && (
+      {location.pathname === "/shopping" && !finishedOrder && !isXXsScreen && (
         <Box
           sx={{
             display: "flex",
