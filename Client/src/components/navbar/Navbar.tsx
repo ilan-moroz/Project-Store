@@ -48,7 +48,7 @@ const Navbar = () => {
   const location = useLocation();
 
   // check the screen size
-  const { isXsScreen } = useResponsive();
+  const { isXsScreen, isTabletOrMobile } = useResponsive();
 
   return (
     <div className="navbar">
@@ -71,7 +71,7 @@ const Navbar = () => {
         </Box>
       )}
       <div className="navbar__contact ">
-        {!isXsScreen && (
+        {!isXsScreen && !isTabletOrMobile && (
           <>
             <p>Phone: 08-6725423</p>
             <p>Email: superstore@gmail.com</p>

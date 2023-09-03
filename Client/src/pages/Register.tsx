@@ -15,6 +15,7 @@ import {
 import { toast } from "react-toastify";
 import { useRegister } from "../hooks/useRegister";
 import { useCities } from "../hooks/useCities";
+import useResponsive from "../hooks/useResponsive";
 
 const Register = () => {
   // Define the steps for registration
@@ -70,8 +71,15 @@ const Register = () => {
     }
   };
 
+  const { isTabletOrMobile } = useResponsive();
+
   return (
-    <Box sx={{ width: "40%", margin: "2rem auto" }}>
+    <Box
+      sx={{
+        width: isTabletOrMobile ? "80%" : "40%",
+        margin: "2rem auto",
+      }}
+    >
       <Typography
         variant="h3"
         gutterBottom
