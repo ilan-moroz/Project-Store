@@ -16,6 +16,7 @@ import dayjs from "dayjs";
 import { setCart } from "../../redux/cartSlice";
 import { useDispatch } from "react-redux";
 import CreditCardInput from "../CreditCardInput";
+import useResponsive from "../../hooks/useResponsive";
 
 const OrderForm = () => {
   // custom hook to get user and cart state from the Redux store
@@ -71,6 +72,8 @@ const OrderForm = () => {
     }
   });
 
+  const { isTabletOrMobile } = useResponsive();
+
   return (
     <div className="order">
       {isModalOpen && (
@@ -115,18 +118,29 @@ const OrderForm = () => {
             )}
           />
           <h2 className="order__header-3 header purpleText">Payments</h2>
-          <Controller
-            name="paymentMethodLast4Digits"
-            control={control}
-            render={({ field }) => (
-              <CreditCardInput
-                value={field.value}
-                onChange={field.onChange}
-                error={!!errors.paymentMethodLast4Digits}
-                helperText={errors.paymentMethodLast4Digits?.message}
-              />
-            )}
-          />
+          {isTabletOrMobile ? (
+            <FormInput
+              register={register("paymentMethodLast4Digits")}
+              name="paymentMethodLast4Digits"
+              label="Card Number"
+              type="number"
+              error={!!errors.paymentMethodLast4Digits}
+              helperText={errors.paymentMethodLast4Digits?.message}
+            />
+          ) : (
+            <Controller
+              name="paymentMethodLast4Digits"
+              control={control}
+              render={({ field }) => (
+                <CreditCardInput
+                  value={field.value}
+                  onChange={field.onChange}
+                  error={!!errors.paymentMethodLast4Digits}
+                  helperText={errors.paymentMethodLast4Digits?.message}
+                />
+              )}
+            />
+          )}
           <div className="order__form--button">
             <Button
               type="submit"
