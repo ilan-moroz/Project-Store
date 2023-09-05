@@ -50,7 +50,7 @@ export default function OrderCompletedModal({
   const { downloadReceipt } = useReceipt();
 
   return (
-    <div>
+    <Box>
       <Modal
         open={isOpen}
         onClose={handleClose}
@@ -92,6 +92,6 @@ export default function OrderCompletedModal({
           </Box>
         </Box>
       </Modal>
-    </div>
+    </Box>
   );
 }
