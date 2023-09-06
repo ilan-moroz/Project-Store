@@ -9,22 +9,7 @@ import { setFinishedOrder } from "../redux/cartSlice";
 import { useDispatch } from "react-redux";
 import { useReceipt } from "../hooks/useReceipt";
 import { Order } from "../models/Order";
-
-// Modal styles configuration
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 450,
-  bgcolor: "background.paper",
-  border: "2px solid rgb(103, 32, 180)",
-  boxShadow: 24,
-  p: 4,
-  borderRadius: "10px",
-  textAlign: "center",
-  color: "rgb(103, 32, 180)",
-};
+import useResponsive from "../hooks/useResponsive";
 
 export default function OrderCompletedModal({
   onClose,
@@ -38,6 +23,24 @@ export default function OrderCompletedModal({
   // Hooks for navigation and dispatching actions
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const { isXsScreen } = useResponsive();
+
+  // Modal styles configuration
+  const style = {
+    position: "absolute" as "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: isXsScreen ? "50%" : 450,
+    bgcolor: "background.paper",
+    border: "2px solid rgb(103, 32, 180)",
+    boxShadow: 24,
+    p: 4,
+    borderRadius: "10px",
+    textAlign: "center",
+    color: "rgb(103, 32, 180)",
+  };
 
   // Close handler for the modal
   const handleClose = () => {
