@@ -36,6 +36,7 @@ const StartShopping = () => {
   }, [cart]);
 
   const isAdmin = user?.role === "admin";
+  const firstName = user?.firstName;
 
   return (
     <div className="startShopping-container">
@@ -46,7 +47,7 @@ const StartShopping = () => {
             component="div"
             className="startShopping-text"
           >
-            Welcome{user && user.firstName ? `, ${user.firstName}` : ""}!
+            Welcome, {firstName}!
             {!isAdmin ? (
               <Box>{hasItemsInCart ? "Continue" : "Start"} shopping now.</Box>
             ) : (
