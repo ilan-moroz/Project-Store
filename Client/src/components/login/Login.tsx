@@ -51,7 +51,10 @@ export const Login = () => {
             getAllCartItems(res._id);
           }
           // if admin logged in navigate to shopping page
-        } else navigate("/shopping");
+        } else
+          setTimeout(() => {
+            navigate("/shopping");
+          }, 50);
         reset();
       }
     } catch (err: any) {
