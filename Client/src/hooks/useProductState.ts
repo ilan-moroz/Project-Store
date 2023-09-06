@@ -7,9 +7,9 @@ export const useProductState = () => {
   const searchProducts = useSelector(
     (state: RootState) => state.products.searchProducts
   );
-  const productToEdit = useSelector(
+  const productEdit = useSelector(
     (state: RootState) => state.products.productToEdit
   );
 
-  return { products, searchProducts, productToEdit };
+  return { products, searchProducts, productEdit };
 };

@@ -7,14 +7,14 @@ import { addProductApi, editProductApi } from "../api/productApi";
 import { prepareFormData } from "../utils/prepareFormData";
 import Button from "./Button/Button";
 import { useDispatch } from "react-redux";
-import { addProduct, editProduct } from "../redux/productSlice";
+import { addProduct, editProduct, productToEdit } from "../redux/productSlice";
 import { useProductState } from "../hooks/useProductState";
 import React from "react";
 import { Product } from "../models/Product";
 
 const AddProduct = () => {
   // check if there product to edit
-  const { productToEdit } = useProductState();
+  const { productEdit } = useProductState();
 
   const {
     register,
@@ -38,11 +38,11 @@ const AddProduct = () => {
     }
   };
 
-    // Function to edit an existing product in the database
+  // Function to edit an existing product in the database
   const editProductDatabase = async (data: Product) => {
     try {
       const formData = prepareFormData(data);
-      const response = await editProductApi(formData, productToEdit!._id!);
+      const response = await editProductApi(formData, productEdit!._id!);
       dispatch(editProduct(response));
       reset();
     } catch (err) {
@@ -52,7 +52,7 @@ const AddProduct = () => {
 
   // Handler for form submission
   const onSubmit = handleSubmit(async data => {
-    if (!productToEdit) {
+    if (!productEdit) {
       addProductDatabase(data);
     } else {
       editProductDatabase(data);
@@ -62,15 +62,20 @@ const AddProduct = () => {
   // Get the categories using a custom hook
   const { categories } = useCategory();
 
-    // useEffect hook to populate form fields if there's a product to edit
+  // useEffect hook to populate form fields if there's a product to edit
   React.useEffect(() => {
-    if (productToEdit) {
-      setValue("productName", productToEdit.productName);
-      setValue("price", productToEdit.price);
-      setValue("categoryId", productToEdit.categoryId);
-      setValue("imagePath", productToEdit.imagePath);
+    if (productEdit) {
+      setValue("productName", productEdit.productName);
+      setValue("price", productEdit.price);
+      setValue("categoryId", productEdit.categoryId);
+      setValue("imagePath", productEdit.imagePath);
     }
-  }, [productToEdit, setValue]);
+  }, [productEdit, setValue]);
+
+  // reset the form back to add product
+  const resetForm = () => {
+    dispatch(productToEdit(null));
+  };
 
   return (
     <div
@@ -81,6 +86,9 @@ const AddProduct = () => {
         margin: "0 auto",
       }}
     >
+      <h1 className="purpleText" style={{ margin: "-1rem 0 1.5rem 0" }}>
+        {!productEdit ? "Add Product" : "Edit Product "}
+      </h1>
       <form onSubmit={onSubmit}>
         <FormInput
           register={register("productName")}
@@ -117,9 +125,7 @@ const AddProduct = () => {
           register={register("imagePath")}
           name="imagePath"
           label={
-            productToEdit
-              ? "Select new image or leave it empty"
-              : "Product image"
+            productEdit ? "Select new image or leave it empty" : "Product image"
           }
           type="file"
           error={!!errors.imagePath}
@@ -128,10 +134,15 @@ const AddProduct = () => {
         <div className="login__form--buttons">
           <Button
             type="submit"
-            text={productToEdit ? "edit product" : "add product"}
+            text={productEdit ? "edit product" : "add product"}
             color=" rgb(103, 32, 180)"
           />
-          <Button type="reset" text="cancel" color=" rgb(109, 112, 104)" />
+          <Button
+            type="reset"
+            text="cancel"
+            color=" rgb(109, 112, 104)"
+            onClick={resetForm}
+          />
         </div>
       </form>
     </div>
