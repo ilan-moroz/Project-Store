@@ -11,7 +11,12 @@ import { verifyToken } from "../middleware/auth";
 const productRouter = express.Router();
 
 // add new product
-productRouter.post("/addProduct", upload.single("imagePath"), addProduct);
+productRouter.post(
+  "/addProduct",
+  upload.single("imagePath"),
+  verifyToken,
+  addProduct
+);
 productRouter.get("/getAllProducts", getAllProducts);
 productRouter.get("/searchProducts", verifyToken, searchProducts);
 productRouter.put(
