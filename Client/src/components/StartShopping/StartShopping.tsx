@@ -8,6 +8,7 @@ import React from "react";
 import { getLastOrder } from "../../api/orderApi";
 import { useUserState } from "../../hooks/useUserState";
 import CartIcon from "../CartIcon";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 
 const StartShopping = () => {
   // Fetch cart and user state using custom hooks
@@ -34,6 +35,8 @@ const StartShopping = () => {
     userLastOrder();
   }, [cart]);
 
+  const isAdmin = user?.role === "admin";
+
   return (
     <div className="startShopping-container">
       <Card className="startShopping-card">
@@ -44,27 +47,32 @@ const StartShopping = () => {
             className="startShopping-text"
           >
             Welcome{user && user.firstName ? `, ${user.firstName}` : ""}!
-            <Box>{hasItemsInCart ? "Continue" : "Start"} shopping now.</Box>
+            {!isAdmin ? (
+              <Box>{hasItemsInCart ? "Continue" : "Start"} shopping now.</Box>
+            ) : (
+              <Box>Manage Your products.</Box>
+            )}
           </Typography>
-          {hasItemsInCart ? (
-            <Box sx={{ mt: 2 }}>
-              <Box>Shopping cart created on: {cartCreatedAt}</Box>
-              <Box>Total cart value: &#8362;{totalPrice}</Box>
-            </Box>
-          ) : lastOrder ? (
-            <Box sx={{ mt: 2 }}>
-              Your most recent order was placed on: {rearrangeDate(lastOrder)}
-            </Box>
-          ) : (
-            <Box sx={{ mt: 2 }}>
-              Welcome to our store!
-              <Box>Begin your premium shopping experience now.</Box>
-            </Box>
-          )}
+          {!isAdmin &&
+            (hasItemsInCart ? (
+              <Box sx={{ mt: 2 }}>
+                <Box>Shopping cart created on: {cartCreatedAt}</Box>
+                <Box>Total cart value: &#8362;{totalPrice}</Box>
+              </Box>
+            ) : lastOrder ? (
+              <Box sx={{ mt: 2 }}>
+                Your most recent order was placed on: {rearrangeDate(lastOrder)}
+              </Box>
+            ) : (
+              <Box sx={{ mt: 2 }}>
+                Welcome to our store!
+                <Box>Begin your premium shopping experience now.</Box>
+              </Box>
+            ))}
         </CardContent>
         <CardActions className="startShopping-actions">
           <Link to="/shopping" className="startShopping-link">
-            <CartIcon />
+            {isAdmin ? <ManageAccountsIcon fontSize="large" /> : <CartIcon />}
           </Link>
         </CardActions>
       </Card>
