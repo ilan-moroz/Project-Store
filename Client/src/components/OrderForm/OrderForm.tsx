@@ -62,7 +62,7 @@ const OrderForm = () => {
       };
       const response = await createOrder(orderDetails);
       if (response) {
-        setOrderDetails(response);
+        setOrderDetails(response.newOrder);
         setModalOpen(true);
         dispatch(setCart(response.newShoppingCart));
       }

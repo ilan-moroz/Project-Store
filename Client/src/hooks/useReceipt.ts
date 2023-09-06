@@ -31,6 +31,8 @@ export const useReceipt = () => {
 
   // Function to generate and download the receipt
   const downloadReceipt = (orderDetails: Order) => {
+    console.log("Order Details:", orderDetails);
+
     // Format the current date for the receipt
     const orderDate = moment().format("DD/MM/YYYY, HH:mm:ss");
     // Format the provided delivery date for the receipt
