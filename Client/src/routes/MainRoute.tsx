@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import Register from "../pages/Register";
-import Main from "../pages/main/Main";
-import Shopping from "../pages/shopping/Shopping";
+import Main from "../pages/Main/Main";
+import Shopping from "../pages/Shopping/Shopping";
 import { useUserState } from "../hooks/useUserState";
 import Page404 from "../pages/Page404";
 
