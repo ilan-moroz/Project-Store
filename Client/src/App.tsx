@@ -10,9 +10,11 @@ function App() {
 
   return (
     <div className="App">
+      {/* Navbar */}
       <header>
         <Navbar />
       </header>
+      {/* mainRoute for display all pages */}
       <main>
         <MainRoute />
       </main>
