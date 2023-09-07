@@ -1,7 +1,10 @@
 import React from "react";
 import { CSSProperties } from "react";
+import useResponsive from "../hooks/useResponsive";
 
 const Page404: React.FC = () => {
+  const { isSmallScreen } = useResponsive();
+
   const style: { [key: string]: CSSProperties } = {
     container: {
       display: "flex",
@@ -14,20 +17,20 @@ const Page404: React.FC = () => {
       position: "relative",
     },
     header: {
-      fontSize: "12rem",
+      fontSize: isSmallScreen ? "8rem" : "12rem",
       fontWeight: "bold",
       marginBottom: "10px",
       textShadow: "5px 5px 15px #bb86fc",
       animation: "bounce 2s infinite",
     },
     text: {
-      fontSize: "2.5rem",
+      fontSize: isSmallScreen ? "1.1rem" : "2.5rem",
       fontStyle: "italic",
       textShadow: "2px 2px 8px #bb86fc",
     },
     link: {
       marginTop: "20px",
-      fontSize: "1.5rem",
+      fontSize: isSmallScreen ? "0.8rem" : "1.5rem",
       padding: "15px 30px",
       borderRadius: "30px",
       background: "white",
@@ -39,7 +42,7 @@ const Page404: React.FC = () => {
       position: "absolute",
       top: "10%",
       right: "10%",
-      fontSize: "10rem",
+      fontSize: isSmallScreen ? "7rem" : "10rem",
       opacity: 0.4,
       zIndex: 1,
     },
