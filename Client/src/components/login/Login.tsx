@@ -1,7 +1,7 @@
 import { Avatar, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import LoginIcon from "@mui/icons-material/Login";
-import "./login.css";
+import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { resolver } from "../../validators/loginValidator";
 import { LoginFormValues } from "../../types/LoginFormValues";

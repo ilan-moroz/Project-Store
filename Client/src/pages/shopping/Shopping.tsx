@@ -1,6 +1,6 @@
 import Cart from "../../components/Cart/Cart";
 import Products from "../../components/Products/Products";
-import "./shopping.css";
+import "./Shopping.css";
 import AddProduct from "../../components/AddProduct";
 import { useUserState } from "../../hooks/useUserState";
 import { useCartState } from "../../hooks/useCartState";

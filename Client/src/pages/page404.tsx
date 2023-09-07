@@ -1,7 +1,7 @@
 import React from "react";
 import { CSSProperties } from "react";
 
-const NotFoundPage: React.FC = () => {
+const Page404: React.FC = () => {
   const style: { [key: string]: CSSProperties } = {
     container: {
       display: "flex",
@@ -59,4 +59,4 @@ const NotFoundPage: React.FC = () => {
   );
 };
 
-export default NotFoundPage;
+export default Page404;

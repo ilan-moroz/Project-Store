@@ -3,7 +3,7 @@ import { OrderFormValues } from "../../types/OrderFormValues";
 import Button from "../Button/Button";
 import FormInput from "../FormInput";
 import { resolver } from "../../validators/orderFormValidator";
-import "./orderForm.css";
+import "./OrderForm.css";
 import { useUserState } from "../../hooks/useUserState";
 import React from "react";
 import { capitalizeWords } from "../../utils/capitalizeWords";

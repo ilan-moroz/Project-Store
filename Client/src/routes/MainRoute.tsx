@@ -2,8 +2,8 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Register from "../pages/Register";
 import Main from "../pages/main/Main";
 import Shopping from "../pages/shopping/Shopping";
-import Page404 from "../pages/page404";
 import { useUserState } from "../hooks/useUserState";
+import Page404 from "../pages/Page404";
 
 export const MainRoute = () => {
   const { user } = useUserState();

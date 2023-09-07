@@ -1,7 +1,7 @@
 import { Typography, Grid } from "@mui/material";
 import storeImage from "../../assets/images/store.png";
 import useResponsive from "../../hooks/useResponsive";
-import "./about.css";
+import "./About.css";
 
 const About = () => {
   const { isXsScreen } = useResponsive();

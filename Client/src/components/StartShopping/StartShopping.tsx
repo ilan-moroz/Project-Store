@@ -1,7 +1,7 @@
 import { Card, CardActions, CardContent, Typography, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useCartState } from "../../hooks/useCartState";
-import "./startShopping.css";
+import "./StartShopping.css";
 import useTotalCartPrice from "../../hooks/useTotalCartPrice";
 import { rearrangeDate } from "../../utils/rearrangeDate";
 import React from "react";

@@ -1,7 +1,7 @@
 import React from "react";
 import { useCategory } from "../../hooks/useCategory";
 import { Category } from "../../models/Category";
-import "./categoryNavbar.css";
+import "./CategoryNavbar.css";
 import { useCategoryState } from "../../hooks/useCategoryState";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";

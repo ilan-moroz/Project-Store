@@ -2,7 +2,7 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useProductState } from "../../hooks/useProductState";
 import { Product } from "../../models/Product";
-import "./productsCarousel.css";
+import "./ProductsCarousel.css";
 import { Typography } from "@mui/material";
 import useResponsive from "../../hooks/useResponsive";
 

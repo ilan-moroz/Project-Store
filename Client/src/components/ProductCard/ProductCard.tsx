@@ -13,7 +13,7 @@ import { Product } from "../../models/Product";
 import { Box, ThemeProvider, createTheme } from "@mui/material";
 import { useCartState } from "../../hooks/useCartState";
 import { addItemToCart, updateCartItem } from "../../redux/cartSlice";
-import "./productCard.css";
+import "./ProductCard.css";
 import { useUserState } from "../../hooks/useUserState";
 import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";

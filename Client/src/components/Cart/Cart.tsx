@@ -1,7 +1,7 @@
 import React from "react";
 import ItemCart from "../ItemCart/ItemCart";
 import { CartItem } from "../../models/CartItem";
-import "./cart.css";
+import "./Cart.css";
 import { Button, LinearProgress } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useCartState } from "../../hooks/useCartState";

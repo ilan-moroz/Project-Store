@@ -1,6 +1,6 @@
 import { Box, Chip, Menu, MenuItem } from "@mui/material";
 import logo from "../../assets/images/logo.png";
-import "./navbar.css";
+import "./Navbar.css";
 import MoodIcon from "@mui/icons-material/Mood";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";

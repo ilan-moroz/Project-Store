@@ -1,5 +1,5 @@
 import { CartItem } from "../../models/CartItem";
-import "./itemCart.css";
+import "./ItemCart.css";
 import NumberInput from "../NumberInput";
 import React from "react";
 import { Button, Grow, IconButton } from "@mui/material";

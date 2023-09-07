@@ -1,7 +1,7 @@
 import Info from "../../components/Info";
 import About from "../../components/About/About";
 import { Login } from "../../components/Login/Login";
-import "./main.css";
+import "./Main.css";
 
 const Main = () => {
   return (
