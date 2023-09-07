@@ -21,3 +21,16 @@ This MERN Supermarket Store is a comprehensive, full-stack web application desig
 - **Node.js:** JavaScript runtime environment
 - **Material-UI (MUI):** A popular React UI framework for designing robust and accessible interfaces
 - **CSS:** For styling and layout
+
+## Admin Access
+
+### How to Connect as Admin
+
+To access the admin functionalities, follow these steps:
+
+2. **Admin Credentials**: Use the following credentials to log in as an admin:
+   - **Email:** admin@gmail.com
+   - **Password:** admin
+3. **Admin Dashboard**: Once logged in, you will be redirected to the admin dashboard where you can explore a variety of admin features including adding new products, editing existing products.
+
+_Feel free to explore the functionalities and get a feel of the full capabilities of the application._
