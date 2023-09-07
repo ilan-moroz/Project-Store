@@ -80,7 +80,7 @@ const ItemCart: React.FC<cardProps> = ({ item, searchQuery }) => {
           </div>
         )}
         <img
-          src={`http://localhost:4000/${product?.imagePath}`}
+          src={`${process.env.REACT_APP_API_BASE_URL}${product?.imagePath}`}
           alt={product?.productName}
           className="cartItem__image"
         />

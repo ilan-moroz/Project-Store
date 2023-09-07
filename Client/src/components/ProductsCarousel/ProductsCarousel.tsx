@@ -40,7 +40,7 @@ const ProductsCarousel = () => {
         {randomTenProducts.map((product: Product) => (
           <div key={product._id}>
             <img
-              src={`http://localhost:4000/${product.imagePath}`}
+              src={`${process.env.REACT_APP_API_BASE_URL}${product.imagePath}`}
               alt={product.productName}
             />
             <p className="legend">{product.productName}</p>

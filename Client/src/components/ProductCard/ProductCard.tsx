@@ -107,7 +107,7 @@ const ProductCard: React.FC<cardProps> = ({ product }) => {
           )}
           <CardMedia
             sx={{ height: 150, backgroundSize: "contain" }}
-            image={`http://localhost:4000/${product.imagePath}`}
+            image={`${process.env.REACT_APP_API_BASE_URL}${product.imagePath}`}
             title={product.productName}
           />
           <CardContent>
