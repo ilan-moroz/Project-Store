@@ -1,7 +1,7 @@
 import { MainRoute } from "./routes/MainRoute";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Navbar from "../src/components/Navbar/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 import { useProduct } from "./hooks/useProducts";
 
 function App() {
