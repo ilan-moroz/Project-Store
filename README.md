@@ -31,6 +31,6 @@ To access the admin functionalities, follow these steps:
 2. **Admin Credentials**: Use the following credentials to log in as an admin:
    - **Email:** admin@gmail.com
    - **Password:** admin
-3. **Admin Dashboard**: Once logged in, you will be redirected to the admin dashboard where you can explore a variety of admin features including adding new products, editing existing products.
+3. **Admin Dashboard**: Once logged in, you will be redirected to the admin dashboard where you can add new products and edit existing products.
 
 _Feel free to explore the functionalities and get a feel of the full capabilities of the application._
